@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/conexao.php';
-require_once 'includes/verificarLogin.php';
+//require_once 'includes/verificaLogin.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
