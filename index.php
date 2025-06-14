@@ -57,6 +57,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </p>
         </article>
       <?php endforeach; ?>
+      <a href="login.php">Login/cadastro</a>
     <?php endif; ?>
   </main>
 

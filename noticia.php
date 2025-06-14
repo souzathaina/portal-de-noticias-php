@@ -1,5 +1,7 @@
 <?php
+session_start();
 require_once 'includes/conexao.php';
+require_once 'includes/funcoes.php';
 
 // Verifica se o parâmetro 'id' foi passado na URL e se é um número válido
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -57,8 +59,14 @@ if (!$noticia) {
 
         <!-- Exibe o texto da notícia com quebras de linha convertidas para <br> -->
         <p><?= nl2br(htmlspecialchars($noticia['noticia'])) ?></p>
+        <?php
+        if (usuarioLogado()) {
+            echo "<p><a href=" . "telaLogado.php" . ">← Voltar para a lista de notícias</a></p>";
+        } else {
+            echo "<p><a href=" . "index.php" . ">← Voltar para a lista de notícias</a></p>";
 
-        <p><a href="index.php">← Voltar para a lista de notícias</a></p>
+        }
+        ?>
     </main>
 
 </body>

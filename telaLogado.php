@@ -1,18 +1,16 @@
-<?php
-
+<?php 
 session_start();
 // Inclui a conexão com o banco
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
 
 if (!usuarioLogado()) {
-
     header("location: cadastro.php");
-
+    exit;
 }
 
 // Pega todas as notícias do banco, juntando com o nome do autor (usuario)
-$sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, noticias.imagem, usuarios.nome AS autor
+$sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, noticias.imagem, usuarios.nome AS autor, usuarios.id AS id_autor
         FROM noticias
         JOIN usuarios ON noticias.autor = usuarios.id
         ORDER BY noticias.data DESC"; // Ordena da mais recente para a mais antiga
@@ -45,8 +43,8 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="menu">
                 <a href="cadastrarNoticia.php">Criar notícia</a>
                 <a href="logout.php">Logout</a>
-
             </div>
+
         <?php else: ?>
             <?php foreach ($noticias as $noticia): ?>
 
@@ -69,12 +67,22 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
                         <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>">Leia mais</a>
                     </p>
+
+                    <!-- Só exibe o link ALTERAR e EXCLUIR se o usuário for o autor da notícia -->
+                    <?php if ($noticia['id_autor'] == $_SESSION['id']): ?>
+                        <p>
+                            <a href="alterarNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>">Alterar</a> |
+                            <a href="excluirNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>">Excluir</a>
+                        </p>
+                    <?php endif; ?>
+
                 </article>
+
             <?php endforeach; ?>
+
             <div class="menu">
                 <a href="cadastrarNoticia.php">Criar notícia</a>
                 <a href="logout.php">Sair</a>
-
             </div>
         <?php endif; ?>
     </main>
