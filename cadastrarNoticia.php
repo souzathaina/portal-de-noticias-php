@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/conexao.php';
+require_once 'includes/funcoes.php';
 //require_once 'includes/verificaLogin.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $autor = $_SESSION['id']; // ID do autor a partir da sessão.
 
     $imagemNome = null;
+
     // Verifica se uma imagem foi enviada.
     if (!empty($_FILES['imagem']['name'])) {
         $imagem = $_FILES['imagem'];
@@ -33,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Redireciona para a página inicial após o cadastro bem-sucedido.
-        header("Location: index.php");
+
+        header("Location: telaLogado.php");
         exit;
 
     } catch (PDOException $e) {

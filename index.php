@@ -14,12 +14,14 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portal de Notícias</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <header>
@@ -29,6 +31,9 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <main>
     <?php if (count($noticias) == 0): ?>
       <p>Nenhuma notícia publicada ainda.</p>
+
+      <a href="login.php">Login/cadastro</a>
+
     <?php else: ?>
       <?php foreach ($noticias as $noticia): ?>
         <article class="noticia">
@@ -38,10 +43,12 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <?= htmlspecialchars($noticia['titulo']) ?>
             </a>
           </h2>
-          <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+          <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
+              <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
 
           <?php if (!empty($noticia['imagem'])): ?>
-            <img src="<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" />
+            <img src="<?= htmlspecialchars($noticia['imagem']) ?>"
+              alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" />
           <?php endif; ?>
 
           <p>
@@ -54,4 +61,5 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </main>
 
 </body>
+
 </html>

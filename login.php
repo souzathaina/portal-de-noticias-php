@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/conexao.php';
-session_start();
+require_once 'includes/funcoes.php';
+
 
 $mensagem = '';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -15,9 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($usuario && password_verify($senha, $usuario["senha"])) {
         $_SESSION['id'] = $usuario['id'];
         $_SESSION['nome'] = $usuario['nome'];
-        session_regenerate_id(true);// previne roubo de sessão
 
-        header("Location:index.php");
+        header("location: telaLogado.php");
         exit;
     } else {
         $mensagem = "E-mail ou senha incorreto";
@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="password" name="senha" required><br><br>
 
         <button type="submit">Entrar</button>
+        <a href="cadastro.php">Cadastrar-se</a>
     </form>
 </body>
 

@@ -7,11 +7,20 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 function usuarioLogado()
 {
-    return isset(($_SESSION['usuario_id']));
-}
 
+    return isset(($_SESSION['nome']));
+}
+function pegarIdAutor()
+{
+
+    if (isset($_SESSION['id'])) {
+        $autor = $_SESSION['id'];
+    }
+    ;
+
+}
 function idUsuarioLogado()
 {
-    return $_SESSION['usuario_id'] ?? null;
+    return $_SESSION['id'] ?? null;
 }
 ?>
