@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 // Inclui a conexão com o banco
 require_once 'includes/conexao.php';
@@ -26,13 +26,17 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portal de Notícias</title>
-    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
     <header>
         <h1>Portal de Notícias</h1>
+        <div class="menu">
+            <a href="cadastrarNoticia.php">Criar notícia</a>
+            <a href="logout.php">Logout</a>
+            <a href="editarUsuario.php">Editar Usuario</a>
+        </div>
     </header>
 
     <main>
@@ -40,10 +44,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <p>Nenhuma notícia publicada ainda.</p>
 
-            <div class="menu">
-                <a href="cadastrarNoticia.php">Criar notícia</a>
-                <a href="logout.php">Logout</a>
-            </div>
+
 
         <?php else: ?>
             <?php foreach ($noticias as $noticia): ?>
@@ -80,10 +81,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <?php endforeach; ?>
 
-            <div class="menu">
-                <a href="cadastrarNoticia.php">Criar notícia</a>
-                <a href="logout.php">Sair</a>
-            </div>
+
         <?php endif; ?>
     </main>
 
