@@ -3,7 +3,7 @@ session_start();
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
 
-// ✅ Verifica se o usuário está logado
+//  Verifica se o usuário está logado
 if (!usuarioLogado()) {
     header("Location: login.php");
     exit;
@@ -11,7 +11,7 @@ if (!usuarioLogado()) {
 
 $usuarioId = $_SESSION['id'];
 
-// ✅ Busca os dados atuais do usuário
+//  Busca os dados atuais do usuário
 $sql = "SELECT * FROM usuarios WHERE id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['id' => $usuarioId]);
@@ -22,7 +22,7 @@ if (!$usuario) {
     exit;
 }
 
-// ✅ Se o formulário for enviado
+//  Se o formulário for enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome']);
     $email = trim($_POST['email']);
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="dashboard.php">Cancelar</a>
     </form>
 
-    <form action="confirmarExclusaoUsuario.php" method="post"
+    <form action="confirmarExclusao.php" method="post"
         onsubmit="return confirm('Tem certeza que deseja excluir sua conta?');">
         <button type="submit" style="color: red; margin-top: 20px;">Excluir Conta</button>
     </form>

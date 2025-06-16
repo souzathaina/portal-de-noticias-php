@@ -1,9 +1,10 @@
-<?php
+<?php 
+var_dump($_SESSION);
 session_start();
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
 
-// ✅ Verifica se o usuário está logado
+// Verifica se o usuário está logado
 if (!usuarioLogado()) {
     header("Location: login.php");
     exit;
@@ -11,12 +12,12 @@ if (!usuarioLogado()) {
 
 $id_usuario = $_SESSION['id'];
 
-// Exclui todas as notícias do usuário para evitar restrição de chave estrangeira
+// Exclui todas as notícias do usuário antes de excluir o usuário
 $sqlExcluirNoticias = "DELETE FROM noticias WHERE autor = ?";
 $stmtNoticias = $pdo->prepare($sqlExcluirNoticias);
 $stmtNoticias->execute([$id_usuario]);
 
-// Exclui o usuário logado
+// Agora sim: exclui o usuário logado
 $sqlExcluirUsuario = "DELETE FROM usuarios WHERE id = ?";
 $stmtUsuario = $pdo->prepare($sqlExcluirUsuario);
 $stmtUsuario->execute([$id_usuario]);
