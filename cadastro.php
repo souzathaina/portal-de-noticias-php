@@ -1,7 +1,19 @@
 <?php
+
 require_once 'includes/conexao.php';
 
 $mensagem = "";
+
+// Função que verifica se já existe nome de usuário ou e-mail no banco
+function usuarioOuEmailExiste($pdo, $nome, $email)
+{
+    $sql = "SELECT 1 FROM usuarios WHERE nome = :nome OR email = :email LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':nome', $nome);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -12,32 +24,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Criptografa a senha antes de salvar no banco 
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-    $caminhoFoto = null;
+    //$caminhoFoto = null;
 
-    // Verifica se o upload da imagem foi realizado sem erro
-    if ($foto && $foto['error'] === 0) {
-        $pasta = 'imagens/'; // Pasta onde a imagem será salva
-        // Gera um nome único para o arquivo usando uniqid() para evitar sobrescrita
-        $nomeUnico = uniqid() . '-' . basename($foto['name']);
-        $caminhoCompleto = $pasta . $nomeUnico;
+    // Verifica se nome ou email já estão cadastrados no banco
+    if (usuarioOuEmailExiste($pdo, $nome, $email)) {
+        $mensagem = "Erro: nome de usuário ou e-mail já estão cadastrados.";
+    } else {
 
-        // Move a imagem da pasta temporária para a pasta /imagens
-        if (move_uploaded_file($foto['tmp_name'], $caminhoCompleto)) {
-            // Salva o caminho da imagem no banco de dados
-            $caminhoFoto = $caminhoCompleto;
-        } else {
-            $mensagem = "Erro ao salvar a imagem.";
-        }
-    }
+        // Verifica se o upload da imagem foi realizado sem erro
+        // if ($foto && $foto['error'] === 0) {
+        //     $pasta = 'imagens/'; // Pasta onde a imagem será salva
+        //     // Gera um nome único para o arquivo usando uniqid() para evitar sobrescrita
+        //     $nomeUnico = uniqid() . '-' . basename($foto['name']);
+        //     $caminhoCompleto = $pasta . $nomeUnico;
 
-    // Se não houve erro com a imagem, insere os dados no banco de dados
-    if (!$mensagem) {
-        $sql = "INSERT INTO usuarios (nome, email, senha, foto) VALUES (?, ?, ?, ?)";
+        //     // Move a imagem da pasta temporária para a pasta /imagens
+        //     if (move_uploaded_file($foto['tmp_name'], $caminhoCompleto)) {
+        //         // Salva o caminho da imagem no banco de dados
+        //         $caminhoFoto = $caminhoCompleto;
+        //     } else {
+        //         $mensagem = "Erro ao salvar a imagem.";
+        //     }
+
+        // Se não houve erro com a imagem, insere os dados no banco de dados
+        // if (!$mensagem) {
+        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
         $stmt = $pdo->prepare($sql); // Prepara a query com parâmetros
 
         try {
             // Executa a query com os dados coletados do formulário
-            $stmt->execute([$nome, $email, $senhaHash, $caminhoFoto]);
+            $stmt->execute([$nome, $email, $senhaHash]);
 
             // Redireciona o usuário para a página de login após cadastro
             header("Location: login.php");
@@ -71,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <input type="file" name="foto" accept="image/*"><br><br>
         <label>Foto de Perfil:</label><br>
+
 
         <label>Nome:</label><br>
         <input type="text" name="nome" required><br><br>

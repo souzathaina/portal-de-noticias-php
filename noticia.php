@@ -24,20 +24,24 @@ if (!$noticia) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <title><?= htmlspecialchars($noticia['titulo']) ?></title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <header>
         <h1><?= htmlspecialchars($noticia['titulo']) ?></h1>
-        <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+        <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
+                <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
     </header>
 
     <main>
         <?php if (!empty($noticia['imagem'])): ?>
-            <img src="<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia" style="max-width: 100%; height: auto;">
+            <img src="<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia"
+                style="max-width: 100%; height: auto;">
         <?php endif; ?>
 
         <p><?= nl2br(htmlspecialchars($noticia['noticia'])) ?></p>
@@ -45,4 +49,5 @@ if (!$noticia) {
         <p><a href="index.php">Voltar para o início</a></p>
     </main>
 </body>
+
 </html>
