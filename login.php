@@ -1,21 +1,26 @@
-<?php
+<?php 
+session_start();  // ESSENCIAL para usar sessão
+
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
 
-
 $mensagem = '';
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST["email"]);
     $senha = trim($_POST["senha"]);
-    $sql = "SELECT id, nome, senha FROM usuarios WHERE email = ?";
-    $stmt = $pdo->prepare(($sql));
+
+    // Busca também o campo foto
+    $sql = "SELECT id, nome, senha, foto FROM usuarios WHERE email = ?";
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([$email]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    //verifica se encontrou o usuário e se a senha está correta
     if ($usuario && password_verify($senha, $usuario["senha"])) {
         $_SESSION['id'] = $usuario['id'];
         $_SESSION['nome'] = $usuario['nome'];
+        // Se foto estiver vazia, colocar imagem padrão
+        $_SESSION['foto'] = !empty($usuario['foto']) ? $usuario['foto'] : 'imagens/perfil_padrao.png';
 
         header("location: telaLogado.php");
         exit;
@@ -23,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mensagem = "E-mail ou senha incorreto";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
