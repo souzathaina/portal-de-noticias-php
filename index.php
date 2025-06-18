@@ -46,8 +46,9 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
 
           <?php if (!empty($noticia['imagem'])): ?>
-            <img src="<?= htmlspecialchars($noticia['imagem']) ?>"
-              alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" />
+            <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
+              alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" style="max-width: 100%; height: auto;" />
+
           <?php endif; ?>
 
           <p>

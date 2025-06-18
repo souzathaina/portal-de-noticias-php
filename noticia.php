@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/conexao.php';
+require_once 'includes/funcoes.php';
 
 // Verifica se o parâmetro 'id' foi passado via GET e é numérico
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -40,13 +41,21 @@ if (!$noticia) {
 
     <main>
         <?php if (!empty($noticia['imagem'])): ?>
-            <img src="<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia"
+            <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia"
                 style="max-width: 100%; height: auto;">
+
         <?php endif; ?>
 
         <p><?= nl2br(htmlspecialchars($noticia['noticia'])) ?></p>
 
-        <p><a href="index.php">Voltar para o início</a></p>
+<?php
+        if (usuarioLogado()) {
+            echo "<p><a href=" . "telaLogado.php" . ">Voltar para o início</a></p>";
+        } else {
+            echo "<p><a href=" . "index.php" . ">Voltar para o início</a></p>";
+
+        }
+        ?>
     </main>
 </body>
 

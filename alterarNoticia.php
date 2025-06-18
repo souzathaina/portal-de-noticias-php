@@ -91,13 +91,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if (!empty($noticia['imagem'])): ?>
             <p>Imagem atual:</p>
-            <img src="<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia" style="max-width:200px;"><br><br>
+            <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia" style="max-width:200px;">
         <?php endif; ?>
 
         <label for="imagem">Nova imagem (opcional):</label><br>
         <input type="file" name="imagem" id="imagem"><br><br>
 
         <button type="submit">Salvar Alterações</button>
+        <a href="telaLogado.php">Voltar</a>
+
     </form>
 </body>
 

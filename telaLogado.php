@@ -1,5 +1,5 @@
 <?php
-// telaLogado.php (ou index.php do portal logado)
+
 session_start();
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
@@ -103,7 +103,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
 
                     <?php if (!empty($noticia['imagem'])): ?>
-                        <img src="<?= htmlspecialchars($noticia['imagem']) ?>"
+                        <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
                             alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>"
                             style="max-width: 100%; height: auto;">
                     <?php endif; ?>
