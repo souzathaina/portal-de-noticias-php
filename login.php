@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();  // ESSENCIAL para usar sessão
 
 require_once 'includes/conexao.php';
@@ -35,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_login.css">
+
     <title>Login</title>
 </head>
 
@@ -45,17 +47,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <form action="login.php" method="POST">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <label>Email:</label>
+        <input type="email" name="email" required>
 
-        <label>Senha:</label><br>
-        <input type="password" name="senha" required><br><br>
+        <label>Senha:</label>
+        <input type="password" name="senha" required>
 
         <button type="submit">Entrar</button>
-        <a href="cadastro.php">Cadastrar-se</a>
-        <a href="index.php">Voltar</a>
-        <a href="alterarSenha.php">Esqueceu a senha?</a>
+
+        <div class="links">
+            <a href="cadastro.php">Cadastrar-se</a>
+            <a href="index.php">Voltar</a>
+            <a href="alterarSenha.php">Esqueceu a senha?</a>
+        </div>
     </form>
+
 </body>
 
 </html>

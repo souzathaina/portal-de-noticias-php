@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_excluirNoticia.css">
     <title>Excluir Notícia</title>
 </head>
 

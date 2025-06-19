@@ -1,0 +1,85 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  color: #222;
+  padding: 20px;
+}
+
+/* Cabeçalho da notícia */
+header {
+  background: linear-gradient(90deg, #0f3a51, #145374);
+  color: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 0.9em;
+  color: #f0f4f8;
+}
+
+/* Conteúdo principal */
+main {
+  max-width: 900px;
+  margin: auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Imagem da notícia */
+main img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+/* Parágrafo do corpo */
+main p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Link de voltar */
+main a {
+  display: inline-block;
+  background: #0f3a51;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  font-weight: bold;
+}
+
+main a:hover {
+  background: #145374;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  main {
+    padding: 20px;
+  }
+}

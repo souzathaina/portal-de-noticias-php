@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_cadastro.css">
     <title>Cadastro de Usuário</title>
 </head>
 
@@ -92,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="password" name="senha" required><br><br>
 
         <input type="submit" value="Cadastrar">
+        <a href="index.php">Voltar</a>
     </form>
 </body>
 

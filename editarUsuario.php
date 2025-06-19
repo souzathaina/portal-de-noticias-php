@@ -90,10 +90,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_editUsuario.css">
     <title>Editar Conta</title>
 </head>
 
 <body>
+<div>
     <h1>Editar Conta</h1>
 
     <?php if (isset($erro)): ?>
@@ -125,10 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="telaLogado.php">Voltar</a>
     </form>
 
-    <form action="confirmarExclusao.php" method="post"
-        onsubmit="return confirm('Tem certeza que deseja excluir sua conta?');">
-        <button type="submit" style="color: red; margin-top: 20px;">Excluir Conta</button>
-    </form>
+    <a href="confirmarExclusao.php">Excluir Conta</a>
+</div>
 </body>
 
 </html>

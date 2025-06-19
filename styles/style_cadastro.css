@@ -1,0 +1,90 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+  color: #222;
+  padding: 30px;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  font-size: 2em;
+  color: #0f3a51;
+  margin-bottom: 30px;
+}
+
+/* Mensagem de erro */
+p {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+form {
+  max-width: 500px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Labels */
+form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #0f3a51;
+}
+
+/* Inputs e textarea */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 1em;
+  background-color: #f9f9f9;
+}
+
+/* Botão */
+form input[type="submit"] {
+  width: 100%;
+  background: #0077b6;
+  color: white;
+  font-size: 1.1em;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+  background: #023e8a;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  form {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+}

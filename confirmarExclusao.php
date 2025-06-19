@@ -14,6 +14,7 @@ if (!usuarioLogado()) {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_confirmarExclusao.css">
     <title>Confirmar Exclusão</title>
 </head>
 

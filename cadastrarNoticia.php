@@ -51,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_cadNoticia.css">
+
     <title>Cadastrar Notícia</title>
 </head>
 
@@ -68,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="file" name="imagem" id="imagem"><br><br>
 
         <button type="submit">Cadastrar Notícia</button>
+        <a href="telaLogado.php">Voltar</a>
     </form>
 </body>
 

@@ -1,0 +1,123 @@
+/* Reset e base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  color: #333;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Título */
+.container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0f3a51;
+}
+
+/* Mensagens */
+p {
+  margin-bottom: 15px;
+}
+
+p[style*="color:red"] {
+  color: #d9534f;
+}
+
+p[style*="color:green"] {
+  color: #28a745;
+}
+
+/* Foto */
+img {
+  display: block;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  padding: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+/* Botões */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-bottom: 15px;
+}
+
+/* Botão salvar */
+button[type="submit"] {
+  background-color: #0077b6;
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background-color: #005f87;
+}
+
+/* Botão excluir */
+form[action="confirmarExclusao.php"] button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+form[action="confirmarExclusao.php"] button:hover {
+  background-color: #a71d2a;
+}
+
+/* Link voltar */
+a {
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  color: #0f3a51;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}

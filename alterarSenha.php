@@ -45,31 +45,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style_altSenha.css">
     <title>Recuperar Senha</title>
 </head>
 
 <body>
-    <h2>Recuperar Senha</h2>
+    <div class="container">
+        <h2>Recuperar Senha</h2>
 
-    <!-- Exibe a mensagem em vermelho ou verde -->
-    <?php if (!empty($mensagem)): ?>
-        <p style="color: <?= $mensagemCor ?>;"><?= $mensagem ?></p>
-    <?php endif; ?>
+        <?php if (!empty($mensagem)): ?>
+            <p style="color: <?= $mensagemCor ?>;"><?= $mensagem ?></p>
+        <?php endif; ?>
 
-    <form action="alterarSenha.php" method="POST">
-        <label>Nome de Usuário:</label><br>
-        <input type="text" name="usuario" required><br><br>
+        <form action="alterarSenha.php" method="POST">
+            <label>Nome de Usuário:</label>
+            <input type="text" name="usuario" required>
 
-        <label>E-mail:</label><br>
-        <input type="email" name="email" required><br><br>
+            <label>E-mail:</label>
+            <input type="email" name="email" required>
 
-        <label>Nova Senha:</label><br>
-        <input type="password" name="nova_senha" required><br><br>
+            <label>Nova Senha:</label>
+            <input type="password" name="nova_senha" required>
 
-        <button type="submit">Atualizar Senha</button>
-        <a href="login.php">Fazer login</a>
-        <a href="index.php">Voltar</a>
-    </form>
+            <button type="submit">Atualizar Senha</button>
+            <a href="login.php">Fazer login</a>
+            <a href="index.php">Voltar</a>
+        </form>
+    </div>
 </body>
 
 </html>

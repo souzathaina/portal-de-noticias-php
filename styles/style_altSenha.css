@@ -1,0 +1,89 @@
+/* Reset e base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Container principal */
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Título */
+.container h2 {
+  margin-bottom: 25px;
+  color: #0f3a51;
+}
+
+/* Mensagem de erro/sucesso */
+.container p {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+/* Botão principal */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #0077b6;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #005f87;
+}
+
+/* Links */
+a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #0f3a51;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
