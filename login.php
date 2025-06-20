@@ -1,5 +1,5 @@
 <?php
-session_start();  // ESSENCIAL para usar sessão
+session_start();
 
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['nome'] = $usuario['nome'];
         // Se foto estiver vazia, colocar imagem padrão
         $_SESSION['foto'] = !empty($usuario['foto']) ? $usuario['foto'] : 'imagens/perfil_padrao.png';
-
+        setcookie("email_usuario", $email, time() + 3600);
         header("location: telaLogado.php");
         exit;
     } else {

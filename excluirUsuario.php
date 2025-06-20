@@ -1,4 +1,4 @@
-<?php 
+<?php
 var_dump($_SESSION);
 session_start();
 require_once 'includes/conexao.php';

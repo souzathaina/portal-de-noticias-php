@@ -70,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="file" name="imagem" id="imagem"><br><br>
 
         <button type="submit">Cadastrar Notícia</button>
-        <a href="telaLogado.php">Voltar</a>
+        <a href="telaLogado.php" class="botao-voltar">Voltar</a>
+
     </form>
 </body>
 

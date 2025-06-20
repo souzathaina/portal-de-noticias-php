@@ -29,7 +29,7 @@ if (!$noticia) {
 <head>
     <meta charset="UTF-8" />
     <title><?= htmlspecialchars($noticia['titulo']) ?></title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/style_noticia.css" />
 </head>
 
 <body>
