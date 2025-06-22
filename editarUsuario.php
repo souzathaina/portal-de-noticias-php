@@ -90,45 +90,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style_editUsuario.css">
     <title>Editar Conta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/style_editUsuario.css">
 </head>
 
 <body>
-<div>
-    <h1>Editar Conta</h1>
+    <header>
+        <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+        <div class="usuario-area">
+            <p class="nome-usuario"><?= htmlspecialchars($_SESSION['nome']) ?></p>
+            <div class="menu">
+                <a href="telaLogado.php">Voltar</a>
+                <a href="logout.php">Logout</a>
+            </div>
+        </div>
 
-    <?php if (isset($erro)): ?>
-        <p style="color:red;"><?= $erro ?></p>
-    <?php elseif (isset($mensagem)): ?>
-        <p style="color:green;"><?= $mensagem ?></p>
-    <?php endif; ?>
+    </header>
 
-    <?php if (!empty($usuario['foto'])): ?>
-        <p>Foto atual:</p>
-        <img src="<?= htmlspecialchars($usuario['foto']) ?>" alt="Foto de perfil"
-            style="width:100px; height:100px; object-fit:cover; border-radius:50%;">
-    <?php endif; ?>
+    <main>
+        <h1>Editar Conta</h1>
 
-    <form method="post" enctype="multipart/form-data">
-        <label>Nova foto de perfil (opcional):</label><br>
-        <input type="file" name="foto" accept="image/*"><br><br>
+        <?php if (isset($erro)): ?>
+            <p class="mensagem-erro"><?= $erro ?></p>
+        <?php elseif (isset($mensagem)): ?>
+            <p class="mensagem-sucesso"><?= $mensagem ?></p>
+        <?php endif; ?>
 
-        <label>Nome:</label><br>
-        <input type="text" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required><br><br>
+        <?php if (!empty($usuario['foto'])): ?>
+            <p>Foto atual:</p>
+            <img src="<?= htmlspecialchars($usuario['foto']) ?>" alt="Foto de perfil" class="foto-perfil-atual">
+        <?php endif; ?>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" required><br><br>
+        <form method="post" enctype="multipart/form-data">
+            <label>Nova foto de perfil (opcional):</label>
+            <input type="file" name="foto" accept="image/*">
 
-        <label>Nova senha (opcional):</label><br>
-        <input type="password" name="senha"><br><br>
+            <label>Nome:</label>
+            <input type="text" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required>
 
-        <button type="submit">Salvar</button>
-        <a href="telaLogado.php">Voltar</a>
-    </form>
+            <label>Email:</label>
+            <input type="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" required>
 
-    <a href="confirmarExclusao.php">Excluir Conta</a>
-</div>
+            <label>Nova senha (opcional):</label>
+            <input type="password" name="senha">
+
+            <button type="submit">Salvar</button>
+            <a href="confirmarExclusao.php" class="botao-excluir">Excluir Conta</a>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+    </footer>
 </body>
 
 </html>

@@ -77,31 +77,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <h1>Alterar Notícia</h1>
+    <div class="wrapper">
+        <header>
+            <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+            <a class="voltar-index" href="telaLogado.php">← Voltar</a>
+        </header>
 
-    <form action="" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+        <main>
+            <h1>Alterar Notícia</h1>
 
-        <label for="titulo">Título:</label><br>
-        <input type="text" name="titulo" id="titulo" value="<?= htmlspecialchars($noticia['titulo']) ?>"
-            required><br><br>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
 
-        <label for="noticia">Conteúdo:</label><br>
-        <textarea name="noticia" id="noticia" rows="8"
-            required><?= htmlspecialchars($noticia['noticia']) ?></textarea><br><br>
+                <label for="titulo">Título:</label>
+                <input type="text" name="titulo" id="titulo" value="<?= htmlspecialchars($noticia['titulo']) ?>"
+                    required>
 
-        <?php if (!empty($noticia['imagem'])): ?>
-            <p>Imagem atual:</p>
-            <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia" style="max-width:200px;">
-        <?php endif; ?>
+                <label for="noticia">Conteúdo:</label>
+                <textarea name="noticia" id="noticia" rows="8"
+                    required><?= htmlspecialchars($noticia['noticia']) ?></textarea>
 
-        <label for="imagem">Nova imagem (opcional):</label><br>
-        <input type="file" name="imagem" id="imagem"><br><br>
+                <?php if (!empty($noticia['imagem'])): ?>
+                    <p>Imagem atual:</p>
+                    <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia"
+                        class="imagem-atual">
+                <?php endif; ?>
 
-        <button type="submit">Salvar Alterações</button>
-        <a href="telaLogado.php">Voltar</a>
+                <label for="imagem">Nova imagem (opcional):</label>
+                <input type="file" name="imagem" id="imagem">
 
-    </form>
+                <button type="submit">Salvar Alterações</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+        </footer>
+    </div>
 </body>
 
 </html>

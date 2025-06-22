@@ -60,15 +60,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
 </head>
 
 <body>
-    <h1>Excluir Notícia</h1>
 
-    <p>Tem certeza que deseja excluir a notícia: <strong><?= htmlspecialchars($noticia['titulo']) ?></strong>?</p>
+    <header>
+        <div class="container-header">
+            <img src="imagens/logo/logo.png" alt="Logo do Site" />
+            <nav>
+                <a href="telaLogado.php">Início</a> |
+                <a href="editarUsuario.php">Editar Perfil</a> |
+                <a href="logout.php">Sair</a>
+            </nav>
+        </div>
+    </header>
 
-    <form action="" method="POST">
-        <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
-        <button type="submit" name="confirmar" value="sim">Sim, excluir</button>
-        <a href="telaLogado.php">Cancelar</a>
-    </form>
+    <main>
+        <h2>Excluir Notícia</h2>
+        <p>Tem certeza que deseja excluir a notícia: <strong><?= htmlspecialchars($noticia['titulo']) ?></strong>?</p>
+
+        <form action="" method="POST">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+            <button type="submit" name="confirmar" value="sim">✅ Sim, excluir</button>
+            <a class="cancelar" href="telaLogado.php">❌ Cancelar</a>
+        </form>
+    </main>
+
+    <footer>
+        <div class="container-footer">
+            <p>© <?= date("Y"); ?> Meu Portal de Notícias. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
 </body>
 
 </html>

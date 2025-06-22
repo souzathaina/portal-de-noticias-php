@@ -51,27 +51,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style_cadNoticia.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cadastrar Notícia</title>
+    <link rel="stylesheet" href="styles/style_cadNoticia.css">
 </head>
 
 <body>
-    <h1>Cadastrar Nova Notícia</h1>
+    <header>
+        <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+        <div class="usuario-area">
+            
+            <div class="menu">
+                <a href="telaLogado.php">Voltar</a>
+                <a href="editarUsuario.php">Editar Usuário</a>
+                <a href="logout.php">Logout</a>
+            </div>
+        </div>
+    </header>
 
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="titulo">Título:</label><br>
-        <input type="text" name="titulo" id="titulo" required><br><br>
+    <main>
+        <h1>Cadastrar Nova Notícia</h1>
 
-        <label for="noticia">Conteúdo:</label><br>
-        <textarea name="noticia" id="noticia" rows="8" required></textarea><br><br>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" id="titulo" required>
 
-        <label for="imagem">Imagem (opcional):</label><br>
-        <input type="file" name="imagem" id="imagem"><br><br>
+            <label for="noticia">Conteúdo:</label>
+            <textarea name="noticia" id="noticia" rows="8" required></textarea>
 
-        <button type="submit">Cadastrar Notícia</button>
-        <a href="telaLogado.php">Voltar</a>
-    </form>
+            <label for="imagem">Imagem (opcional):</label>
+            <input type="file" name="imagem" id="imagem">
+
+            <button type="submit">Cadastrar Notícia</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+    </footer>
 </body>
 
 </html>

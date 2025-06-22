@@ -35,33 +35,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style_login.css">
-
     <title>Login</title>
+    <link rel="stylesheet" href="styles/style_login.css">
 </head>
 
 <body>
-    <h2>Login</h2>
-    <?php if (!empty($mensagem)): ?>
-        <p style="color: red;"><?= htmlspecialchars($mensagem) ?></p>
-    <?php endif; ?>
+    <div class="wrapper">
+        <header>
+            <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+            <a class="voltar-index" href="index.php">← Voltar ao início</a>
+        </header>
 
-    <form action="login.php" method="POST">
-        <label>Email:</label>
-        <input type="email" name="email" required>
+        <main>
+            <h2>Login</h2>
 
-        <label>Senha:</label>
-        <input type="password" name="senha" required>
+            <?php if (!empty($mensagem)): ?>
+                <p class="mensagem-erro"><?= htmlspecialchars($mensagem) ?></p>
+            <?php endif; ?>
 
-        <button type="submit">Entrar</button>
+            <form action="login.php" method="POST">
+                <label>Email:</label>
+                <input type="email" name="email" required>
 
-        <div class="links">
-            <a href="cadastro.php">Cadastrar-se</a>
-            <a href="index.php">Voltar</a>
-            <a href="alterarSenha.php">Esqueceu a senha?</a>
-        </div>
-    </form>
+                <label>Senha:</label>
+                <input type="password" name="senha" required>
 
+                <button type="submit">Entrar</button>
+
+                <div class="links">
+                    <a href="cadastro.php">Cadastrar-se</a>
+                    <a href="alterarSenha.php">Esqueceu a senha?</a>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+        </footer>
+    </div>
 </body>
 
 </html>

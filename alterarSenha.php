@@ -45,32 +45,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style_altSenha.css">
     <title>Recuperar Senha</title>
+    <link rel="stylesheet" href="styles/style_altSenha.css">
 </head>
 
 <body>
-    <div class="container">
-        <h2>Recuperar Senha</h2>
+    <div class="wrapper">
+        <header>
+            <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+            <a class="voltar-index" href="index.php">← Voltar ao início</a>
+        </header>
 
-        <?php if (!empty($mensagem)): ?>
-            <p style="color: <?= $mensagemCor ?>;"><?= $mensagem ?></p>
-        <?php endif; ?>
+        <main>
+            <h2>Recuperar Senha</h2>
 
-        <form action="alterarSenha.php" method="POST">
-            <label>Nome de Usuário:</label>
-            <input type="text" name="usuario" required>
+            <?php if (!empty($mensagem)): ?>
+                <p class="mensagem" style="color: <?= $mensagemCor ?>;"><?= $mensagem ?></p>
+            <?php endif; ?>
 
-            <label>E-mail:</label>
-            <input type="email" name="email" required>
+            <form action="alterarSenha.php" method="POST">
+                <label>Nome de Usuário:</label>
+                <input type="text" name="usuario" required>
 
-            <label>Nova Senha:</label>
-            <input type="password" name="nova_senha" required>
+                <label>E-mail:</label>
+                <input type="email" name="email" required>
 
-            <button type="submit">Atualizar Senha</button>
-            <a href="login.php">Fazer login</a>
-            <a href="index.php">Voltar</a>
-        </form>
+                <label>Nova Senha:</label>
+                <input type="password" name="nova_senha" required>
+
+                <button type="submit">Atualizar Senha</button>
+
+                <div class="links">
+                    <a href="login.php">Fazer login</a>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+        </footer>
     </div>
 </body>
 

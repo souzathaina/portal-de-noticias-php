@@ -5,81 +5,143 @@
   box-sizing: border-box;
 }
 
+body, html {
+  height: 100%;
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
-  color: #222;
-  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
-/* Cabeçalho da notícia */
+/* Container principal */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 160px; /* espaço para o header fixo */
+}
+
+/* Cabeçalho fixo */
 header {
-  background: linear-gradient(90deg, #0f3a51, #145374);
-  color: #fff;
-  padding: 30px 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #4a1e18;
+  color: #ffd700;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-bottom: 5px solid #541212;
+  z-index: 1000;
 }
 
-header h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
+.logo {
+  max-height: 130px;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
 }
 
-header p {
-  font-size: 0.9em;
-  color: #f0f4f8;
+.header-texto {
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
 }
 
-/* Conteúdo principal */
+.header-texto h1 {
+  font-size: 1.8em;
+  margin-bottom: 8px;
+}
+
+.header-texto p {
+  font-size: 0.95em;
+  color: #ffe98d;
+}
+
+/* Conteúdo */
 main {
-  max-width: 900px;
-  margin: auto;
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Imagem da notícia */
 main img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
+  width: 100%;
+  height: auto;             /* Altura proporcional */
+  object-fit: contain;      /* Garante que a imagem completa apareça */
+  background-color: #fff;   /* Para evitar fundo transparente */
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  display: block;
+  margin: 20px 0;
 }
 
-/* Parágrafo do corpo */
+
+/* Texto */
 main p {
-  font-size: 1.1em;
-  line-height: 1.7;
+  font-size: 1.05em;
   margin-bottom: 20px;
+  color: #444;
 }
 
-/* Link de voltar */
-main a {
+/* Botão */
+.botao-voltar {
   display: inline-block;
-  background: #0f3a51;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 5px;
   text-decoration: none;
+  background-color: #541212;
+  color: #ffd700;
+  padding: 10px 20px;
+  border-radius: 6px;
   transition: background 0.3s ease;
   font-weight: bold;
+  margin-top: 20px;
 }
 
-main a:hover {
-  background: #145374;
+.botao-voltar:hover {
+  background-color: #6b1e1e;
+}
+
+/* Rodapé fixo no final */
+footer {
+  background-color: #4a1e18;
+  color: #ffd700;
+  text-align: center;
+  padding: 20px;
+  border-top: 5px solid #541212;
+  width: 100%;
+  margin-top: 40px;
 }
 
 /* Responsivo */
-@media (max-width: 600px) {
-  header h1 {
+@media (max-width: 768px) {
+  .header-texto h1 {
     font-size: 1.5em;
   }
 
+  .logo {
+    max-height: 60px;
+    margin-bottom: 10px;
+  }
+
   main {
-    padding: 20px;
+    padding: 15px;
+  }
+
+  main p {
+    font-size: 1em;
   }
 }

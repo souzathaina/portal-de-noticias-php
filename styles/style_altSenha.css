@@ -3,87 +3,180 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  background-color: #4a1e18;
   color: #333;
-  display: flex;
-  justify-content: center;
-  padding: 40px;
 }
 
-/* Container principal */
-.container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+/* Wrapper para manter layout colado ao rodapé */
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header fixo */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  text-align: center;
+  background-color: #4a1e18;
+  color: #ffd700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.logo {
+  max-height: 130px;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+}
+
+.voltar-index {
+  background-color: #ffd700;
+  color: #4a1e18;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.voltar-index:hover {
+  background-color: #fff0a0;
+}
+
+/* Conteúdo principal */
+main {
+  padding-top: 160px;
+  max-width: 500px;
+  margin: 0 auto;
+  flex: 1;
 }
 
 /* Título */
-.container h2 {
+h2 {
+  text-align: center;
   margin-bottom: 25px;
-  color: #0f3a51;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd700;
 }
 
-/* Mensagem de erro/sucesso */
-.container p {
-  margin-bottom: 20px;
+/* Mensagem */
+.mensagem {
+  background-color: #fdf2e9;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 /* Formulário */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
+/* Labels e inputs */
 label {
-  font-weight: bold;
-  text-align: left;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: #333;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  padding: 10px;
-  border-radius: 8px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
-  font-size: 15px;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
-/* Botão principal */
-button {
-  padding: 12px;
+input:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 5px 1px #ffd700;
+}
+
+/* Botão */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px 0;
+  background-color: #ffd700;
   border: none;
   border-radius: 8px;
-  background-color: #0077b6;
-  color: white;
+  color: #4a1e18;
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 15px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #005f87;
+button[type="submit"]:hover {
+  background-color: #e6c200;
 }
 
 /* Links */
-a {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #0f3a51;
-  font-weight: bold;
+.links {
+  margin-top: 20px;
+  text-align: center;
 }
 
-a:hover {
+.links a {
+  color: #4a1e18;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.links a:hover {
   text-decoration: underline;
+}
+
+/* Rodapé */
+footer {
+  width: 100%;
+  background-color: #541212;
+  color: #ffd700;
+  text-align: center;
+  padding: 15px;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  main {
+    padding-top: 200px;
+  }
+
+  .links a {
+    display: block;
+    margin-top: 10px;
+  }
 }

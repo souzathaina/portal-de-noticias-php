@@ -6,74 +6,146 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
-  color: #222;
-  padding: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  padding-top: 200px; /* Espaço para o cabeçalho fixo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Cabeçalho */
-h1 {
-  text-align: center;
-  font-size: 2em;
-  color: #0f3a51;
+/* Cabeçalho fixo */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #4a1e18;
+  color: #ffd700;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  flex-wrap: wrap;
+}
+
+.logo {
+  max-height: 130px;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+}
+
+.usuario-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.perfil-usuario img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #ffd700;
+  object-fit: cover;
+}
+
+.perfil-usuario p {
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.menu a {
+  background-color: #ffd700;
+  color: #541212;
+  padding: 6px 12px;
+  margin-left: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: #fff0a0;
+}
+
+/* Título principal */
+main h1 {
+  color: #4a1e18;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 /* Formulário */
 form {
-  max-width: 700px;
-  margin: auto;
-  background: #fff;
+  background-color: #fff;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
 }
 
 /* Labels */
-form label {
+label {
   font-weight: bold;
+  color: #541212;
   display: block;
-  margin-bottom: 8px;
-  color: #0f3a51;
+  margin-bottom: 6px;
 }
 
-/* Inputs e textarea */
-form input[type="text"],
-form input[type="file"],
-form textarea {
+/* Campos de texto, textarea e file */
+input[type="text"],
+textarea,
+input[type="file"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
   margin-bottom: 20px;
   font-size: 1em;
-  background-color: #f9f9f9;
+  transition: border 0.3s ease;
 }
 
-/* Botão */
-form button {
-  background: #0077b6;
-  color: white;
-  font-size: 1em;
-  padding: 12px 20px;
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  border-color: #4a1e18;
+  outline: none;
+}
+
+/* Botão cadastrar */
+button[type="submit"] {
+  background-color: #4a1e18;
+  color: #ffd700;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  font-size: 1em;
   cursor: pointer;
+  font-weight: bold;
   transition: background 0.3s ease;
 }
 
-form button:hover {
-  background: #023e8a;
+button[type="submit"]:hover {
+  background-color: #300f0f;
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-  form {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 1.6em;
-  }
+/* Rodapé */
+footer {
+  width: 100%;
+  background-color: #541212;
+  color: #ffd700;
+  text-align: center;
+  padding: 15px;
 }

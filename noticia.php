@@ -28,35 +28,48 @@ if (!$noticia) {
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?= htmlspecialchars($noticia['titulo']) ?></title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/style_noticia.css" />
 </head>
 
 <body>
+  <div class="container"> <!-- Início da estrutura flexível -->
+
     <header>
+      <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+      <div class="header-texto">
         <h1><?= htmlspecialchars($noticia['titulo']) ?></h1>
-        <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
-                <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+        <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+      </div>
+      <?php
+        if (usuarioLogado()) {
+          echo '<a href="telaLogado.php" class="botao-voltar">⬅ Voltar para o início</a>';
+        } else {
+          echo '<a href="index.php" class="botao-voltar">⬅ Voltar para o início</a>';
+        }
+      ?>
     </header>
 
     <main>
-        <?php if (!empty($noticia['imagem'])): ?>
-            <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia"
-                style="max-width: 100%; height: auto;">
+      <?php if (!empty($noticia['imagem'])): ?>
+        <img 
+          src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>?v=<?= time() ?>" 
+          alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>"
+          loading="lazy"
+        />
+      <?php endif; ?>
 
-        <?php endif; ?>
+      <p><?= nl2br(htmlspecialchars($noticia['noticia'])) ?></p>
 
-        <p><?= nl2br(htmlspecialchars($noticia['noticia'])) ?></p>
-
-<?php
-        if (usuarioLogado()) {
-            echo "<p><a href=" . "telaLogado.php" . ">Voltar para o início</a></p>";
-        } else {
-            echo "<p><a href=" . "index.php" . ">Voltar para o início</a></p>";
-
-        }
-        ?>
+      
     </main>
+
+    <footer>
+      <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+    </footer>
+
+  </div> 
 </body>
 
 </html>

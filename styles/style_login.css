@@ -1,103 +1,196 @@
-/* Reset básico */
+/* Reset e base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Garante que o footer fique no final da tela */
+html, body {
+  height: 100%;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
-  color: #222;
-  padding: 30px;
+  background-color: #864d45; /* bordô escuro */
+  color: #333;
+}
+
+/* Wrapper para layout em coluna */
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header fixo com logo e botão voltar */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4a1e18;
+  color: #ffd700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.logo {
+  max-height: 130px;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+}
+
+.voltar-index {
+  background-color: #ffd700;
+  color: #4a1e18;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.voltar-index:hover {
+  background-color: #fff0a0;
+}
+
+/* Conteúdo principal */
+main {
+  padding-top: 160px; /* espaço para o header fixo */
+  max-width: 450px;
+  margin: 0 auto;
+  flex: 1;
 }
 
 /* Título */
 h2 {
   text-align: center;
-  font-size: 2em;
-  color: #0f3a51;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd700;
 }
 
 /* Mensagem de erro */
-p {
-  color: red;
+.mensagem-erro {
+  color: #ff7f7f;
+  background-color: #330000;
+  padding: 10px;
+  border-radius: 6px;
   text-align: center;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
-/* Formulário */
+/* Formulário com fundo branco */
 form {
-  max-width: 450px;
-  margin: auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Labels */
-form label {
-  font-weight: bold;
-  color: #0f3a51;
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: #333;
 }
 
-/* Inputs */
-form input[type="email"],
-form input[type="password"] {
-  padding: 10px;
-  font-size: 1em;
+/* Campos de entrada */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  font-size: 1rem;
 }
 
-/* Botão */
-form button {
-  background: #0077b6;
-  color: white;
-  font-size: 1.1em;
-  padding: 14px;
+input:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 5px 1px #ffd700;
+}
+
+/* Botão de envio */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px 0;
+  background-color: #ffd700;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  color: #4a1e18;
+  font-size: 1.1rem;
   font-weight: bold;
-  transition: background 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-form button:hover {
-  background: #023e8a;
+button[type="submit"]:hover {
+  background-color: #e6c200;
 }
 
-/* Links de navegação */
-form a {
-  color: #0f3a51;
-  text-decoration: none;
-  font-weight: 600;
-  margin-top: 10px;
-  text-align: center;
-  display: block;
-  transition: color 0.3s ease;
-}
-
-form a:hover {
-  color: #023e8a;
-}
-
-/* Organizar links em linha, se quiser */
-form .links {
+/* Links abaixo do botão */
+.links {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-form .links a {
-  margin: 0;
-  font-size: 0.9em;
-  flex: 1;
+.links a {
+  color: #4a1e18;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+/* Rodapé no fim da tela */
+footer {
+  width: 100%;
+  background-color: #541212;
+  color: #ffd700;
   text-align: center;
+  padding: 15px;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .voltar-index {
+    font-size: 0.9rem;
+  }
+
+  main {
+    padding-top: 200px;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .links a {
+    width: 100%;
+    text-align: center;
+  }
 }
