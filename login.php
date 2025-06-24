@@ -35,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login</title>
     <link rel="stylesheet" href="styles/style_login.css">
 </head>
@@ -47,27 +49,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </header>
 
         <main>
-            <h2>Login</h2>
+            <div class="main-container">
+                <h2>Login</h2>
 
-            <?php if (!empty($mensagem)): ?>
-                <p class="mensagem-erro"><?= htmlspecialchars($mensagem) ?></p>
-            <?php endif; ?>
+                <?php if (!empty($mensagem)): ?>
+                    <p class="mensagem-erro"><?= htmlspecialchars($mensagem) ?></p>
+                <?php endif; ?>
 
-            <form action="login.php" method="POST">
-                <label>Email:</label>
-                <input type="email" name="email" required>
+                <form action="login.php" method="POST">
+                    <label>Email:</label>
+                    <input type="email" name="email" required>
 
-                <label>Senha:</label>
-                <input type="password" name="senha" required>
+                    <label>Senha:</label>
+                    <input type="password" name="senha" required>
 
-                <button type="submit">Entrar</button>
+                    <button type="submit">Entrar</button>
 
-                <div class="links">
-                    <a href="cadastro.php">Cadastrar-se</a>
-                    <a href="alterarSenha.php">Esqueceu a senha?</a>
-                </div>
-            </form>
+                    <div class="links">
+                        <a href="cadastro.php">Cadastrar-se</a>
+                        <a href="alterarSenha.php">Esqueceu a senha?</a>
+                    </div>
+                </form>
+            </div>
         </main>
+
 
         <footer>
             <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>

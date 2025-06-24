@@ -1,4 +1,4 @@
-/* Reset geral */ 
+/* Reset geral */
 * {
   margin: 0;
   padding: 0;
@@ -49,6 +49,58 @@ header {
 
 .login-link:hover {
   background-color: #fff0a0;
+}
+
+/* Menu padrão */
+.menu {
+  display: flex;
+  gap: 15px;
+  z-index: 1100; /* fica acima do header */
+}
+
+.menu a {
+  text-decoration: none;
+  color: #f0f0f0;
+  background-color: #8b0000;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.menu a:hover {
+  background-color: #a52a2a;
+}
+
+/* Ícone ☰ */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Responsivo: ao reduzir a tela, vira sanduíche */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 130px; /* abaixo da logo */
+    right: 20px;
+    background-color: #8b0000;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1100;
+  }
+
+  .menu.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
 
 /* Mensagem quando não há notícia */
@@ -147,14 +199,14 @@ article.noticia p {
 
 /* Rodapé */
 footer {
-  background-color: #541212;
+  background-color: #451107;
   color: #ffd700;
   text-align: center;
   padding: 15px;
   margin-top: 40px;
 }
 
-/* Responsivo */
+/* Responsivo para grade de notícias */
 @media (max-width: 1024px) {
   .noticias-grid {
     grid-template-columns: repeat(2, 1fr);

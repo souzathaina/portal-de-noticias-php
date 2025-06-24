@@ -104,9 +104,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="telaLogado.php">Voltar</a>
                 <a href="logout.php">Logout</a>
             </div>
+            <!-- Menu Hamburguer -->
+            <div class="menu-hamburguer" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-
     </header>
+
 
     <main>
         <h1>Editar Conta</h1>
@@ -143,6 +149,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <footer>
         <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('open');
+        }
+    </script>
 </body>
 
 </html>

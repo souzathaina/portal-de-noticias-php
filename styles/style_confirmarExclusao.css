@@ -10,7 +10,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa;
   color: #333;
-  padding-top: 210px; /* espaço para o cabeçalho fixo */
+  padding-top: 210px; 
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -22,8 +22,8 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #4a1e18; /* bordô */
-  color: #ffd700; /* dourado */
+  background-color: #451107; 
+  color: #ffd700; 
   padding: 20px 0;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   z-index: 1000;
@@ -121,7 +121,7 @@ form[action="editarUsuario.php"] button:hover {
 
 /* Rodapé */
 footer {
-  background-color: #541212;
+  background-color: #451107;
   color: #ffd700;
   text-align: center;
   padding: 18px;

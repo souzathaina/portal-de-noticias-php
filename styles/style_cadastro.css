@@ -28,7 +28,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #4a1e18;
+  background-color: #451107;
   color: #ffd700;
   display: flex;
   justify-content: space-between;
@@ -165,7 +165,7 @@ input[type="submit"]:hover {
 /* Rodapé */
 footer {
   width: 100%;
-  background-color: #541212;
+  background-color: #451107;
   color: #ffd700;
   text-align: center;
   padding: 15px;

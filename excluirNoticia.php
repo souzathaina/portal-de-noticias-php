@@ -54,19 +54,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style_excluirNoticia.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Excluir Notícia</title>
+    <link rel="stylesheet" href="styles/style_excluirNoticia.css" />
 </head>
 
 <body>
-
     <header>
         <div class="container-header">
             <img src="imagens/logo/logo.png" alt="Logo do Site" />
+
+            <!-- Botão Menu Sanduíche -->
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+
+            <!-- Menu de navegação -->
             <nav>
-                <a href="telaLogado.php">Início</a> |
-                <a href="editarUsuario.php">Editar Perfil</a> |
+                <a href="telaLogado.php">Início</a>
+                <a href="editarUsuario.php">Editar Perfil</a>
                 <a href="logout.php">Sair</a>
             </nav>
         </div>
@@ -77,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
         <p>Tem certeza que deseja excluir a notícia: <strong><?= htmlspecialchars($noticia['titulo']) ?></strong>?</p>
 
         <form action="" method="POST">
-            <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>" />
             <button type="submit" name="confirmar" value="sim">✅ Sim, excluir</button>
             <a class="cancelar" href="telaLogado.php">❌ Cancelar</a>
         </form>
@@ -89,6 +98,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
         </div>
     </footer>
 
+    <!-- Script para o menu sanduíche -->
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('header nav');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>

@@ -7,12 +7,14 @@
 }
 
 /* Garante que o footer fique no final da tela */
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
-  background-color: #864d45; /* bordô escuro */
+  background-color: #864d45;
+  /* bordô escuro */
   color: #333;
 }
 
@@ -29,17 +31,18 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #4a1e18;
+  background-color: #451107;
   color: #ffd700;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px 20px;
   z-index: 1000;
 }
 
 .logo {
-  max-height: 130px;
+  max-height: 100px;
+  /* Logo menor para telas pequenas */
   height: auto;
   width: auto;
   margin: 0 auto;
@@ -48,7 +51,7 @@ header {
 .voltar-index {
   background-color: #ffd700;
   color: #4a1e18;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
@@ -59,19 +62,27 @@ header {
   background-color: #fff0a0;
 }
 
-/* Conteúdo principal */
+/* Conteúdo principal centralizado */
 main {
-  padding-top: 160px; /* espaço para o header fixo */
-  max-width: 450px;
-  margin: 0 auto;
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 160px 20px 40px;
+  /* Compensa header fixo e evita grudar no rodapé */
 }
+
+.main-container {
+  width: 100%;
+  max-width: 450px;
+}
+
 
 /* Título */
 h2 {
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 2rem;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #ffd700;
 }
@@ -80,17 +91,17 @@ h2 {
 .mensagem-erro {
   color: #ff7f7f;
   background-color: #330000;
-  padding: 10px;
+  padding: 8px;
   border-radius: 6px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-weight: bold;
 }
 
 /* Formulário com fundo branco */
 form {
   background-color: #ffffff;
-  padding: 30px 40px;
+  padding: 20px 30px;
   border-radius: 12px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
@@ -108,23 +119,17 @@ label {
 input[type="email"],
 input[type="password"] {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
 }
 
-input:focus {
-  outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 5px 1px #ffd700;
-}
-
 /* Botão de envio */
 button[type="submit"] {
   width: 100%;
-  padding: 14px 0;
+  padding: 12px 0;
   background-color: #ffd700;
   border: none;
   border-radius: 8px;
@@ -141,11 +146,11 @@ button[type="submit"]:hover {
 
 /* Links abaixo do botão */
 .links {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .links a {
@@ -165,15 +170,118 @@ footer {
   background-color: #541212;
   color: #ffd700;
   text-align: center;
-  padding: 15px;
+  padding: 10px;
 }
 
-/* Responsivo */
-@media (max-width: 480px) {
+/* Responsivo para todas as telas de celular */
+@media (max-width: 1200px) {
+  header {
+    padding: 15px 10px;
+  }
+
+  .logo {
+    max-height: 100px;
+  }
+
+  .voltar-index {
+    font-size: 1rem;
+  }
+
+  main {
+    padding-top: 160px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .links {
+    gap: 10px;
+  }
+
+  .links a {
+    font-size: 1rem;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+  }
+
+  footer {
+    padding: 12px;
+  }
+}
+
+/* Responsivo para smartphones (menores que 1024px) */
+@media (max-width: 1024px) {
+  header {
+    padding: 15px 10px;
+  }
+
+  .logo {
+    max-height: 90px;
+  }
+
+  .voltar-index {
+    font-size: 0.95rem;
+  }
+
+  main {
+    padding-top: 160px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .links {
+    gap: 15px;
+  }
+
+  .links a {
+    font-size: 1rem;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+  }
+
+  footer {
+    padding: 12px;
+  }
+}
+
+/* Responsivo para smartphones (menores que 768px) */
+@media (max-width: 768px) {
   header {
     flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    gap: 15px;
+    padding: 15px 10px;
+  }
+
+  .logo {
+    max-height: 80px;
   }
 
   .voltar-index {
@@ -181,16 +289,102 @@ footer {
   }
 
   main {
-    padding-top: 200px;
+    padding-top: 170px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
   }
 
   .links {
     flex-direction: column;
+    gap: 8px;
     align-items: center;
   }
 
   .links a {
     width: 100%;
     text-align: center;
+    font-size: 1rem;
+  }
+
+  form {
+    padding: 12px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    padding: 8px;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  footer {
+    padding: 10px;
+  }
+}
+
+/* Responsivo para smartphones muito pequenos (ex: iPhone SE, telas de 320px) */
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 15px 10px;
+  }
+
+  .logo {
+    max-height: 70px;
+  }
+
+  .voltar-index {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  main {
+    padding-top: 180px;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .links a {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    padding: 8px;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  footer {
+    padding: 8px;
   }
 }

@@ -6,11 +6,15 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background-color: #4a1e18;
+  font-size: 16px;
+  /* Ajuste a fonte base */
 }
 
+/* Container da página */
 .wrapper {
   min-height: 100%;
   display: flex;
@@ -22,9 +26,9 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #4a1e18;
+  background-color: #451107;
   color: #ffd700;
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,13 +36,14 @@ header {
 }
 
 .logo {
-  max-height: 80px;
+  max-height: 50px;
+  width: auto;
 }
 
 .voltar-index {
   background-color: #ffd700;
   color: #4a1e18;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
@@ -51,33 +56,35 @@ header {
 
 /* Conteúdo principal */
 main {
-  padding-top: 160px;
+  padding-top: 100px;
+  /* Ajuste do padding superior para telas menores */
   flex: 1;
-  max-width: 600px;
+  max-width: 90%;
+  /* Ajuste da largura */
   margin: 0 auto;
   color: #333;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 2rem;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
   color: #ffd700;
 }
 
 /* Formulário */
 form {
   background-color: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
+  padding: 20px 30px;
+  border-radius: 10px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
 label {
   font-weight: 600;
   display: block;
-  margin-top: 20px;
-  margin-bottom: 6px;
+  margin-top: 12px;
+  margin-bottom: 4px;
   color: #333;
 }
 
@@ -85,7 +92,7 @@ input[type="text"],
 textarea,
 input[type="file"] {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
@@ -93,7 +100,7 @@ input[type="file"] {
 
 textarea {
   resize: vertical;
-  min-height: 150px;
+  min-height: 120px;
 }
 
 input:focus,
@@ -105,7 +112,7 @@ textarea:focus {
 
 .imagem-atual {
   max-width: 100%;
-  margin: 10px 0;
+  margin: 8px 0;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 }
@@ -113,13 +120,13 @@ textarea:focus {
 /* Botão */
 button[type="submit"] {
   width: 100%;
-  margin-top: 25px;
-  padding: 14px 0;
+  margin-top: 20px;
+  padding: 12px 0;
   background-color: #ffd700;
   border: none;
   border-radius: 8px;
   color: #4a1e18;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -132,22 +139,257 @@ button[type="submit"]:hover {
 /* Rodapé */
 footer {
   width: 100%;
-  background-color: #541212;
+  background-color: #451107;
   color: #ffd700;
   text-align: center;
-  padding: 15px;
+  padding: 12px;
 }
 
-/* Responsivo */
-@media (max-width: 480px) {
+/* Responsivo - Ajuste no layout para telas menores */
+@media (max-width: 1024px) {
   header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    padding: 10px 15px;
+  }
+
+  .logo {
+    max-height: 50px;
+  }
+
+  .voltar-index {
+    font-size: 0.9rem;
   }
 
   main {
-    padding-top: 200px;
-    margin: 0 20px;
+    padding-top: 120px;
+    /* Ajuste o espaço acima */
+    margin: 0 15px;
+    /* Reduzir as margens */
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    /* Tamanho da fonte reduzido */
+  }
+
+  form {
+    padding: 15px 20px;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 0.95rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .logo {
+    max-height: 50px;
+  }
+
+  .voltar-index {
+    font-size: 0.85rem;
+  }
+
+  main {
+    padding-top: 140px;
+    /* Ajuste o espaço acima */
+    margin: 0 10px;
+    /* Reduzir as margens */
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    /* Tamanho da fonte reduzido */
+  }
+
+  form {
+    padding: 12px 15px;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 0.9rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .logo {
+    max-height: 40px;
+  }
+
+  .voltar-index {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  main {
+    padding-top: 160px;
+    /* Ajuste o espaço acima */
+    margin: 0 10px;
+    /* Reduzir as margens */
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    /* Tamanho da fonte reduzido */
+  }
+
+  form {
+    padding: 8px 12px;
+  }
+
+  label {
+    font-size: 0.85rem;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 0.85rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  header {
+    padding: 8px;
+  }
+
+  .logo {
+    max-height: 35px;
+  }
+
+  .voltar-index {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  main {
+    padding-top: 180px;
+    /* Ajuste o espaço acima */
+    margin: 0 5px;
+    /* Reduzir as margens */
+  }
+
+  h1 {
+    font-size: 1rem;
+    /* Tamanho da fonte reduzido */
+  }
+
+  form {
+    padding: 6px 10px;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 0.8rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsivo - Para telas ultra pequenas (200px e abaixo) */
+@media (max-width: 200px) {
+  header {
+    padding: 5px;
+    /* Diminuir o padding para caber */
+  }
+
+  .logo {
+    max-height: 30px;
+    /* Logo ainda menor para caber */
+  }
+
+  .voltar-index {
+    font-size: 0.5rem;
+    /* Reduzir o tamanho do texto do botão */
+    padding: 3px 6px;
+    /* Diminuir o tamanho do botão */
+  }
+
+  main {
+    padding-top: 130px;
+    /* Menos espaço no topo */
+    margin: 0 3px;
+    /* Reduzir a margem */
+  }
+
+  h1 {
+    font-size: 1rem;
+    /* Fontes ainda menores para caber */
+  }
+
+  form {
+    padding: 4px 8px;
+    /* Compactar o formulário */
+  }
+
+  label {
+    font-size: 0.7rem;
+    /* Menor tamanho de fonte para rótulos */
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 0.7rem;
+    /* Reduzir fonte das entradas */
+    padding: 6px;
+    /* Ajustar o padding */
+  }
+
+  button[type="submit"] {
+    font-size: 0.8rem;
+    /* Reduzir o tamanho da fonte do botão */
+    padding: 8px 0;
+    /* Ajustar o padding do botão */
+  }
+
+  .imagem-atual {
+    max-width: 50px;
+    /* Limitar o tamanho das imagens */
+    height: auto;
   }
 }

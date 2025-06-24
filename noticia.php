@@ -4,7 +4,7 @@ require_once 'includes/funcoes.php';
 
 // Verifica se o parâmetro 'id' foi passado via GET e é numérico
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die("Notícia inválida.");
+  die("Notícia inválida.");
 }
 
 $id = (int) $_GET['id'];
@@ -19,7 +19,7 @@ $stmt->execute(['id' => $id]);
 $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$noticia) {
-    die("Notícia não encontrada.");
+  die("Notícia não encontrada.");
 }
 ?>
 
@@ -27,49 +27,45 @@ if (!$noticia) {
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?= htmlspecialchars($noticia['titulo']) ?></title>
-    <link rel="stylesheet" href="styles/style_noticia.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><?= htmlspecialchars($noticia['titulo']) ?></title>
+  <link rel="stylesheet" href="styles/style_noticia.css" />
 </head>
 
 <body>
-  <div class="container"> <!-- Início da estrutura flexível -->
+  <div class="container">
 
     <header>
       <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
       <div class="header-texto">
         <h1><?= htmlspecialchars($noticia['titulo']) ?></h1>
-        <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+        <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
+            <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
       </div>
       <?php
-        if (usuarioLogado()) {
-          echo '<a href="telaLogado.php" class="botao-voltar">⬅ Voltar para o início</a>';
-        } else {
-          echo '<a href="index.php" class="botao-voltar">⬅ Voltar para o início</a>';
-        }
+      if (usuarioLogado()) {
+        echo '<a href="telaLogado.php" class="botao-voltar">⬅ Voltar para o início</a>';
+      } else {
+        echo '<a href="index.php" class="botao-voltar">⬅ Voltar para o início</a>';
+      }
       ?>
     </header>
 
     <main>
       <?php if (!empty($noticia['imagem'])): ?>
-        <img 
-          src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>?v=<?= time() ?>" 
-          alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>"
-          loading="lazy"
-        />
+        <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>?v=<?= time() ?>"
+          alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" loading="lazy" />
       <?php endif; ?>
 
       <p><?= nl2br(htmlspecialchars($noticia['noticia'])) ?></p>
-
-      
     </main>
 
     <footer>
       <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
     </footer>
 
-  </div> 
+  </div>
 </body>
 
 </html>

@@ -9,7 +9,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f8f9fa;
   color: #333;
-  padding-top: 210px;
+  padding-top: 210px; /* Espaço para o cabeçalho fixo */
   overflow-x: hidden;
 }
 
@@ -19,7 +19,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background: #4a1e18;
+  background: #451107;
   color: #ffd700;
   padding: 20px;
   display: flex;
@@ -34,6 +34,15 @@ header {
   height: auto;
   width: auto;
   margin: 0 auto;
+}
+
+/* Ícone do menu sanduíche */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  margin-left: auto;
 }
 
 /* Área do usuário */
@@ -64,6 +73,11 @@ header {
 }
 
 /* Menu de ações */
+.menu {
+  display: flex;
+  gap: 15px;
+}
+
 .menu a {
   background-color: #ffd700;
   color: #541212;
@@ -95,7 +109,7 @@ main {
 /* Grade de notícias */
 .noticias-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   align-items: stretch;
 }
@@ -110,6 +124,7 @@ main {
 
 article.noticia {
   display: flex;
+  cursor: pointer;
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
@@ -175,28 +190,45 @@ article.noticia a:hover {
 
 /* Rodapé */
 footer {
-  background-color: #541212;
+  background-color: #451107;
   color: #ffd700;
   text-align: center;
   padding: 15px;
   margin-top: 40px;
 }
 
-/* Responsivo */
-@media (max-width: 1024px) {
-  .noticias-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .usuario-area {
-    align-items: center;
-  }
-}
-
+/* Responsivo: Menu sanduíche */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
     align-items: center;
+  }
+
+  /* Ícone do menu sanduíche */
+  .menu-toggle {
+    display: block;
+    font-size: 28px;
+    color: #ffd700;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  /* Menu escondido por padrão, visível quando a classe "show" for aplicada */
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 130px;
+    right: 20px;
+    background-color: #8b0000;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1100;
+  }
+
+  /* Menu visível quando ativado */
+  .menu.show {
+    display: flex;
   }
 
   .logo {
@@ -217,5 +249,15 @@ footer {
 
   main {
     margin: 0 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .noticias-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .usuario-area {
+    align-items: center;
   }
 }

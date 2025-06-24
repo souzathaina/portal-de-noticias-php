@@ -24,9 +24,16 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
   <header>
-    <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
-    <a class="login-link" href="login.php">Login / Cadastro</a>
-  </header>
+  <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div> <!-- Ícone ☰ -->
+
+  <nav class="menu" id="menu">
+    <a href="index.php">Início</a>
+    <a href="login.php">Login / Cadastro</a>
+  </nav>
+</header>
+
 
   <main>
     <?php if (count($noticias) == 0): ?>
@@ -63,6 +70,12 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <footer>
     <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
   </footer>
+  <script>
+  document.getElementById('menu-toggle').addEventListener('click', function () {
+    document.getElementById('menu').classList.toggle('show');
+  });
+</script>
+
 </body>
 
 </html>
