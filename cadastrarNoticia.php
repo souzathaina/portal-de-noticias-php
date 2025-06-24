@@ -60,14 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
         <div class="usuario-area">
-            
-            <div class="menu">
+            <div class="menu-toggle" id="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="menu" id="menu">
                 <a href="telaLogado.php">Voltar</a>
                 <a href="editarUsuario.php">Editar Usuário</a>
                 <a href="logout.php">Logout</a>
             </div>
         </div>
     </header>
+
 
     <main>
         <h1>Cadastrar Nova Notícia</h1>
@@ -89,6 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <footer>
         <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Quando clicar no ícone de hambúrguer
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active'); // Alterna a classe "active" para mostrar/ocultar o menu
+        });
+    </script>
+
+
+
 </body>
 
 </html>

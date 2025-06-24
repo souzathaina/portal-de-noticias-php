@@ -1,4 +1,4 @@
-/* Reset e base */
+/* Reset e base */ 
 * {
   margin: 0;
   padding: 0;
@@ -148,4 +148,58 @@ footer {
   color: #ffd700;
   text-align: center;
   padding: 15px;
+}
+
+/* Esconder o menu para telas pequenas e mostrar o ícone do hambúrguer */
+@media (max-width: 768px) {
+  .menu {
+    display: none; /* Esconde o menu por padrão em telas pequenas */
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    background-color: #451107;
+    top: 60px; /* Ajusta a posição para o menu */
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Suaviza a transição */
+    transform: translateY(-100%); /* Começa oculto acima */
+  }
+
+  .menu.active {
+    display: flex;
+    transform: translateY(0); /* Exibe o menu com a animação */
+  }
+
+  .menu a {
+    margin: 10px 0;
+  }
+
+  .menu-toggle {
+    display: block; /* Mostra o ícone do hambúrguer */
+    cursor: pointer;
+  }
+
+  .menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #ffd700;
+    transition: 0.3s;
+  }
+}
+
+/* No caso de telas grandes, manter o menu como estava */
+@media (min-width: 769px) {
+  .menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: none; /* Esconde o ícone do hambúrguer */
+  }
 }

@@ -8,11 +8,13 @@
 
 html, body {
   height: 100%;
+  font-size: 16px; /* Base font-size */
 }
 
 body {
   background-color: #4a1e18;
   color: #333;
+  line-height: 1.5;
 }
 
 /* Wrapper para manter layout colado ao rodapé */
@@ -33,15 +35,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px 20px;
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .logo {
   max-height: 130px;
   height: auto;
   width: auto;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .voltar-index {
@@ -60,22 +63,27 @@ header {
 
 /* Conteúdo principal */
 main {
-  padding-top: 160px;
-  max-width: 500px;
+  padding-top: 160px; /* Ajuste para header fixo */
+  max-width: 600px;
   margin: 0 auto;
   flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Para centralizar o título e o formulário */
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
 }
 
-/* Título */
 h2 {
   text-align: center;
   margin-bottom: 25px;
   font-size: 2rem;
   font-weight: bold;
   color: #ffd700;
+  width: 100%; /* Para garantir que ele tenha o mesmo comportamento de centralização */
 }
 
-/* Mensagem */
 .mensagem {
   background-color: #fdf2e9;
   padding: 10px;
@@ -85,15 +93,16 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Formulário */
 form {
   background-color: #fff;
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 480px; /* Limite máximo para telas grandes */
+  margin: 0 auto;
 }
 
-/* Labels e inputs */
 label {
   display: block;
   font-weight: 600;
@@ -119,7 +128,6 @@ input:focus {
   box-shadow: 0 0 5px 1px #ffd700;
 }
 
-/* Botão */
 button[type="submit"] {
   width: 100%;
   padding: 14px 0;
@@ -137,7 +145,6 @@ button[type="submit"]:hover {
   background-color: #e6c200;
 }
 
-/* Links */
 .links {
   margin-top: 20px;
   text-align: center;
@@ -154,29 +161,88 @@ button[type="submit"]:hover {
   text-decoration: underline;
 }
 
-/* Rodapé */
 footer {
   width: 100%;
   background-color: #451107;
   color: #ffd700;
   text-align: center;
   padding: 15px;
+  box-sizing: border-box;
 }
 
-/* Responsivo */
-@media (max-width: 480px) {
+/* Media Queries */
+@media (max-width: 768px) {
   header {
     flex-direction: column;
-    gap: 10px;
     text-align: center;
+    gap: 10px;
   }
 
   main {
-    padding-top: 200px;
+    padding-top: 180px; /* Ajuste para header fixo */
+  }
+
+  form {
+    padding: 25px 40px; /* Mais padding para aumentar o formulário em telas médias */
+  }
+
+  h2 {
+    font-size: 1.8rem; /* Ajuste no título */
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  main {
+    padding-top: 200px; /* Mais espaço para header fixo */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  form {
+    padding: 25px 30px; /* Aumentei o padding em telas menores */
+    width: 100%; /* Flexível */
+    max-width: 600px; /* Aumentei o tamanho máximo do formulário */
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 1.6rem; /* Ajuste no título */
   }
 
   .links a {
-    display: block;
-    margin-top: 10px;
+    font-size: 0.85rem; /* Ajuste de font-size */
+  }
+}
+
+/* Media Query para telas ultra pequenas (até 200px) */
+@media (max-width: 200px) {
+  header {
+    padding: 8px; /* Reduzindo o padding no header */
+  }
+
+  main {
+    padding-top: 210px; /* Ajuste para garantir que o conteúdo não fique escondido */
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  form {
+    padding: 10px 15px; /* Reduzindo o padding para usar melhor o espaço */
+    width: 100%; /* Flexível */
+    max-width: 200px; /* Limitando o formulário para 200px de largura */
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 1.2rem; /* Diminuindo o tamanho da fonte para caber melhor */
+  }
+
+  .links a {
+    font-size: 0.75rem; /* Ajuste para links em telas muito pequenas */
   }
 }
