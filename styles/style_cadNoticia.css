@@ -142,64 +142,337 @@ button[type="submit"]:hover {
 }
 
 /* Rodapé */
-footer {
-  width: 100%;
+footer.rodape-completo {
+  width: 100%; /* ocupa toda a largura */
+  left: 0; /* alinha à esquerda */
+  position: relative;
+  bottom: 0;
   background-color: #451107;
   color: #ffd700;
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
+}
+
+footer.rodape-completo {
+  background-color: #451107;
+  color: #ffd700;
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
+}
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rodape-completo h3 {
+  margin-bottom: 10px;
+  color: #ffd700;
+  font-size: 1.2em;
+}
+
+.contato a,
+.redes-sociais a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.contato a:hover,
+.redes-sociais a:hover {
+  text-decoration: underline;
+}
+
+.redes-sociais img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+  vertical-align: middle;
+}
+
+.redes-sociais img:hover {
+  transform: scale(1.1);
+}
+
+.copyright {
   text-align: center;
-  padding: 15px;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #ffd700;
 }
 
-/* Esconder o menu para telas pequenas e mostrar o ícone do hambúrguer */
-@media (max-width: 768px) {
+
+/* Pequenas telas: 320px (muito comum em celulares pequenos) */
+@media (max-width: 320px) {
+  body {
+    padding-top: 160px; /* menos espaço para o cabeçalho */
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  .logo {
+    max-height: 80px;
+    margin: 0 auto;
+  }
+
+  main h1 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+
+  form {
+    padding: 20px;
+    max-width: 280px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  button[type="submit"] {
+    font-size: 0.9em;
+    padding: 8px 15px;
+  }
+
   .menu {
-    display: none; /* Esconde o menu por padrão em telas pequenas */
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    background-color: #451107;
-    top: 60px; /* Ajusta a posição para o menu */
-    left: 0;
-    width: 100%;
+    top: 50px;
+  }
+}
+
+/* Pequenas telas: 375px (iPhone 6/7/8 padrão) */
+@media (min-width: 321px) and (max-width: 375px) {
+  body {
+    padding-top: 170px;
+  }
+
+  header {
+    padding: 18px;
+  }
+
+  .logo {
+    max-height: 90px;
+  }
+
+  main h1 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    padding: 0 15px;
+  }
+
+  form {
+    padding: 25px;
+    max-width: 320px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 1em;
+    padding: 9px;
+  }
+
+  button[type="submit"] {
+    font-size: 1em;
+    padding: 9px 18px;
+  }
+}
+
+/* Pequenas telas: 425px (largura padrão celulares maiores) */
+@media (min-width: 376px) and (max-width: 425px) {
+  body {
+    padding-top: 180px;
+  }
+
+  header {
+    padding: 20px;
+  }
+
+  .logo {
+    max-height: 100px;
+  }
+
+  main h1 {
+    font-size: 1.8rem;
+    margin-bottom: 28px;
+    padding: 0 20px;
+  }
+
+  form {
+    padding: 28px;
+    max-width: 400px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 1.05em;
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    font-size: 1.05em;
     padding: 10px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease; /* Suaviza a transição */
-    transform: translateY(-100%); /* Começa oculto acima */
-  }
-
-  .menu.active {
-    display: flex;
-    transform: translateY(0); /* Exibe o menu com a animação */
-  }
-
-  .menu a {
-    margin: 10px 0;
-  }
-
-  .menu-toggle {
-    display: block; /* Mostra o ícone do hambúrguer */
-    cursor: pointer;
-  }
-
-  .menu-toggle .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: #ffd700;
-    transition: 0.3s;
   }
 }
 
-/* No caso de telas grandes, manter o menu como estava */
-@media (min-width: 769px) {
-  .menu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+/* Tablets pequenos e grandes celulares: 768px */
+@media (min-width: 426px) and (max-width: 768px) {
+  body {
+    padding-top: 190px;
   }
 
-  .menu-toggle {
-    display: none; /* Esconde o ícone do hambúrguer */
+  header {
+    padding: 22px 25px;
+  }
+
+  .logo {
+    max-height: 110px;
+  }
+
+  main h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    padding: 0 25px;
+  }
+
+  form {
+    padding: 30px;
+    max-width: 550px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 1.1em;
+    padding: 12px;
+  }
+
+  button[type="submit"] {
+    font-size: 1.1em;
+    padding: 12px 25px;
+  }
+}
+
+/* Tela média / laptops: 769px a 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    padding-top: 200px;
+  }
+
+  header {
+    padding: 25px 35px;
+  }
+
+  .logo {
+    max-height: 120px;
+  }
+
+  main h1 {
+    font-size: 2.2rem;
+    margin-bottom: 32px;
+    padding: 0 30px;
+  }
+
+  form {
+    max-width: 600px;
+    padding: 35px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 1.15em;
+    padding: 14px;
+  }
+
+  button[type="submit"] {
+    font-size: 1.15em;
+    padding: 14px 30px;
+  }
+}
+
+/* Tela grande: 1025px a 1440px */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  body {
+    padding-top: 210px;
+  }
+
+  header {
+    padding: 25px 50px;
+  }
+
+  .logo {
+    max-height: 130px;
+  }
+
+  main h1 {
+    font-size: 2.4rem;
+    margin-bottom: 35px;
+  }
+
+  form {
+    max-width: 650px;
+    padding: 40px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 1.2em;
+    padding: 15px;
+  }
+
+  button[type="submit"] {
+    font-size: 1.2em;
+    padding: 15px 35px;
+  }
+}
+
+/* Telas muito grandes (4K e ultra wide): acima de 1440px até 2560px */
+@media (min-width: 1441px) and (max-width: 2560px) {
+  body {
+    padding-top: 230px;
+  }
+
+  header {
+    padding: 30px 80px;
+  }
+
+  .logo {
+    max-height: 150px;
+  }
+
+  main h1 {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+  }
+
+  form {
+    max-width: 700px;
+    padding: 45px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 1.3em;
+    padding: 18px;
+  }
+
+  button[type="submit"] {
+    font-size: 1.3em;
+    padding: 18px 40px;
   }
 }

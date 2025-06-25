@@ -23,7 +23,7 @@ if (!usuarioLogado()) {
     <header>
         <div class="container-header">
             <img src="imagens/logo/logo.png" alt="Logo do Site" />
-            
+
             <nav>
                 <a href="telaLogado.php">Início</a> |
                 <a href="editarUsuario.php">Editar Perfil</a> |
@@ -47,9 +47,30 @@ if (!usuarioLogado()) {
         </form>
     </main>
 
-    <footer>
-        <div class="container-footer">
-            <p>© <?= date("Y"); ?> Meu Portal de Notícias. Todos os direitos reservados.</p>
+    <footer class="rodape-completo">
+        <div class="rodape-conteudo">
+            <div class="contato">
+                <h3>Fale Conosco</h3>
+                <p>Email: <a href="mailto:sac@luzeverdade.com">sac@luzeverdade.com</a></p>
+                <p>Telefone: <a href="tel:+5511999999999">(11) 99999-9999</a></p>
+            </div>
+
+            <div class="redes-sociais">
+                <h3>Redes Sociais</h3>
+                <a href="https://facebook.com/luzeverdadeoficial" target="_blank">
+                    <img src="imagens/icons/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://instagram.com/luzeverdade.portal" target="_blank">
+                    <img src="imagens/icons/instagram.png" alt="Instagram">
+                </a>
+                <a href="https://wa.me/5511999999999" target="_blank">
+                    <img src="imagens/icons/whatsapp.png" alt="WhatsApp">
+                </a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
         </div>
     </footer>
 

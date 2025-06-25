@@ -164,12 +164,69 @@ input[type="submit"]:hover {
 }
 
 /* Rodapé */
-footer {
-  width: 100%;
+footer.rodape-completo {
+  width: 100%; /* ocupa toda a largura */
+  left: 0; /* alinha à esquerda */
+  position: relative;
+  bottom: 0;
   background-color: #451107;
   color: #ffd700;
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
+}
+
+footer.rodape-completo {
+  background-color: #451107;
+  color: #ffd700;
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
+}
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rodape-completo h3 {
+  margin-bottom: 10px;
+  color: #ffd700;
+  font-size: 1.2em;
+}
+
+.contato a,
+.redes-sociais a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.contato a:hover,
+.redes-sociais a:hover {
+  text-decoration: underline;
+}
+
+.redes-sociais img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+  vertical-align: middle;
+}
+
+.redes-sociais img:hover {
+  transform: scale(1.1);
+}
+
+.copyright {
   text-align: center;
-  padding: 15px;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #ffd700;
 }
 
 /* Responsividade - Telas pequenas (320px) */

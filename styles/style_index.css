@@ -82,6 +82,27 @@ header {
 
 /* Responsivo: ao reduzir a tela, vira sanduíche */
 @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    max-height: 120px;
+    margin-bottom: 10px;
+  }
+
+  .login-link {
+    margin-top: 10px;
+  }
+
+  /* Grade de notícias para telas pequenas */
+  .noticias-grid {
+    grid-template-columns: 1fr; /* Uma coluna por vez em telas pequenas */
+    padding: 0 20px;
+  }
+
+  /* Menu */
   .menu {
     display: none;
     flex-direction: column;
@@ -101,6 +122,108 @@ header {
   .menu-toggle {
     display: block;
   }
+  
+  /* Ajustes nas notícias e artigos */
+  article.noticia {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .noticia-link {
+    padding: 0 10px;
+  }
+
+  .login-link {
+    font-size: 0.9em;
+  }
+
+  main {
+    margin: 0 20px;
+  }
+}
+
+/* Responsivo para telas de 320px, 375px e 425px */
+@media (max-width: 425px) {
+  body {
+    padding-top: 160px; /* Ajusta o padding do topo para que o conteúdo não fique por trás do cabeçalho */
+  }
+
+  .logo {
+    max-height: 100px;
+  }
+
+  .menu a {
+    padding: 6px 10px;
+    font-size: 0.9em;
+  }
+
+  article.noticia {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .noticias-grid {
+    grid-template-columns: 1fr; /* Notícias empilhadas em uma coluna */
+  }
+
+  .login-link {
+    font-size: 0.9em;
+  }
+
+  main {
+    margin: 0 10px;
+  }
+}
+
+/* Responsivo para telas de 768px */
+@media (max-width: 768px) {
+  .noticias-grid {
+    grid-template-columns: 1fr; /* Notícias empilhadas em uma coluna */
+  }
+
+  .logo {
+    max-height: 120px;
+  }
+
+  .menu a {
+    font-size: 1em;
+  }
+
+  .login-link {
+    margin-top: 10px;
+  }
+
+  main {
+    margin: 0 20px;
+  }
+}
+
+/* Responsivo para telas de 1024px */
+@media (max-width: 1024px) {
+  .noticias-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  }
+}
+
+/* Responsividade para telas maiores, como 1440px e 2560px */
+@media (min-width: 1440px) {
+  .noticias-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+  }
+
+  article.noticia {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .noticias-grid {
+    grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+  }
+
+  article.noticia {
+    padding: 20px;
+  }
 }
 
 /* Mensagem quando não há notícia */
@@ -119,7 +242,7 @@ main {
 /* Grade de notícias */
 .noticias-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas por padrão */
   gap: 20px;
   align-items: stretch;
 }
@@ -198,40 +321,67 @@ article.noticia p {
 }
 
 /* Rodapé */
-footer {
+footer.rodape-completo {
+  width: 100%; /* ocupa toda a largura */
+  left: 0; /* alinha à esquerda */
+  position: relative;
+  bottom: 0;
   background-color: #451107;
   color: #ffd700;
-  text-align: center;
-  padding: 15px;
+  padding: 30px 20px 15px;
   margin-top: 40px;
+  font-size: 0.95em;
 }
 
-/* Responsivo para grade de notícias */
-@media (max-width: 1024px) {
-  .noticias-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+footer.rodape-completo {
+  background-color: #451107;
+  color: #ffd700;
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
 }
 
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .logo {
-    margin-bottom: 10px;
-  }
+.rodape-completo h3 {
+  margin-bottom: 10px;
+  color: #ffd700;
+  font-size: 1.2em;
+}
 
-  .login-link {
-    margin-top: 10px;
-  }
+.contato a,
+.redes-sociais a {
+  color: #ffd700;
+  text-decoration: none;
+}
 
-  .noticias-grid {
-    grid-template-columns: 1fr;
-  }
+.contato a:hover,
+.redes-sociais a:hover {
+  text-decoration: underline;
+}
 
-  main {
-    margin: 0 20px;
-  }
+.redes-sociais img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+  vertical-align: middle;
+}
+
+.redes-sociais img:hover {
+  transform: scale(1.1);
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #ffd700;
 }

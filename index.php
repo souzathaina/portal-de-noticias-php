@@ -24,15 +24,15 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
   <header>
-  <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
+    <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
-  <div class="menu-toggle" id="menu-toggle">&#9776;</div> <!-- Ícone ☰ -->
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div> <!-- Ícone ☰ -->
 
-  <nav class="menu" id="menu">
-    <a href="index.php">Início</a>
-    <a href="login.php">Login / Cadastro</a>
-  </nav>
-</header>
+    <nav class="menu" id="menu">
+      <a href="index.php">Início</a>
+      <a href="login.php">Login / Cadastro</a>
+    </nav>
+  </header>
 
 
   <main>
@@ -41,40 +41,68 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php else: ?>
       <div class="noticias-grid">
         <?php foreach ($noticias as $index => $noticia): ?>
-  <?php
-    $area = '';
-    if ($index === 0) $area = 'item1';
-    if ($index === 1) $area = 'item2';
-    if ($index === 2) $area = 'item3';
-  ?>
-  <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
-    <article class="noticia <?= $area ?>">
-      <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
-      <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+          <?php
+          $area = '';
+          if ($index === 0)
+            $area = 'item1';
+          if ($index === 1)
+            $area = 'item2';
+          if ($index === 2)
+            $area = 'item3';
+          ?>
+          <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
+            <article class="noticia <?= $area ?>">
+              <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
+              <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
+                  <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
 
-      <?php if (!empty($noticia['imagem'])): ?>
-        <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>" alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
-      <?php endif; ?>
+              <?php if (!empty($noticia['imagem'])): ?>
+                <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
+                  alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
+              <?php endif; ?>
 
-      <p>
-        <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
-        <span class="leia-mais">Leia mais</span>
-      </p>
-    </article>
-  </a>
-<?php endforeach; ?>
+              <p>
+                <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
+                <span class="leia-mais">Leia mais</span>
+              </p>
+            </article>
+          </a>
+        <?php endforeach; ?>
       </div>
     <?php endif; ?>
   </main>
 
-  <footer>
-    <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+  <footer class="rodape-completo">
+    <div class="rodape-conteudo">
+      <div class="contato">
+        <h3>Fale Conosco</h3>
+        <p>Email: <a href="mailto:sac@luzeverdade.com">sac@luzeverdade.com</a></p>
+        <p>Telefone: <a href="tel:+5511999999999">(11) 99999-9999</a></p>
+      </div>
+
+      <div class="redes-sociais">
+        <h3>Redes Sociais</h3>
+        <a href="https://facebook.com/luzeverdadeoficial" target="_blank">
+          <img src="imagens/icons/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://instagram.com/luzeverdade.portal" target="_blank">
+          <img src="imagens/icons/instagram.png" alt="Instagram">
+        </a>
+        <a href="https://wa.me/5511999999999" target="_blank">
+          <img src="imagens/icons/whatsapp.png" alt="WhatsApp">
+        </a>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+    </div>
   </footer>
   <script>
-  document.getElementById('menu-toggle').addEventListener('click', function () {
-    document.getElementById('menu').classList.toggle('show');
-  });
-</script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('show');
+    });
+  </script>
 
 </body>
 
