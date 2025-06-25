@@ -4,7 +4,7 @@
 $host = 'localhost';
 $dbname = 'db_portal_noticias';
 $usuario = 'root';
-$senha = '200567';
+$senha = '';
 
 try {
     // Fazendo a conexão corretamente
