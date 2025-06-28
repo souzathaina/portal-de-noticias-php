@@ -5,7 +5,8 @@
   box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
   height: 100%;
 }
 
@@ -23,17 +24,17 @@ body {
 .container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  padding-top: 160px; /* espaço para o header fixo */
+  flex-direction: row;
+  padding-top: 160px; /* Só para telas grandes */
 }
 
-/* Cabeçalho fixo */
+/* Cabeçalho fixo (para telas maiores) */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: #4a1e18;
+  background: #451107;
   color: #ffd700;
   padding: 20px;
   display: flex;
@@ -69,7 +70,7 @@ header {
 
 /* Conteúdo */
 main {
-  flex: 1;
+  display: flex;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -81,15 +82,17 @@ main {
 /* Imagem da notícia */
 main img {
   width: 100%;
-  height: auto;             /* Altura proporcional */
-  object-fit: contain;      /* Garante que a imagem completa apareça */
-  background-color: #fff;   /* Para evitar fundo transparente */
+  height: auto;
+  /* Altura proporcional */
+  object-fit: contain;
+  /* Garante que a imagem completa apareça */
+  background-color: #fff;
+  /* Para evitar fundo transparente */
   border-radius: 6px;
   border: 2px solid #ddd;
   display: block;
   margin: 20px 0;
 }
-
 
 /* Texto */
 main p {
@@ -102,8 +105,8 @@ main p {
 .botao-voltar {
   display: inline-block;
   text-decoration: none;
-  background-color: #541212;
-  color: #ffd700;
+  background-color: #ffd700;
+  color: #541212;
   padding: 10px 20px;
   border-radius: 6px;
   transition: background 0.3s ease;
@@ -116,25 +119,110 @@ main p {
 }
 
 /* Rodapé fixo no final */
-footer {
-  background-color: #4a1e18;
+footer.rodape-completo {
+  width: 100%; /* ocupa toda a largura */
+  left: 0; /* alinha à esquerda */
+  position: relative;
+  bottom: 0;
+  background-color: #451107;
   color: #ffd700;
-  text-align: center;
-  padding: 20px;
-  border-top: 5px solid #541212;
-  width: 100%;
+  padding: 30px 20px 15px;
   margin-top: 40px;
+  font-size: 0.95em;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
+footer.rodape-completo {
+  background-color: #451107;
+  color: #ffd700;
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
+}
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rodape-completo h3 {
+  margin-bottom: 10px;
+  color: #ffd700;
+  font-size: 1.2em;
+}
+
+.contato a,
+.redes-sociais a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.contato a:hover,
+.redes-sociais a:hover {
+  text-decoration: underline;
+}
+
+.redes-sociais img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+  vertical-align: middle;
+}
+
+.redes-sociais img:hover {
+  transform: scale(1.1);
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #ffd700;
+}
+
+/* Responsivo para 320px */
+@media (max-width: 320px) {
+  header {
+    position: relative;
+    padding-top: 60px;
+  }
+
+  .logo {
+    max-height: 50px;
+    margin-bottom: 5px;
+  }
+
   .header-texto h1 {
-    font-size: 1.5em;
+    font-size: 1.2em;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  main p {
+    font-size: 0.9em;
+  }
+}
+
+/* Responsivo para 375px */
+@media (max-width: 375px) {
+  header {
+    position: relative;
+    padding-top: 70px;
   }
 
   .logo {
     max-height: 60px;
     margin-bottom: 10px;
+  }
+
+  .header-texto h1 {
+    font-size: 1.4em;
   }
 
   main {
@@ -143,5 +231,111 @@ footer {
 
   main p {
     font-size: 1em;
+  }
+}
+
+/* Responsivo para 425px */
+@media (max-width: 425px) {
+  header {
+    position: relative;
+    padding-top: 80px;
+  }
+
+  .logo {
+    max-height: 80px;
+    margin-bottom: 15px;
+  }
+
+  .header-texto h1 {
+    font-size: 1.5em;
+  }
+
+  main {
+    padding: 18px;
+  }
+
+  main p {
+    font-size: 1.05em;
+  }
+}
+
+/* Responsivo para 768px */
+@media (max-width: 768px) {
+  header {
+    position: relative;
+    padding-top: 80px;
+  }
+
+  .logo {
+    max-height: 90px;
+  }
+
+  .header-texto h1 {
+    font-size: 1.6em;
+  }
+
+  .header-texto p {
+    font-size: 1em;
+  }
+
+  main {
+    padding: 20px;
+  }
+}
+
+/* Responsivo para 1024px */
+@media (max-width: 1024px) {
+  .container {
+    padding-top: 120px;
+  }
+
+  .logo {
+    max-height: 120px;
+  }
+
+  .header-texto h1 {
+    font-size: 1.8em;
+  }
+
+  main {
+    padding: 25px;
+  }
+}
+
+/* Responsivo para 1440px */
+@media (max-width: 1440px) {
+  .container {
+    padding-top: 140px;
+  }
+
+  .logo {
+    max-height: 130px;
+  }
+
+  .header-texto h1 {
+    font-size: 1.9em;
+  }
+
+  main {
+    padding: 30px;
+  }
+}
+
+/* Responsivo para 2560px */
+@media (max-width: 2560px) {
+  header {
+    padding: 40px;
+  }
+
+  .logo {
+    max-height: 160px;
+  }
+
+  .header-texto h1 {
+    font-size: 2em;
+  }
+
+  main {
+    padding: 40px;
   }
 }

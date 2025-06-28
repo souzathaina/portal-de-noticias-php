@@ -35,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login</title>
     <link rel="stylesheet" href="styles/style_login.css">
 </head>
@@ -47,30 +49,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </header>
 
         <main>
-            <h2>Login</h2>
+            <div class="main-container">
+                <h2>Login</h2>
 
-            <?php if (!empty($mensagem)): ?>
-                <p class="mensagem-erro"><?= htmlspecialchars($mensagem) ?></p>
-            <?php endif; ?>
+                <?php if (!empty($mensagem)): ?>
+                    <p class="mensagem-erro"><?= htmlspecialchars($mensagem) ?></p>
+                <?php endif; ?>
 
-            <form action="login.php" method="POST">
-                <label>Email:</label>
-                <input type="email" name="email" required>
+                <form action="login.php" method="POST">
+                    <label>Email:</label>
+                    <input type="email" name="email" required>
 
-                <label>Senha:</label>
-                <input type="password" name="senha" required>
+                    <label>Senha:</label>
+                    <input type="password" name="senha" required>
 
-                <button type="submit">Entrar</button>
+                    <button type="submit">Entrar</button>
 
-                <div class="links">
-                    <a href="cadastro.php">Cadastrar-se</a>
-                    <a href="alterarSenha.php">Esqueceu a senha?</a>
-                </div>
-            </form>
+                    <div class="links">
+                        <a href="cadastro.php">Cadastrar-se</a>
+                        <a href="alterarSenha.php">Esqueceu a senha?</a>
+                    </div>
+                </form>
+            </div>
         </main>
 
-        <footer>
-            <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+
+        <footer class="rodape-completo">
+            <div class="rodape-conteudo">
+                <div class="contato">
+                    <h3>Fale Conosco</h3>
+                    <p>Email: <a href="mailto:sac@luzeverdade.com">sac@luzeverdade.com</a></p>
+                    <p>Telefone: <a href="tel:+5511999999999">(11) 99999-9999</a></p>
+                </div>
+
+                <div class="redes-sociais">
+                    <h3>Redes Sociais</h3>
+                    <a href="https://facebook.com/luzeverdadeoficial" target="_blank">
+                        <img src="imagens/icons/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://instagram.com/luzeverdade.portal" target="_blank">
+                        <img src="imagens/icons/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://wa.me/5511999999999" target="_blank">
+                        <img src="imagens/icons/whatsapp.png" alt="WhatsApp">
+                    </a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+            </div>
         </footer>
     </div>
 </body>

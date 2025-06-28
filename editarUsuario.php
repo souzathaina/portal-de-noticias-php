@@ -104,9 +104,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="telaLogado.php">Voltar</a>
                 <a href="logout.php">Logout</a>
             </div>
+            <!-- Menu Hamburguer -->
+            <div class="menu-hamburguer" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-
     </header>
+
 
     <main>
         <h1>Editar Conta</h1>
@@ -140,9 +146,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </main>
 
-    <footer>
-        <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+    <footer class="rodape-completo">
+        <div class="rodape-conteudo">
+            <div class="contato">
+                <h3>Fale Conosco</h3>
+                <p>Email: <a href="mailto:sac@luzeverdade.com">sac@luzeverdade.com</a></p>
+                <p>Telefone: <a href="tel:+5511999999999">(11) 99999-9999</a></p>
+            </div>
+
+            <div class="redes-sociais">
+                <h3>Redes Sociais</h3>
+                <a href="https://facebook.com/luzeverdadeoficial" target="_blank">
+                    <img src="imagens/icons/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://instagram.com/luzeverdade.portal" target="_blank">
+                    <img src="imagens/icons/instagram.png" alt="Instagram">
+                </a>
+                <a href="https://wa.me/5511999999999" target="_blank">
+                    <img src="imagens/icons/whatsapp.png" alt="WhatsApp">
+                </a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
+        </div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('open');
+        }
+    </script>
 </body>
 
 </html>
