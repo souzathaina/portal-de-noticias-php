@@ -28,6 +28,35 @@ header {
   z-index: 1000;
   flex-wrap: wrap;
 }
+/* Tempo no header */
+.tempo-header {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  z-index: 10;
+}
+
+.tempo-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.tempo-box img {
+  width: 28px;
+  height: 28px;
+}
+
+.tempo-box.erro {
+  color: #900;
+  background-color: rgba(255, 230, 230, 0.9);
+}
 
 .logo {
   max-height: 130px;

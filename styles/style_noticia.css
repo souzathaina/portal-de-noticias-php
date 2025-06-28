@@ -24,7 +24,11 @@ body {
 .container {
   min-height: 100vh;
   display: flex;
+<<<<<<< HEAD
   flex-direction: column;
+=======
+  flex-direction: row;
+>>>>>>> anuncio
   padding-top: 160px; /* Só para telas grandes */
 }
 
@@ -70,7 +74,7 @@ header {
 
 /* Conteúdo */
 main {
-  flex: 1;
+  display: flex;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
