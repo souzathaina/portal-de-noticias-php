@@ -73,7 +73,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
-    <div class="menu-toggle" id="menu-toggle">&#9776;</div> <!-- Ícone ☰ -->
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div> 
 
     <nav class="menu" id="menu">
       <a href="index.php">Início</a>

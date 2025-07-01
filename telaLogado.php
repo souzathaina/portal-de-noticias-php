@@ -50,6 +50,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="cadastrarNoticia.php">Criar notícia</a>
                 <a href="editarUsuario.php">Editar Usuário</a>
                 <a href="logout.php">Logout</a>
+                <a href="cadastrarAnuncio.php">Cadastrar Anuncio</a>
             </nav>
         </div>
     </header>
