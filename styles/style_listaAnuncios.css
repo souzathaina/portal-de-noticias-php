@@ -1,0 +1,218 @@
+/* Reset e base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 40px 50px;
+}
+
+/* Container principal */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Título da página */
+h1 {
+  color: #451107; /* bordô escuro */
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Botão de novo anunciante */
+a.novo-anuncio {
+  display: inline-block;
+  background-color: #ffd700; /* dourado */
+  color: #451107;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 8px rgba(69, 17, 7, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+a.novo-anuncio:hover,
+a.novo-anuncio:focus {
+  background-color: #ffea47;
+  box-shadow: 0 6px 12px rgba(69, 17, 7, 0.5);
+  outline: none;
+}
+
+/* Tabela principal */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Cabeçalho da tabela */
+thead tr {
+  background-color: #451107;
+  color: #ffd700;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+thead th {
+  padding: 15px 10px;
+  border-right: 1px solid #ffd700;
+}
+
+thead th:last-child {
+  border-right: none;
+}
+
+/* Corpo da tabela */
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.25s ease;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #faf6f2;
+}
+
+tbody tr:hover {
+  background-color: #fff2cc;
+  cursor: pointer;
+}
+
+/* Células da tabela */
+tbody td {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 1rem;
+  vertical-align: middle;
+  border-right: 1px solid #eee;
+}
+
+tbody td:last-child {
+  border-right: none;
+}
+
+/* Imagem do anúncio */
+tbody td img {
+  max-width: 120px;
+  max-height: 70px;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(69, 17, 7, 0.15);
+}
+
+/* Links de ações */
+.acoes a {
+  color: #451107;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 8px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.acoes a:hover {
+  background-color: #ffd700;
+  color: #451107;
+  text-decoration: none;
+  box-shadow: 0 0 8px #ffd700;
+}
+
+/* Indicadores Sim / Não */
+td[data-boolean="1"]::before {
+  content: "✔";
+  color: #228B22; /* verde */
+  margin-right: 6px;
+}
+
+td[data-boolean="0"]::before {
+  content: "✘";
+  color: #b30000; /* vermelho */
+  margin-right: 6px;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  body {
+    padding: 20px 15px;
+  }
+  
+  a.novo-anuncio {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  thead tr {
+    font-size: 1rem;
+  }
+
+  tbody td img {
+    max-width: 90px;
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    display: none;
+  }
+  tbody tr {
+    margin-bottom: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(69, 17, 7, 0.1);
+    padding: 20px;
+  }
+  tbody td {
+    padding-left: 50%;
+    text-align: left;
+    position: relative;
+    border: none;
+    font-size: 1rem;
+  }
+  tbody td::before {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #451107;
+  }
+
+  tbody td:nth-of-type(1)::before { content: "ID"; }
+  tbody td:nth-of-type(2)::before { content: "Nome"; }
+  tbody td:nth-of-type(3)::before { content: "Imagem"; }
+  tbody td:nth-of-type(4)::before { content: "Link"; }
+  tbody td:nth-of-type(5)::before { content: "Destaque"; }
+  tbody td:nth-of-type(6)::before { content: "Ativo"; }
+  tbody td:nth-of-type(7)::before { content: "Ações"; }
+
+  tbody td img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 6px;
+  }
+
+  .acoes a {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+}
