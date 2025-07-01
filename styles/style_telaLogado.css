@@ -9,7 +9,8 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f8f9fa;
   color: #333;
-  padding-top: 210px; /* Espaço para o cabeçalho fixo */
+  padding-top: 210px;
+  /* Espaço para o cabeçalho fixo */
   overflow-x: hidden;
 }
 
@@ -27,6 +28,27 @@ header {
   align-items: center;
   z-index: 1000;
   flex-wrap: wrap;
+}
+
+.noticia-anuncio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.separador-colorido {
+  width: 20px;
+  /* tamanho do "gap" visual */
+  background-color: #737373;
+  /* a cor que você quiser */
+  border-radius: 4px;
+}
+
+
+.anuncio {
+  border-radius: 0.5em;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+
 }
 
 .logo {
@@ -108,10 +130,9 @@ main {
 
 /* Grade de notícias */
 .noticias-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }
 
 /* Cada notícia (card) */
@@ -190,8 +211,10 @@ article.noticia a:hover {
 
 /* Rodapé */
 footer.rodape-completo {
-  width: 100%; /* ocupa toda a largura */
-  left: 0; /* alinha à esquerda */
+  width: 100%;
+  /* ocupa toda a largura */
+  left: 0;
+  /* alinha à esquerda */
   position: relative;
   bottom: 0;
   background-color: #451107;
@@ -261,6 +284,31 @@ footer.rodape-completo {
     padding-top: 260px;
   }
 
+  .noticia-anuncio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.separador-colorido {
+  width: 20px;
+  /* tamanho do "gap" visual */
+  background-color: #737373;
+  /* a cor que você quiser */
+  border-radius: 4px;
+}
+
+
+.anuncio {
+  border-radius: 0.5em;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+
+
   .logo {
     max-height: 100px;
   }
@@ -297,6 +345,27 @@ footer.rodape-completo {
     padding-top: 270px;
   }
 
+  .noticia-anuncio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.separador-colorido {
+  width: 20px;
+  /* tamanho do "gap" visual */
+  background-color: #737373;
+  /* a cor que você quiser */
+  border-radius: 4px;
+}
+
+
+.anuncio {
+  border-radius: 0.5em;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+
+}
+
   .logo {
     max-height: 90px;
   }
@@ -328,6 +397,27 @@ footer.rodape-completo {
   body {
     padding-top: 280px;
   }
+
+  .noticia-anuncio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.separador-colorido {
+  width: 20px;
+  /* tamanho do "gap" visual */
+  background-color: #737373;
+  /* a cor que você quiser */
+  border-radius: 4px;
+}
+
+
+.anuncio {
+  border-radius: 0.5em;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+
+}
 
   .logo {
     max-height: 80px;
@@ -366,6 +456,27 @@ footer.rodape-completo {
     gap: 25px;
   }
 
+  .noticia-anuncio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.separador-colorido {
+  width: 20px;
+  /* tamanho do "gap" visual */
+  background-color: #737373;
+  /* a cor que você quiser */
+  border-radius: 4px;
+}
+
+
+.anuncio {
+  border-radius: 0.5em;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+
+}
+
   main {
     margin: 0 80px;
   }
@@ -390,6 +501,27 @@ footer.rodape-completo {
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
   }
+
+  .noticia-anuncio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.separador-colorido {
+  width: 20px;
+  /* tamanho do "gap" visual */
+  background-color: #737373;
+  /* a cor que você quiser */
+  border-radius: 4px;
+}
+
+
+.anuncio {
+  border-radius: 0.5em;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+
+}
 
   main {
     margin: 0 120px;
