@@ -20,15 +20,15 @@ $erroCurl = curl_error($ch);
 curl_close($ch);
 
 if ($response && !$erroCurl) {
-    $dados = json_decode($response, true);
-    if (isset($dados['main'])) {
-        $tempo = [
-            'cidade' => $dados['name'],
-            'temperatura' => round($dados['main']['temp']),
-            'descricao' => ucfirst($dados['weather'][0]['description']),
-            'icone' => $dados['weather'][0]['icon']
-        ];
-    }
+  $dados = json_decode($response, true);
+  if (isset($dados['main'])) {
+    $tempo = [
+      'cidade' => $dados['name'],
+      'temperatura' => round($dados['main']['temp']),
+      'descricao' => ucfirst($dados['weather'][0]['description']),
+      'icone' => $dados['weather'][0]['icon']
+    ];
+  }
 }
 
 
@@ -57,19 +57,19 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <header>
 
 
-  <div class="tempo-header">
-    <?php if ($tempo): ?>
-      <div class="tempo-box">
-        <img src="https://openweathermap.org/img/wn/<?= $tempo['icone'] ?>.png" alt="Tempo">
-        <span><?= $tempo['temperatura'] ?>°C</span>
-        <span><?= htmlspecialchars($tempo['descricao']) ?></span>
-      </div>
-    <?php else: ?>
-      <div class="tempo-box erro">
-        <span>Tempo indisponível</span>
-      </div>
-    <?php endif; ?>
-  </div>
+    <div class="tempo-header">
+      <?php if ($tempo): ?>
+        <div class="tempo-box">
+          <img src="https://openweathermap.org/img/wn/<?= $tempo['icone'] ?>.png" alt="Tempo">
+          <span><?= $tempo['temperatura'] ?>°C</span>
+          <span><?= htmlspecialchars($tempo['descricao']) ?></span>
+        </div>
+      <?php else: ?>
+        <div class="tempo-box erro">
+          <span>Tempo indisponível</span>
+        </div>
+      <?php endif; ?>
+    </div>
 
     <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
@@ -83,59 +83,48 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
   <main>
+    <section class="noticia-anuncio">
+      <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
+      <div class="separador-colorido"></div>
 
-    <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
-    <?php if (count($noticias) == 0): ?>
-      <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
-    <?php else: ?>
-      <div class="noticias-grid">
-        <?php foreach ($noticias as $index => $noticia): ?>
-          <?php
-          $area = '';
-          if ($index === 0)
-            $area = 'item1';
-          if ($index === 1)
-            $area = 'item2';
-          if ($index === 2)
-            $area = 'item3';
-          ?>
-<<<<<<< HEAD
-          <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
-            <article class="noticia <?= $area ?>">
-              <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
-              <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
-                  <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
+      <?php if (count($noticias) == 0): ?>
+        <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
+      <?php else: ?>
+        <div class="noticias-grid">
+          <?php foreach ($noticias as $index => $noticia): ?>
+            <?php
+            $area = '';
+            if ($index === 0)
+              $area = 'item1';
+            if ($index === 1)
+              $area = 'item2';
+            if ($index === 2)
+              $area = 'item3';
+            ?>
 
-              <?php if (!empty($noticia['imagem'])): ?>
-                <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
-                  alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
-              <?php endif; ?>
+            <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
+              <article class="noticia <?= $area ?>">
+                <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
+                <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
+                    <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
 
-=======
+                <?php if (!empty($noticia['imagem'])): ?>
+                  <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
+                    alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
+                <?php endif; ?>
 
-          <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
-            <article class="noticia <?= $area ?>">
-              <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
-              <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
-                  <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
-
-              <?php if (!empty($noticia['imagem'])): ?>
-                <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
-                  alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
-              <?php endif; ?>
-
->>>>>>> anuncio
-              <p>
-                <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
-                <span class="leia-mais">Leia mais</span>
-              </p>
-            </article>
-          </a>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
-    <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
-
+                <p>
+                  <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
+                  <span class="leia-mais">Leia mais</span>
+                </p>
+              </article>
+            </a>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+      <div class="separador-colorido"></div>
+      <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
+    </section>
   </main>
 
   <footer class="rodape-completo">

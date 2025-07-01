@@ -56,48 +56,48 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <main>
-        <?php if (count($noticias) == 0): ?>
-            <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
-        <?php else: ?>
-            <div class="noticias-grid">
-                <?php foreach ($noticias as $index => $noticia): ?>
-                    <?php
-                    $area = '';
-                    if ($index === 0)
-                        $area = 'item1';
-                    if ($index === 1)
-                        $area = 'item2';
-                    if ($index === 2)
-                        $area = 'item3';
-                    ?>
-                    <article class="noticia <?= $area ?>" data-id="<?= htmlspecialchars($noticia['id']) ?>" tabindex="0"
-                        role="link" aria-label="Notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
-                        <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
-                        <p class="autor-data">
-                            <small>Por <?= htmlspecialchars($noticia['autor']) ?> em
-                                <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?>
-                            </small>
-                        </p>
+        <section class="noticia-anuncio">
+            <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
+            <div class="separador-colorido"></div>
 
-                        <?php if (!empty($noticia['imagem'])): ?>
-                            <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
-                                alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
-                        <?php endif; ?>
+            <?php if (count($noticias) == 0): ?>
+                <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
+            <?php else: ?>
+                <div class="noticias-grid">
+                    <?php foreach ($noticias as $index => $noticia): ?>
+                        <?php
+                        $area = '';
+                        if ($index === 0)
+                            $area = 'item1';
+                        if ($index === 1)
+                            $area = 'item2';
+                        if ($index === 2)
+                            $area = 'item3';
+                        ?>
 
-                        <p>
-                            <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
-                        </p>
+                        <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
+                            <article class="noticia <?= $area ?>">
+                                <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
+                                <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
+                                        <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
 
-                        <?php if ($noticia['id_autor'] == $_SESSION['id']): ?>
-                            <p class="acoes-noticia">
-                                <a href="alterarNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>">Alterar</a> |
-                                <a href="excluirNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>">Excluir</a>
-                            </p>
-                        <?php endif; ?>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+                                <?php if (!empty($noticia['imagem'])): ?>
+                                    <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
+                                        alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>">
+                                <?php endif; ?>
+
+                                <p>
+                                    <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
+                                    <span class="leia-mais">Leia mais</span>
+                                </p>
+                            </article>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <div class="separador-colorido"></div>
+            <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
+        </section>
     </main>
 
     <footer class="rodape-completo">
