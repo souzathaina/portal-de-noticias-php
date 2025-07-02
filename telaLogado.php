@@ -30,16 +30,14 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <header>
-        <!-- Logo -->
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
-        <!-- Ícone do menu sanduíche (hamburger) -->
         <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 
-        <!-- Área do usuário e menu -->
         <div class="usuario-area">
             <div class="perfil-usuario">
                 <?php
+                // Usa a foto do usuário da sessão, ou uma imagem padrão se não houver
                 $fotoUsuario = !empty($_SESSION['foto']) ? $_SESSION['foto'] : 'imagens/perfil_padrao.png';
                 ?>
                 <img src="<?= htmlspecialchars($fotoUsuario) ?>" alt="Foto do perfil">
@@ -50,33 +48,25 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="cadastrarNoticia.php">Criar notícia</a>
                 <a href="editarUsuario.php">Editar Usuário</a>
                 <a href="logout.php">Logout</a>
-                <a href="./anuncio/ListarAnuncios.php">Listar Anuncios</a>
+                <a href="./anuncio/ListarAnuncios.php">Listar Anúncios</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="noticia-anuncio">
-            <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
-            <div class="separador-colorido"></div>
+        <div class="anuncio-lateral anuncio-esquerda">
+            <img src="./imagens/anuncio_exemplo_esquerda.png" alt="Anúncio Lateral Esquerdo">
+            <p>Seu anúncio aqui na Esquerda!</p>
+        </div>
 
+        <section class="noticias-principal">
             <?php if (count($noticias) == 0): ?>
                 <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
             <?php else: ?>
                 <div class="noticias-grid">
-                    <?php foreach ($noticias as $index => $noticia): ?>
-                        <?php
-                        $area = '';
-                        if ($index === 0)
-                            $area = 'item1';
-                        if ($index === 1)
-                            $area = 'item2';
-                        if ($index === 2)
-                            $area = 'item3';
-                        ?>
-
-                        <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
-                            <article class="noticia <?= $area ?>">
+                    <?php foreach ($noticias as $noticia): ?>
+                        <article class="noticia" data-id="<?= htmlspecialchars($noticia['id']) ?>">
+                            <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link-conteudo">
                                 <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
                                 <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
                                         <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
@@ -90,14 +80,24 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
                                     <span class="leia-mais">Leia mais</span>
                                 </p>
-                            </article>
-                        </a>
+                            </a> <?php if ($noticia['id_autor'] == $_SESSION['id']): ?>
+                                <p class="acoes-noticia">
+                                    <a href="alterarNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
+                                        class="btn-alterar">Alterar</a>
+                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
+                                        class="btn-excluir">Excluir</a>
+                                </p>
+                            <?php endif; ?>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <div class="separador-colorido"></div>
-            <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
         </section>
+
+        <div class="anuncio-lateral anuncio-direita">
+            <img src="./imagens/anuncio_exemplo_direita.png" alt="Anúncio Lateral Direito">
+            <p>O seu espaço aqui na Direita!</p>
+        </div>
     </main>
 
     <footer class="rodape-completo">
@@ -127,9 +127,6 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </footer>
 
-
-
-    <!-- Script para abrir/fechar o menu sanduíche -->
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function () {
             document.getElementById('menu').classList.toggle('show');
