@@ -9,6 +9,65 @@ if (!usuarioLogado()) {
     exit;
 }
 
+// --- Lógica para buscar anúncios (AJUSTADA) ---
+$anuncioDestaqueEsquerda = null;
+$anuncioDestaqueDireita = null;
+
+try {
+    // 1. Tenta buscar TODOS os anúncios ativos e em destaque
+    $sqlDestaques = "SELECT nome, imagem, link FROM anuncio WHERE ativo = 1 AND destaque = 1 ORDER BY RAND()";
+    $stmtDestaques = $pdo->query($sqlDestaques);
+    $anunciosDestaque = $stmtDestaques->fetchAll(PDO::FETCH_ASSOC);
+
+    // 2. Tenta buscar TODOS os anúncios ativos (para usar como fallback)
+    $sqlAtivos = "SELECT nome, imagem, link FROM anuncio WHERE ativo = 1 ORDER BY RAND()";
+    $stmtAtivos = $pdo->query($sqlAtivos);
+    $anunciosAtivos = $stmtAtivos->fetchAll(PDO::FETCH_ASSOC);
+
+    // Prioriza destaques
+    if (count($anunciosDestaque) >= 2) {
+        // Se tem pelo menos 2 destaques, pega 2 diferentes
+        $anuncioDestaqueEsquerda = array_shift($anunciosDestaque); // Pega o primeiro
+        $anuncioDestaqueDireita = array_shift($anunciosDestaque);  // Pega o segundo
+    } elseif (count($anunciosDestaque) == 1) {
+        // Se tem apenas 1 destaque, ele vai para a esquerda
+        $anuncioDestaqueEsquerda = array_shift($anunciosDestaque);
+
+        // E tenta pegar um ativo diferente para a direita
+        foreach ($anunciosAtivos as $anuncio) {
+            if ($anuncio['imagem'] !== $anuncioDestaqueEsquerda['imagem']) {
+                $anuncioDestaqueDireita = $anuncio;
+                break;
+            }
+        }
+    }
+
+    // Se ainda faltar algum (e houver ativos disponíveis que não foram usados)
+    if (!$anuncioDestaqueEsquerda) {
+        if (!empty($anunciosAtivos)) {
+            $anuncioDestaqueEsquerda = array_shift($anunciosAtivos);
+        }
+    }
+
+    if (!$anuncioDestaqueDireita) {
+        foreach ($anunciosAtivos as $anuncio) {
+            // Garante que o anúncio da direita seja diferente do da esquerda, se a esquerda já tiver um
+            if (!$anuncioDestaqueEsquerda || $anuncio['imagem'] !== $anuncioDestaqueEsquerda['imagem']) {
+                $anuncioDestaqueDireita = $anuncio;
+                break;
+            }
+        }
+    }
+
+
+} catch (PDOException $e) {
+    error_log("Erro ao buscar anúncios: " . $e->getMessage());
+    $anuncioDestaqueEsquerda = null;
+    $anuncioDestaqueDireita = null;
+}
+// --- Fim da lógica para buscar anúncios ---
+
+
 // Pega todas as notícias do banco, junto com o nome do autor (usuário)
 $sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, noticias.imagem, usuarios.nome AS autor, usuarios.id AS id_autor
         FROM noticias
@@ -30,16 +89,14 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <header>
-        <!-- Logo -->
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
-        <!-- Ícone do menu sanduíche (hamburger) -->
         <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 
-        <!-- Área do usuário e menu -->
         <div class="usuario-area">
             <div class="perfil-usuario">
                 <?php
+                // Usa a foto do usuário da sessão, ou uma imagem padrão se não houver
                 $fotoUsuario = !empty($_SESSION['foto']) ? $_SESSION['foto'] : 'imagens/perfil_padrao.png';
                 ?>
                 <img src="<?= htmlspecialchars($fotoUsuario) ?>" alt="Foto do perfil">
@@ -50,33 +107,32 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="cadastrarNoticia.php">Criar notícia</a>
                 <a href="editarUsuario.php">Editar Usuário</a>
                 <a href="logout.php">Logout</a>
-                <a href="./anuncio/ListarAnuncios.php">Listar Anuncios</a>
+                <a href="./anuncio/listarAnuncios.php">Listar Anúncios</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="noticia-anuncio">
-            <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
-            <div class="separador-colorido"></div>
+        <div class="anuncio-lateral anuncio-esquerda">
+            <?php if ($anuncioDestaqueEsquerda): ?>
+                <a href="<?= htmlspecialchars($anuncioDestaqueEsquerda['link']) ?>" target="_blank" title="<?= htmlspecialchars($anuncioDestaqueEsquerda['nome']) ?>">
+                    <img src="imagens/<?= htmlspecialchars($anuncioDestaqueEsquerda['imagem']) ?>" alt="Anúncio: <?= htmlspecialchars($anuncioDestaqueEsquerda['nome']) ?>">
+                    <p><?= htmlspecialchars($anuncioDestaqueEsquerda['nome']) ?></p>
+                </a>
+            <?php else: ?>
+                <img src="./imagens/anuncio_exemplo_esquerda.png" alt="Anúncio Lateral Esquerdo">
+                <p>Seu anúncio aqui na Esquerda!</p>
+            <?php endif; ?>
+        </div>
 
+        <section class="noticias-principal">
             <?php if (count($noticias) == 0): ?>
                 <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
             <?php else: ?>
                 <div class="noticias-grid">
-                    <?php foreach ($noticias as $index => $noticia): ?>
-                        <?php
-                        $area = '';
-                        if ($index === 0)
-                            $area = 'item1';
-                        if ($index === 1)
-                            $area = 'item2';
-                        if ($index === 2)
-                            $area = 'item3';
-                        ?>
-
-                        <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link">
-                            <article class="noticia <?= $area ?>">
+                    <?php foreach ($noticias as $noticia): ?>
+                        <article class="noticia" data-id="<?= htmlspecialchars($noticia['id']) ?>">
+                            <a href="noticia.php?id=<?= htmlspecialchars($noticia['id']) ?>" class="noticia-link-conteudo">
                                 <h2><?= htmlspecialchars($noticia['titulo']) ?></h2>
                                 <p class="autor-data"><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
                                         <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
@@ -90,14 +146,31 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
                                     <span class="leia-mais">Leia mais</span>
                                 </p>
-                            </article>
-                        </a>
+                            </a> <?php if ($noticia['id_autor'] == $_SESSION['id']): ?>
+                                <p class="acoes-noticia">
+                                    <a href="alterarNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
+                                        class="btn-alterar">Alterar</a>
+                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
+                                        class="btn-excluir">Excluir</a>
+                                </p>
+                            <?php endif; ?>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <div class="separador-colorido"></div>
-            <div class="anuncio"><img src="./imagens/perfil_padrao.png" alt="">teste</div>
         </section>
+
+        <div class="anuncio-lateral anuncio-direita">
+            <?php if ($anuncioDestaqueDireita): ?>
+                <a href="<?= htmlspecialchars($anuncioDestaqueDireita['link']) ?>" target="_blank" title="<?= htmlspecialchars($anuncioDestaqueDireita['nome']) ?>">
+                    <img src="imagens/<?= htmlspecialchars($anuncioDestaqueDireita['imagem']) ?>" alt="Anúncio: <?= htmlspecialchars($anuncioDestaqueDireita['nome']) ?>">
+                    <p><?= htmlspecialchars($anuncioDestaqueDireita['nome']) ?></p>
+                </a>
+            <?php else: ?>
+                <img src="./imagens/anuncio_exemplo_direita.png" alt="Anúncio Lateral Direito">
+                <p>O seu espaço aqui na Direita!</p>
+            <?php endif; ?>
+        </div>
     </main>
 
     <footer class="rodape-completo">
@@ -127,9 +200,6 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </footer>
 
-
-
-    <!-- Script para abrir/fechar o menu sanduíche -->
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function () {
             document.getElementById('menu').classList.toggle('show');

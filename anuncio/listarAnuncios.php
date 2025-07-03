@@ -1,7 +1,49 @@
-<?php 
-require_once '../includes/conexao.php';
+<?php
+session_start(); // Inicia a sessão
+require_once '../includes/conexao.php'; // Inclui a conexão com o banco de dados
+require_once'../includes/funcoes.php';
+// --- VERIFICAÇÃO DE SEGURANÇA E PERMISSÃO ---
+// Redireciona para a página inicial se o usuário não estiver logado ou não for administrador
+if (!usuarioLogado()) {
+  header("Location: ../index.php");
+  exit();
+}
 
-$sql = "SELECT * FROM anuncio ORDER BY destaque DESC, data_cadastro DESC";
+// --- LÓGICA DA PREVISÃO DO TEMPO (para o cabeçalho) ---
+// Note: Você pode querer centralizar a lógica da API de tempo se ela for usada em muitas páginas.
+$cidade = "Sapucaia do Sul,BR";
+$apiKey = "9c1317cf29a3f077747a2a410f1b5bf8"; // Sua chave da API do OpenWeatherMap
+$url = "https://api.openweathermap.org/data/2.5/weather?q=" . urlencode($cidade) . "&appid=$apiKey&units=metric&lang=pt_br";
+
+$tempo = null; // Inicializa a variável $tempo
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 5); // Timeout de 5 segundos
+// Em ambiente de desenvolvimento, curl_setopt(..., CURLOPT_SSL_VERIFYPEER, false); pode ser necessário.
+// Em produção, remova ou defina como true e garanta um certificado SSL válido.
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+$response = curl_exec($ch);
+$erroCurl = curl_error($ch);
+curl_close($ch);
+
+if ($response && !$erroCurl) {
+  $dados = json_decode($response, true);
+  if (isset($dados['main'])) {
+    $tempo = [
+      'cidade' => $dados['name'],
+      'temperatura' => round($dados['main']['temp']),
+      'descricao' => ucfirst($dados['weather'][0]['description']),
+      'icone' => $dados['weather'][0]['icon']
+    ];
+  }
+}
+// --- FIM DA LÓGICA DA PREVISÃO DO TEMPO ---
+
+// Busca todos os anúncios do banco de dados
+// Confirmado: sua tabela se chama 'anuncio'.
+$sql = "SELECT id, nome, imagem, link, destaque, ativo FROM anuncio ORDER BY destaque DESC, data_cadastro DESC";
 $anuncios = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -18,9 +60,8 @@ $anuncios = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-  <!-- Início Header -->
   <header>
-    <div class="tempo-header">
+    <div class="tempo-area">
       <?php if (isset($tempo) && $tempo): ?>
         <div class="tempo-box">
           <img src="https://openweathermap.org/img/wn/<?= $tempo['icone'] ?>.png" alt="Tempo">
@@ -68,39 +109,47 @@ $anuncios = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($anuncios as $anuncio): ?>
+        <?php if (empty($anuncios)): ?>
           <tr>
-            <td><?= $anuncio['id'] ?></td>
-            <td><?= htmlspecialchars($anuncio['nome']) ?></td>
-            <td>
-              <?php if (!empty($anuncio['imagem'])): ?>
-                <img src="../imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="Anúncio"
-                  style="max-width:100px; max-height:60px;">
-              <?php else: ?>
-                (sem imagem)
-              <?php endif; ?>
-            </td>
-            <td>
-              <?php if (!empty($anuncio['link'])): ?>
-                <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank" rel="noopener noreferrer">Visitar</a>
-              <?php else: ?>
-                (sem link)
-              <?php endif; ?>
-            </td>
-            <td><?= $anuncio['destaque'] ? 'Sim' : 'Não' ?></td>
-            <td><?= $anuncio['ativo'] ? 'Sim' : 'Não' ?></td>
-            <td class="acoes">
-              <a href="editarAnuncio.php?id=<?= $anuncio['id'] ?>">Editar</a> |
-              <a href="excluirAnuncio.php?id=<?= $anuncio['id'] ?>"
-                onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
-            </td>
+            <td colspan="7">Nenhum anunciante cadastrado ainda.</td>
           </tr>
-        <?php endforeach; ?>
+        <?php else: ?>
+          <?php foreach ($anuncios as $anuncio): ?>
+            <tr>
+              <td data-label="ID"><?= htmlspecialchars($anuncio['id']) ?></td>
+              <td data-label="Nome"><?= htmlspecialchars($anuncio['nome']) ?></td>
+              <td data-label="Imagem">
+                <?php if (!empty($anuncio['imagem'])): ?>
+                  <img src="../imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="Anúncio">
+                <?php else: ?>
+                  (sem imagem)
+                <?php endif; ?>
+              </td>
+              <td data-label="Link">
+                <?php if (!empty($anuncio['link'])): ?>
+                  <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank" rel="noopener noreferrer">Visitar</a>
+                <?php else: ?>
+                  (sem link)
+                <?php endif; ?>
+              </td>
+              <td data-label="Destaque" data-boolean="<?= $anuncio['destaque'] ?>">
+                <?= $anuncio['destaque'] ? 'Sim' : 'Não' ?>
+              </td>
+              <td data-label="Ativo" data-boolean="<?= $anuncio['ativo'] ?>">
+                <?= $anuncio['ativo'] ? 'Sim' : 'Não' ?>
+              </td>
+              <td class="acoes" data-label="Ações">
+                <a href="editarAnuncio.php?id=<?= htmlspecialchars($anuncio['id']) ?>">Editar</a> |
+                <a href="excluirAnuncio.php?id=<?= htmlspecialchars($anuncio['id']) ?>"
+                  onclick="return confirm('Tem certeza que deseja excluir este anunciante?');">Excluir</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </tbody>
     </table>
   </main>
 
-  <!-- Início Footer -->
   <footer class="rodape-completo">
     <div class="rodape-conteudo">
       <div class="contato">

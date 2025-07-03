@@ -2,7 +2,7 @@
 // conexao.php
 
 $host = 'localhost';
-$dbname = 'dbnoticias';
+$dbname = 'dbnoticias'; // Nome do banco de dados
 $usuario = 'root';
 $senha = '';
 

@@ -51,8 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <main>
     <section class="form-container">
       <h2>Cadastrar Anunciante</h2>
-      <form method="post" class="form-anunciante">
-        <label>Nome:</label>
+<form method="post" class="form-anunciante" enctype="multipart/form-data">        <label>Nome:</label>
         <input type="text" name="nome" required>
 
         <label>URL da Imagem:</label>
