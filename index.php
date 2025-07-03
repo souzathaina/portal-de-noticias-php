@@ -3,8 +3,8 @@
 require_once 'includes/conexao.php';
 
 // Previsão do tempo - OpenWeather
-$cidade = "Sapucaia do Sul,BR"; // Corrigido o erro de digitação aqui
-$apiKey = "9c1317cf29a3f077747a2a410f1b5bf8"; // Sua chave da API
+$cidade = "Sapucaia do Sul,BR";
+$apiKey = "9c1317cf29a3f077747a2a410f1b5bf8";
 $url = "https://api.openweathermap.org/data/2.5/weather?q=" . urlencode($cidade) . "&appid=$apiKey&units=metric&lang=pt_br";
 
 $tempo = null;
@@ -39,6 +39,69 @@ $sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, no
 
 $stmt = $pdo->query($sql);
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// --- CÓDIGO PARA PEGAR E DISTRIBUIR ANÚNCIOS (AJUSTADO) ---
+$anunciosEsquerda = [];
+$anunciosDireita = [];
+
+try {
+    // Buscar todos os anúncios ativos, ordenando por destaque e depois por data de cadastro
+    $sqlAnunciosDisponiveis = "SELECT id, nome, imagem, link FROM anuncio WHERE ativo = 1 ORDER BY destaque DESC, data_cadastro DESC";
+    $stmtAnunciosDisponiveis = $pdo->query($sqlAnunciosDisponiveis);
+    $anunciosDisponiveis = $stmtAnunciosDisponiveis->fetchAll(PDO::FETCH_ASSOC);
+
+    // Embaralha para que a seleção seja aleatória (priorizando destaques por conta do ORDER BY)
+    shuffle($anunciosDisponiveis);
+
+    $totalAnuncios = count($anunciosDisponiveis);
+    $anunciosAlocados = 0;
+
+    // Aloca até 2 para a esquerda e até 2 para a direita, garantindo distinção
+    foreach ($anunciosDisponiveis as $anuncio) {
+        if ($anunciosAlocados >= 4) { // Limita a um máximo de 4 anúncios no total (2 por lado)
+            break;
+        }
+
+        // Tenta adicionar à esquerda primeiro, até o limite de 2
+        if (count($anunciosEsquerda) < 2) {
+            $anunciosEsquerda[] = $anuncio;
+            $anunciosAlocados++;
+        }
+        // Se a esquerda já tem 2, tenta adicionar à direita, até o limite de 2
+        else if (count($anunciosDireita) < 2) {
+            // Garante que o anúncio não é repetido entre os lados, se houver apenas 1 ou 2 anúncios no total
+            $isRepeated = false;
+            foreach($anunciosEsquerda as $aE) {
+                if ($aE['imagem'] === $anuncio['imagem']) {
+                    $isRepeated = true;
+                    break;
+                }
+            }
+            if (!$isRepeated) {
+                $anunciosDireita[] = $anuncio;
+                $anunciosAlocados++;
+            }
+        }
+    }
+
+    // Se um lado ficou com menos de 2 anúncios e o outro tem mais que o necessário, redistribui
+    // Isso é útil se houver 3 anúncios, por exemplo, ele pode tentar fazer 2 na esquerda e 1 na direita
+    while (count($anunciosEsquerda) < 2 && count($anunciosDireita) > 0) {
+        $anuncioParaMover = array_shift($anunciosDireita);
+        $anunciosEsquerda[] = $anuncioParaMover;
+    }
+    while (count($anunciosDireita) < 2 && count($anunciosEsquerda) > 0) {
+        $anuncioParaMover = array_shift($anunciosEsquerda);
+        $anunciosDireita[] = $anuncioParaMover;
+    }
+
+
+} catch (PDOException $e) {
+    error_log("Erro ao buscar anúncios: " . $e->getMessage());
+    $anunciosEsquerda = [];
+    $anunciosDireita = [];
+}
+// --- FIM DO CÓDIGO PARA PEGAR E DISTRIBUIR ANÚNCIOS ---
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +118,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
-        <div class="menu-toggle" id="menu-toggle">&#9776;</div> 
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 
         <div class="tempo-area">
             <?php if ($tempo): ?>
@@ -79,8 +142,23 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main>
         <div class="anuncio-lateral anuncio-esquerda">
-            <img src="./imagens/anuncio_exemplo_esquerda.png" alt="Anúncio Lateral Esquerdo">
-            <p>Seu anúncio aqui na Esquerda!</p>
+            <?php if (!empty($anunciosEsquerda)): ?>
+                <?php foreach ($anunciosEsquerda as $anuncio): ?>
+                    <div class="anuncio-item">
+                        <?php if (!empty($anuncio['link'])): ?>
+                            <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank">
+                        <?php endif; ?>
+                        <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="<?= htmlspecialchars($anuncio['nome']) ?>">
+                        <?php if (!empty($anuncio['link'])): ?>
+                            </a>
+                        <?php endif; ?>
+                        <p><?= htmlspecialchars($anuncio['nome']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <img src="./imagens/anuncio_exemplo_esquerda.png" alt="Anúncio Lateral Esquerdo">
+                <p>Seu anúncio aqui na Esquerda!</p>
+            <?php endif; ?>
         </div>
 
         <section class="noticias-principal">
@@ -112,8 +190,23 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </section>
 
         <div class="anuncio-lateral anuncio-direita">
-            <img src="./imagens/anuncio_exemplo_direita.png" alt="Anúncio Lateral Direito">
-            <p>O seu espaço aqui na Direita!</p>
+            <?php if (!empty($anunciosDireita)): ?>
+                <?php foreach ($anunciosDireita as $anuncio): ?>
+                    <div class="anuncio-item">
+                        <?php if (!empty($anuncio['link'])): ?>
+                            <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank">
+                        <?php endif; ?>
+                        <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="<?= htmlspecialchars($anuncio['nome']) ?>">
+                        <?php if (!empty($anuncio['link'])): ?>
+                            </a>
+                        <?php endif; ?>
+                        <p><?= htmlspecialchars($anuncio['nome']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <img src="./imagens/anuncio_exemplo_direita.png" alt="Anúncio Lateral Direito">
+                <p>O seu espaço aqui na Direita!</p>
+            <?php endif; ?>
         </div>
     </main>
 
@@ -148,7 +241,6 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById('menu').classList.toggle('show');
         });
 
-        // Adicionado o script para fazer o card da notícia ser clicável
         document.querySelectorAll('article.noticia').forEach(card => {
             card.addEventListener('click', (e) => {
                 // Previne o clique nos botões Alterar/Excluir de ativar o link do card
