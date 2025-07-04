@@ -79,9 +79,10 @@ foreach ($anuncios as $anuncio) {
         $anunciosDireita[] = $anuncio;
         $countDireita++;
     } else {
-        // Se já preencheu os dois lados com o máximo, para.
+        // Se já preencheu os dois lados com o máximo, para..
         break;
     }
+    //teste
 }
 ?>
 
