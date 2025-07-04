@@ -155,11 +155,13 @@ main {
 }
 .carrossel-container {
   position: relative;
-  max-width: 100%;
+  width: calc(100% - 320px); /* remove 160px de cada lado */
+  margin: 20px auto; /* centraliza com margens laterais fixas */
   height: 300px;
   overflow: hidden;
-  margin-top: 20px;
+  box-sizing: border-box;
 }
+
 
 .carrossel {
   display: flex;
