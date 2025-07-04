@@ -2,36 +2,37 @@
 require_once '../includes/conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nome = $_POST['nome'];
-    $link = $_POST['link'];
-    $ativo = isset($_POST['ativo']) ? 1 : 0;
-    $destaque = isset($_POST['destaque']) ? 1 : 0;
-    $valor = $_POST['valorAnuncio'];
+  $nome = $_POST['nome'];
+  $link = $_POST['link'];
+  $ativo = isset($_POST['ativo']) ? 1 : 0;
+  $destaque = isset($_POST['destaque']) ? 1 : 0;
+  $valor = $_POST['valorAnuncio'];
 
-    $imagemNome = null;
+  $imagemNome = null;
 
-    if (!empty($_FILES['imagem']['name'])) {
-        $imagem = $_FILES['imagem'];
-        $imagemNome = uniqid() . '_' . basename($imagem['name']);
-        $caminho = '../imagens/' . $imagemNome;
+  if (!empty($_FILES['imagem']['name'])) {
+    $imagem = $_FILES['imagem'];
+    $imagemNome = uniqid() . '_' . basename($imagem['name']);
+    $caminho = '../imagens/' . $imagemNome;
 
-        if (!move_uploaded_file($imagem['tmp_name'], $caminho)) {
-            die("Erro ao salvar a imagem.");
-        }
+    if (!move_uploaded_file($imagem['tmp_name'], $caminho)) {
+      die("Erro ao salvar a imagem.");
     }
+  }
 
-    $sql = "INSERT INTO anuncio (nome, imagem, link, ativo, destaque, valorAnuncio)
+  $sql = "INSERT INTO anuncio (nome, imagem, link, ativo, destaque, valorAnuncio)
             VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$nome, $imagemNome, $link, $ativo, $destaque, $valor]);
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$nome, $imagemNome, $link, $ativo, $destaque, $valor]);
 
-    header("Location: listarAnuncios.php");
-    exit;
+  header("Location: listarAnuncios.php");
+  exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <main>
     <section class="form-container">
       <h2>Cadastrar Anunciante</h2>
-<form method="post" class="form-anunciante" enctype="multipart/form-data">        <label>Nome:</label>
+      <form method="post" class="form-anunciante" enctype="multipart/form-data"> <label>Nome:</label>
         <input type="text" name="nome" required>
 
         <label>URL da Imagem:</label>
@@ -105,4 +106,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     });
   </script>
 </body>
+
 </html>

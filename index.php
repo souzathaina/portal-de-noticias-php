@@ -2,6 +2,11 @@
 // Inclui a conexão com o banco
 require_once 'includes/conexao.php';
 
+// --- Anúncio em destaque para pop-up ---
+$sqlPopup = "SELECT * FROM anuncio WHERE ativo = 1 AND destaque = 1 ORDER BY RAND() LIMIT 1";
+$stmtPopup = $pdo->query($sqlPopup);
+$popupAnuncio = $stmtPopup->fetch(PDO::FETCH_ASSOC);
+
 // Previsão do tempo - OpenWeather
 $cidade = "Sapucaia do Sul,BR";
 $apiKey = "9c1317cf29a3f077747a2a410f1b5bf8";
@@ -30,6 +35,15 @@ if ($response && !$erroCurl) {
         ];
     }
 }
+// --- 3 últimas notícias para o carrossel ---
+$sqlUltimas = "SELECT noticias.id, noticias.titulo, noticias.imagem, usuarios.nome AS autor 
+               FROM noticias 
+               JOIN usuarios ON noticias.autor = usuarios.id 
+               ORDER BY noticias.data DESC 
+               LIMIT 3";
+$stmtUltimas = $pdo->query($sqlUltimas);
+$ultimasNoticias = $stmtUltimas->fetchAll(PDO::FETCH_ASSOC);
+
 
 // Pega todas as notícias do banco, juntando com o nome do autor (usuario)
 $sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, noticias.imagem, usuarios.nome AS autor
@@ -42,7 +56,9 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // --- CÓDIGO PARA PEGAR ANÚNCIOS ---
 // Ajustado para buscar 4 anúncios ativos e em destaque, ou os mais recentes
-$sqlAnuncios = "SELECT id, nome, imagem, link FROM anuncio WHERE ativo = 1 ORDER BY destaque DESC, data_cadastro DESC LIMIT 4";
+$sqlAnuncios = "SELECT id, nome, imagem, link 
+FROM anuncio WHERE ativo = 1 AND destaque = 0 
+ORDER BY data_cadastro DESC LIMIT 4";
 $stmtAnuncios = $pdo->query($sqlAnuncios);
 $anuncios = $stmtAnuncios->fetchAll(PDO::FETCH_ASSOC);
 
@@ -63,9 +79,10 @@ foreach ($anuncios as $anuncio) {
         $anunciosDireita[] = $anuncio;
         $countDireita++;
     } else {
-        // Se já preencheu os dois lados com o máximo, para.
+        // Se já preencheu os dois lados com o máximo, para..
         break;
     }
+    //teste
 }
 ?>
 
@@ -80,10 +97,26 @@ foreach ($anuncios as $anuncio) {
 </head>
 
 <body>
+    <?php if ($popupAnuncio): ?>
+        <div id="popup-anuncio" class="popup">
+            <div class="popup-conteudo">
+                <span class="fechar" onclick="fecharPopup()">&times;</span>
+                <?php if (!empty($popupAnuncio['link'])): ?>
+                    <a href="<?= htmlspecialchars($popupAnuncio['link']) ?>" target="_blank">
+                    <?php endif; ?>
+                    <img src="imagens/<?= htmlspecialchars($popupAnuncio['imagem']) ?>"
+                        alt="<?= htmlspecialchars($popupAnuncio['nome']) ?>" class="imagem-anuncio">
+                    <?php if (!empty($popupAnuncio['link'])): ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <header>
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
-        <div class="menu-toggle" id="menu-toggle">&#9776;</div> 
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 
         <div class="tempo-area">
             <?php if ($tempo): ?>
@@ -105,6 +138,23 @@ foreach ($anuncios as $anuncio) {
         </div>
     </header>
 
+    <?php if (!empty($ultimasNoticias)): ?>
+        <section class="carrossel-container">
+            <div class="carrossel" id="carrossel">
+                <?php foreach ($ultimasNoticias as $noticia): ?>
+                    <a href="noticia.php?id=<?= $noticia['id'] ?>" class="slide">
+                        <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>"
+                            alt="<?= htmlspecialchars($noticia['titulo']) ?>">
+                        <div class="titulo-slide"><?= htmlspecialchars($noticia['titulo']) ?></div>
+                        <p class="autor-slide">Por <?= htmlspecialchars($noticia['autor']) ?></p>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+            <button class="seta anterior" onclick="mudarSlide(-1)">&#10094;</button>
+            <button class="seta proximo" onclick="mudarSlide(1)">&#10095;</button>
+        </section>
+    <?php endif; ?>
+
     <main>
         <div class="anuncio-lateral anuncio-esquerda">
             <?php if (!empty($anunciosEsquerda)): ?>
@@ -112,9 +162,10 @@ foreach ($anuncios as $anuncio) {
                     <div class="anuncio-item">
                         <?php if (!empty($anuncio['link'])): ?>
                             <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank">
-                        <?php endif; ?>
-                        <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="<?= htmlspecialchars($anuncio['nome']) ?>">
-                        <?php if (!empty($anuncio['link'])): ?>
+                            <?php endif; ?>
+                            <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>"
+                                alt="<?= htmlspecialchars($anuncio['nome']) ?>">
+                            <?php if (!empty($anuncio['link'])): ?>
                             </a>
                         <?php endif; ?>
                         <p><?= htmlspecialchars($anuncio['nome']) ?></p>
@@ -159,9 +210,10 @@ foreach ($anuncios as $anuncio) {
                     <div class="anuncio-item">
                         <?php if (!empty($anuncio['link'])): ?>
                             <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank">
-                        <?php endif; ?>
-                        <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="<?= htmlspecialchars($anuncio['nome']) ?>">
-                        <?php if (!empty($anuncio['link'])): ?>
+                            <?php endif; ?>
+                            <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>"
+                                alt="<?= htmlspecialchars($anuncio['nome']) ?>">
+                            <?php if (!empty($anuncio['link'])): ?>
                             </a>
                         <?php endif; ?>
                         <p><?= htmlspecialchars($anuncio['nome']) ?></p>
@@ -227,5 +279,40 @@ foreach ($anuncios as $anuncio) {
             });
         });
     </script>
+
+    <script>
+        function fecharPopup() {
+            document.getElementById("popup-anuncio").style.display = "none";
+        }
+
+        // Exibir pop-up após 2 segundos
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                const popup = document.getElementById("popup-anuncio");
+                if (popup) popup.style.display = "flex";
+            }, 2000);
+        });
+    </script>
+
+    <script>
+        let slideIndex = 0;
+        const carrossel = document.getElementById("carrossel");
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function mostrarSlide(index) {
+            if (index >= totalSlides) slideIndex = 0;
+            else if (index < 0) slideIndex = totalSlides - 1;
+            else slideIndex = index;
+            carrossel.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+
+        function mudarSlide(direcao) {
+            mostrarSlide(slideIndex + direcao);
+        }
+
+        setInterval(() => mudarSlide(1), 5000);
+    </script>
+
 </body>
+
 </html>
