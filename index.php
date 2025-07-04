@@ -36,28 +36,28 @@ if ($response && !$erroCurl) {
     }
 }
 // --- 3 últimas notícias para o carrossel ---
-$sqlUltimas = "SELECT noticias.id, noticias.titulo, noticias.imagem, usuarios.nome AS autor 
-               FROM noticias 
-               JOIN usuarios ON noticias.autor = usuarios.id 
-               ORDER BY noticias.data DESC 
-               LIMIT 3";
+$sqlUltimas = "SELECT noticias.id, noticias.titulo, noticias.imagem, usuarios.nome AS autor
+                FROM noticias
+                JOIN usuarios ON noticias.autor = usuarios.id
+                ORDER BY noticias.data DESC
+                LIMIT 3";
 $stmtUltimas = $pdo->query($sqlUltimas);
 $ultimasNoticias = $stmtUltimas->fetchAll(PDO::FETCH_ASSOC);
 
 
 // Pega todas as notícias do banco, juntando com o nome do autor (usuario)
 $sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, noticias.imagem, usuarios.nome AS autor
-        FROM noticias
-        JOIN usuarios ON noticias.autor = usuarios.id
-        ORDER BY noticias.data DESC"; // Ordena da mais recente para a mais antiga
+         FROM noticias
+         JOIN usuarios ON noticias.autor = usuarios.id
+         ORDER BY noticias.data DESC"; // Ordena da mais recente para a mais antiga
 
 $stmt = $pdo->query($sql);
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // --- CÓDIGO PARA PEGAR ANÚNCIOS ---
 // Ajustado para buscar 4 anúncios ativos e em destaque, ou os mais recentes
-$sqlAnuncios = "SELECT id, nome, imagem, link 
-FROM anuncio WHERE ativo = 1 AND destaque = 0 
+$sqlAnuncios = "SELECT id, nome, imagem, link
+FROM anuncio WHERE ativo = 1 AND destaque = 0
 ORDER BY data_cadastro DESC LIMIT 4";
 $stmtAnuncios = $pdo->query($sqlAnuncios);
 $anuncios = $stmtAnuncios->fetchAll(PDO::FETCH_ASSOC);
@@ -134,6 +134,10 @@ foreach ($anuncios as $anuncio) {
             <nav class="menu" id="menu">
                 <a href="index.php">Início</a>
                 <a href="login.php">Login / Cadastro</a>
+                <button id="theme-toggle" class="theme-toggle-button">
+                    <span class="icon-light-mode">☀️</span>
+                    <span class="icon-dark-mode">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -256,10 +260,8 @@ foreach ($anuncios as $anuncio) {
             document.getElementById('menu').classList.toggle('show');
         });
 
-        // Adicionado o script para fazer o card da notícia ser clicável
         document.querySelectorAll('article.noticia').forEach(card => {
             card.addEventListener('click', (e) => {
-                // Previne o clique nos botões Alterar/Excluir de ativar o link do card
                 if (!e.target.closest('.acoes-noticia a')) {
                     const link = card.querySelector('.noticia-link-conteudo');
                     if (link) {
@@ -285,7 +287,6 @@ foreach ($anuncios as $anuncio) {
             document.getElementById("popup-anuncio").style.display = "none";
         }
 
-        // Exibir pop-up após 2 segundos
         window.addEventListener('load', function () {
             setTimeout(function () {
                 const popup = document.getElementById("popup-anuncio");
@@ -312,6 +313,8 @@ foreach ($anuncios as $anuncio) {
 
         setInterval(() => mudarSlide(1), 5000);
     </script>
+
+    <script src="js/theme.js"></script> 
 
 </body>
 
