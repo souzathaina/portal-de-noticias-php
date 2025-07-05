@@ -1,354 +1,586 @@
 /* Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* --- Variáveis CSS para Tema (Padrão: Tema Claro) --- */
+:root {
+    /* Cores de fundo */
+    --body-bg: #4a1e18; /* Cor de fundo principal */
+    --header-bg: #451107;
+    --main-bg: #fff; /* Fundo do formulário principal */
+    --button-submit-bg: #ffd700; /* Fundo do botão Salvar Alterações */
+    --button-submit-hover-bg: #e6c200;
+    --input-border-color: #ccc;
+    --input-focus-border: #ffd700;
+    --input-focus-shadow: #ffd700;
+    --footer-bg: #451107;
+    --theme-toggle-bg: none; /* Fundo do botão de tema */
+    --theme-toggle-hover-shadow-color: #fff0a0; /* Cor da sombra do hover do botão de tema */
+
+    /* Cores de texto */
+    --text-color: #333; /* Cor geral do texto dentro do formulário */
+    --header-text: #ffd700;
+    --logo-filter: none; /* Filtro para o logo se precisar clarear/escurecer */
+    --voltar-index-bg: #ffd700;
+    --voltar-index-text: #4a1e18;
+    --voltar-index-hover-bg: #fff0a0;
+    --main-title-color: #ffd700;
+    --label-color: #333;
+    --input-text-color: #333; /* Cor do texto dentro dos inputs */
+    --button-submit-text: #4a1e18; /* Texto do botão Salvar Alterações */
+    --footer-text-color: #ffd700;
+    --copyright-color: #ffd700;
+    --theme-toggle-icon-color: #ffd700; /* Cor dos ícones do botão de tema */
+    --theme-toggle-border-color: #ffd700; /* Cor da borda do botão de tema */
+    --theme-toggle-hover-color: #fff0a0; /* Cor do ícone no hover do botão de tema */
+
+    /* Sombras */
+    --form-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    --imagem-atual-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    --footer-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estilos do Tema Escuro --- */
+body.dark-mode {
+    /* Cores de fundo */
+    --body-bg: #1a0a05; /* Fundo mais escuro */
+    --header-bg: #1a1a1a;
+    --main-bg: #333333; /* Fundo do formulário mais escuro */
+    --button-submit-bg: #f0c040; /* Fundo do botão Salvar Alterações (amarelo escuro) */
+    --button-submit-hover-bg: #d4a733;
+    --input-border-color: #666;
+    --input-focus-border: #f0c040;
+    --input-focus-shadow: #d4a733;
+    --footer-bg: #1a1a1a;
+    --theme-toggle-bg: none;
+    --theme-toggle-hover-shadow-color: #d4a733;
+
+    /* Cores de texto */
+    --text-color: #e0e0e0; /* Cor geral do texto dentro do formulário */
+    --header-text: #f0c040;
+    --logo-filter: invert(80%) sepia(50%) saturate(2000%) hue-rotate(300deg) brightness(120%) contrast(100%); /* Filtro para clarear o logo se for escuro */
+    --voltar-index-bg: #f0c040;
+    --voltar-index-text: #1a1a1a;
+    --voltar-index-hover-bg: #d4a733;
+    --main-title-color: #f0c040;
+    --label-color: #f0c040;
+    --input-text-color: #e0e0e0; /* Cor do texto dentro dos inputs */
+    --button-submit-text: #1a1a1a; /* Texto do botão Salvar Alterações (preto para contraste) */
+    --footer-text-color: #f0c040;
+    --copyright-color: #f0c040;
+    --theme-toggle-icon-color: #f0c040;
+    --theme-toggle-border-color: #f0c040;
+    --theme-toggle-hover-color: #d4a733;
+
+    /* Sombras */
+    --form-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    --imagem-atual-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    --header-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    --footer-shadow: 0 -2px 15px rgba(0, 0, 0, 0.4);
+}
+
 
 html,
 body {
-  height: 100%;
-  background-color: #4a1e18;
-  font-size: 16px;
-  /* Ajuste a fonte base */
+    height: 100%;
+    background-color: var(--body-bg);
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Container da página */
 .wrapper {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header fixo */
 header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: var(--header-shadow);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo {
-  max-height: 50px;
-  width: auto;
+    max-height: 50px;
+    width: auto;
+    filter: var(--logo-filter); /* Aplica o filtro se houver no dark mode */
+    transition: filter 0.3s ease;
+}
+
+.header-actions { /* Wrapper para o botão voltar e o toggle */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os elementos */
 }
 
 .voltar-index {
-  background-color: #ffd700;
-  color: #4a1e18;
-  padding: 8px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
+    background-color: var(--voltar-index-bg);
+    color: var(--voltar-index-text);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .voltar-index:hover {
-  background-color: #fff0a0;
+    background-color: var(--voltar-index-hover-bg);
+}
+
+/* Estilos para o Botão de Alternância de Tema (theme-toggle) */
+.theme-toggle-button {
+    background: var(--theme-toggle-bg);
+    border: 2px solid var(--theme-toggle-border-color);
+    color: var(--theme-toggle-icon-color);
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 5px;
+    outline: none;
+    transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 0px rgba(0,0,0,0);
+}
+
+.theme-toggle-button:hover {
+    color: var(--theme-toggle-hover-color);
+    transform: scale(1.1);
+    border-color: var(--theme-toggle-hover-color);
+    box-shadow: 0 0 10px var(--theme-toggle-hover-shadow-color);
+}
+
+.theme-toggle-button .icon-light-mode {
+    display: inline-block;
+    line-height: 1;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none;
+    line-height: 1;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block;
 }
 
 /* Conteúdo principal */
 main {
-  padding-top: 100px;
-  /* Ajuste do padding superior para telas menores */
-  flex: 1;
-  max-width: 90%;
-  /* Ajuste da largura */
-  margin: 0 auto;
-  color: #333;
+    padding-top: 100px;
+    flex: 1;
+    max-width: 90%;
+    margin: 0 auto;
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.6rem;
-  color: #ffd700;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    color: var(--main-title-color);
+    transition: color 0.3s ease;
 }
 
 /* Formulário */
 form {
-  background-color: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    background-color: var(--main-bg);
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: var(--form-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 label {
-  font-weight: 600;
-  display: block;
-  margin-top: 12px;
-  margin-bottom: 4px;
-  color: #333;
+    font-weight: 600;
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    color: var(--label-color);
+    transition: color 0.3s ease;
 }
 
 input[type="text"],
 textarea,
 input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--input-border-color);
+    font-size: 1rem;
+    background-color: var(--main-bg); /* Garante que o input mude de cor */
+    color: var(--input-text-color); /* Cor do texto dentro do input */
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 textarea {
-  resize: vertical;
-  min-height: 120px;
+    resize: vertical;
+    min-height: 120px;
 }
 
 input:focus,
 textarea:focus {
-  outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 5px 1px #ffd700;
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 5px 1px var(--input-focus-shadow);
 }
 
 .imagem-atual {
-  max-width: 100%;
-  margin: 8px 0;
-  border-radius: 6px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    margin: 8px 0;
+    border-radius: 6px;
+    box-shadow: var(--imagem-atual-shadow);
+    transition: box-shadow 0.3s ease;
 }
 
 /* Botão */
 button[type="submit"] {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px 0;
-  background-color: #ffd700;
-  border: none;
-  border-radius: 8px;
-  color: #4a1e18;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 0;
+    background-color: var(--button-submit-bg);
+    border: none;
+    border-radius: 8px;
+    color: var(--button-submit-text); /* AGORA CORRIGIDO PARA USAR A VARIÁVEL ESPECÍFICA DO TEXTO DO BOTÃO */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #e6c200;
+    background-color: var(--button-submit-hover-bg);
 }
 
 /* Rodapé */
 footer.rodape-completo {
-  width: 100%; /* ocupa toda a largura */
-  left: 0; /* alinha à esquerda */
-  position: relative;
-  bottom: 0;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
-}
-
-footer.rodape-completo {
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
+    width: 100%;
+    left: 0;
+    position: relative;
+    bottom: 0;
+    background-color: var(--footer-bg);
+    color: var(--footer-text-color);
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+    font-size: 0.95em;
+    box-shadow: var(--footer-shadow);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--footer-text-color);
+    font-size: 1.2em;
+    transition: color 0.3s ease;
 }
 
 .contato a,
 .redes-sociais a {
-  color: #ffd700;
-  text-decoration: none;
+    color: var(--footer-text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .redes-sociais img {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-  vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+    vertical-align: middle;
 }
 
 .redes-sociais img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .copyright {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #ffd700;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--copyright-color);
+    transition: color 0.3s ease;
 }
 
 /* Responsivo - Ajuste no layout para telas menores */
 /* 425px */
 @media (max-width: 425px) {
-  main {
-    padding-top: 180px;
-    margin: 0 8px;
-  }
+    header {
+        padding: 10px 15px;
+    }
+    .logo {
+        max-height: 40px; /* Reduz o tamanho do logo */
+    }
+    .voltar-index {
+        padding: 6px 12px; /* Reduz o padding do botão voltar */
+        font-size: 0.9rem;
+    }
+    .theme-toggle-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3em;
+    }
+    .header-actions {
+        gap: 10px;
+    }
+    main {
+        padding-top: 90px; /* Ajusta o padding do main para o header menor */
+        margin: 0 8px;
+    }
 
-  h1 {
-    font-size: 1.3rem;
-  }
+    h1 {
+        font-size: 1.3rem;
+    }
 
-  form {
-    padding: 18px 20px;
-  }
+    form {
+        padding: 18px 20px;
+    }
 
-  label {
-    font-size: 0.9rem;
-  }
+    label {
+        font-size: 0.9rem;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 0.95rem;
-    padding: 14px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 0.95rem;
+        padding: 14px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.1rem;
-    padding: 15px 0;
-  }
+    button[type="submit"] {
+        font-size: 1.1rem;
+        padding: 15px 0;
+    }
 }
 
 /* 375px */
 @media (max-width: 375px) {
-  main {
-    padding-top: 190px;
-    margin: 0 6px;
-  }
+    header {
+        padding: 8px 12px;
+    }
+    .logo {
+        max-height: 35px;
+    }
+    .voltar-index {
+        padding: 5px 10px;
+        font-size: 0.85rem;
+    }
+    .theme-toggle-button {
+        width: 30px;
+        height: 30px;
+        font-size: 1.1em;
+    }
+    .header-actions {
+        gap: 8px;
+    }
+    main {
+        padding-top: 80px; /* Ajusta o padding do main */
+        margin: 0 6px;
+    }
 
-  h1 {
-    font-size: 1.2rem;
-  }
+    h1 {
+        font-size: 1.2rem;
+    }
 
-  form {
-    padding: 16px 18px;
-  }
+    form {
+        padding: 16px 18px;
+    }
 
-  label {
-    font-size: 0.85rem;
-  }
+    label {
+        font-size: 0.85rem;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 0.9rem;
-    padding: 13px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 0.9rem;
+        padding: 13px;
+    }
 
-  button[type="submit"] {
-    font-size: 1rem;
-    padding: 14px 0;
-  }
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 14px 0;
+    }
 }
 
 /* 320px */
 @media (max-width: 320px) {
-  main {
-    padding-top: 200px;
-    margin: 0 5px;
-  }
+    header {
+        padding: 6px 10px;
+    }
+    .logo {
+        max-height: 30px;
+    }
+    .voltar-index {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+    .theme-toggle-button {
+        width: 28px;
+        height: 28px;
+        font-size: 1em;
+    }
+    .header-actions {
+        gap: 6px;
+    }
+    main {
+        padding-top: 70px; /* Ajusta o padding do main */
+        margin: 0 5px;
+    }
 
-  h1 {
-    font-size: 1.1rem;
-  }
+    h1 {
+        font-size: 1.1rem;
+    }
 
-  form {
-    padding: 14px 16px;
-  }
+    form {
+        padding: 14px 16px;
+    }
 
-  label {
-    font-size: 0.8rem;
-  }
+    label {
+        font-size: 0.8rem;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 0.85rem;
-    padding: 12px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 0.85rem;
+        padding: 12px;
+    }
 
-  button[type="submit"] {
-    font-size: 0.95rem;
-    padding: 13px 0;
-  }
+    button[type="submit"] {
+        font-size: 0.95rem;
+        padding: 13px 0;
+    }
 }
 
 /* 1440px */
 @media (min-width: 1440px) {
-  main {
-    max-width: 900px;
-  }
+    main {
+        max-width: 900px;
+    }
 
-  form {
-    padding: 40px 50px;
-  }
+    form {
+        padding: 40px 50px;
+    }
 
-  h1 {
-    font-size: 2rem;
-  }
+    h1 {
+        font-size: 2rem;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.1rem;
-    padding: 16px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.1rem;
+        padding: 16px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.2rem;
-    padding: 18px 0;
-  }
+    button[type="submit"] {
+        font-size: 1.2rem;
+        padding: 18px 0;
+    }
+    header {
+        padding: 15px 30px;
+    }
+    .logo {
+        max-height: 60px;
+    }
+    .voltar-index {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    .theme-toggle-button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.8em;
+    }
+    .header-actions {
+        gap: 20px;
+    }
+    main {
+        padding-top: 110px; /* Ajusta padding para telas maiores */
+    }
 }
 
 /* 2560px */
 @media (min-width: 2560px) {
-  main {
-    max-width: 1100px;
-  }
+    main {
+        max-width: 1100px;
+    }
 
-  form {
-    padding: 50px 60px;
-  }
+    form {
+        padding: 50px 60px;
+    }
 
-  h1 {
-    font-size: 2.4rem;
-  }
+    h1 {
+        font-size: 2.4rem;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.2rem;
-    padding: 18px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.2rem;
+        padding: 18px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.3rem;
-    padding: 20px 0;
-  }
+    button[type="submit"] {
+        font-size: 1.3rem;
+        padding: 20px 0;
+    }
+    header {
+        padding: 20px 40px;
+    }
+    .logo {
+        max-height: 70px;
+    }
+    .voltar-index {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+    .theme-toggle-button {
+        width: 50px;
+        height: 50px;
+        font-size: 2em;
+    }
+    .header-actions {
+        gap: 25px;
+    }
+    main {
+        padding-top: 130px; /* Ajusta padding para telas maiores */
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-session_start();  // ESSENCIAL para usar sessão
+session_start(); // ESSENCIAL para usar sessão
 
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
@@ -45,7 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="wrapper">
         <header>
             <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
-            <a class="voltar-index" href="index.php">← Voltar ao início</a>
+            <div class="header-actions">
+                <a class="voltar-index" href="index.php">← Voltar ao início</a>
+                <button id="theme-toggle" class="theme-toggle-button" aria-label="Alternar tema">
+                    <span class="icon-light-mode">☀️</span>
+                    <span class="icon-dark-mode">🌙</span>
+                </button>
+            </div>
         </header>
 
         <main>
@@ -57,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php endif; ?>
 
                 <form action="login.php" method="POST">
-                    <label>Email:</label>
-                    <input type="email" name="email" required>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
 
-                    <label>Senha:</label>
-                    <input type="password" name="senha" required>
+                    <label for="senha">Senha:</label>
+                    <input type="password" name="senha" id="senha" required>
 
                     <button type="submit">Entrar</button>
 
@@ -72,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </form>
             </div>
         </main>
-
 
         <footer class="rodape-completo">
             <div class="rodape-conteudo">
@@ -101,6 +106,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            // Carrega o tema salvo no localStorage ou detecta a preferência do sistema
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark-mode' || (!savedTheme && prefersDarkMode)) {
+                body.classList.add('dark-mode');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+
+                // Salva a preferência no localStorage
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark-mode');
+                } else {
+                    localStorage.setItem('theme', 'light-mode');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

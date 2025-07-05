@@ -1,518 +1,813 @@
 /* Reset e base */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Variáveis CSS para Tema (Padrão: Tema Claro) --- */
+:root {
+    /* Cores de fundo */
+    --body-bg: #864d45; /* bordô escuro */
+    --header-bg: #451107;
+    --main-bg: #ffffff; /* Fundo do formulário principal */
+    --button-submit-bg: #ffd700; /* Fundo do botão Entrar */
+    --button-submit-hover-bg: #e6c200;
+    --input-border-color: #ccc;
+    --input-focus-border: #ffd700;
+    --input-focus-shadow: #ffd700;
+    --mensagem-erro-bg: #330000;
+    --footer-bg: #451107;
+    --theme-toggle-bg: none;
+    --theme-toggle-hover-shadow-color: #fff0a0;
+
+    /* Cores de texto */
+    --text-color: #333; /* Cor geral do texto dentro do formulário */
+    --header-text: #ffd700;
+    --logo-filter: none; /* Mantém o filtro como none por padrão */
+    --voltar-index-bg: #ffd700;
+    --voltar-index-text: #4a1e18;
+    --voltar-index-hover-bg: #fff0a0;
+    --main-title-color: #ffd700;
+    --mensagem-erro-color: #ff7f7f;
+    --label-color: #333;
+    --input-text-color: #333; /* Cor do texto dentro dos inputs */
+    --button-submit-text: #4a1e18; /* Texto do botão Entrar */
+    --link-color: #4a1e18; /* Cor dos links */
+    --footer-text-color: #ffd700;
+    --copyright-color: #ffd700;
+    --theme-toggle-icon-color: #ffd700;
+    --theme-toggle-border-color: #ffd700;
+    --theme-toggle-hover-color: #fff0a0;
+
+    /* Sombras */
+    --form-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    --footer-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estilos do Tema Escuro --- */
+body.dark-mode {
+    /* Cores de fundo */
+    --body-bg: #1a0a05; /* Fundo mais escuro */
+    --header-bg: #1a1a1a;
+    --main-bg: #333333; /* Fundo do formulário mais escuro */
+    --button-submit-bg: #f0c040; /* Fundo do botão Entrar (amarelo escuro) */
+    --button-submit-hover-bg: #d4a733;
+    --input-border-color: #666;
+    --input-focus-border: #f0c040;
+    --input-focus-shadow: #d4a733;
+    --mensagem-erro-bg: #550000; /* Fundo do erro mais escuro */
+    --footer-bg: #1a1a1a;
+    --theme-toggle-bg: none;
+    --theme-toggle-hover-shadow-color: #d4a733;
+
+    /* Cores de texto */
+    --text-color: #e0e0e0;
+    --header-text: #f0c040;
+    /* --- IMPORTANTE: Se a sua logo não tiver fundo transparente ou precisar de inversão de cor,
+            você pode mudar esta linha para "invert(1)" para inverter as cores no dark mode.
+            Se ela já for escura ou se adaptar bem, "none" está correto. --- */
+    --logo-filter: none; /* A logo mantém suas cores originais, sem filtro no dark mode */
+    --voltar-index-bg: #f0c040;
+    --voltar-index-text: #1a1a1a;
+    --voltar-index-hover-bg: #d4a733;
+    --main-title-color: #f0c040;
+    --mensagem-erro-color: #ffaaaa; /* Erro mais claro */
+    --label-color: #f0c040;
+    --input-text-color: #e0e0e0;
+    --button-submit-text: #1a1a1a; /* Texto do botão Entrar (preto para contraste) */
+    --link-color: #f0c040; /* Links no dark mode */
+    --footer-text-color: #f0c040;
+    --copyright-color: #f0c040;
+    --theme-toggle-icon-color: #f0c040;
+    --theme-toggle-border-color: #f0c040;
+    --theme-toggle-hover-color: #d4a733;
+
+    /* Sombras */
+    --form-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    --header-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    --footer-shadow: 0 -2px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Garante que o footer fique no final da tela */
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  background-color: #864d45; /* bordô escuro */
-  color: #333;
+    margin: 0; /* CORREÇÃO: Remove a margem padrão do navegador que estava sendo aplicada. */
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Wrapper para layout em coluna */
 .wrapper {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header fixo com logo e botão voltar */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #451107;
-  color: #ffd700;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: var(--header-shadow);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo {
-  max-height: 100px;
-  height: auto;
-  width: auto;
-  margin: 0 auto;
+    max-height: 130px;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
+    filter: var(--logo-filter);
+    transition: filter 0.3s ease;
+}
+
+.header-actions { /* Wrapper para o botão voltar e o toggle */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os elementos */
 }
 
 .voltar-index {
-  background-color: #ffd700;
-  color: #4a1e18;
-  padding: 6px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
+    background-color: var(--voltar-index-bg);
+    color: var(--voltar-index-text);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .voltar-index:hover {
-  background-color: #fff0a0;
+    background-color: var(--voltar-index-hover-bg);
+}
+
+/* Estilos para o Botão de Alternância de Tema (theme-toggle) */
+.theme-toggle-button {
+    background: var(--theme-toggle-bg);
+    border: 2px solid var(--theme-toggle-border-color);
+    color: var(--theme-toggle-icon-color);
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 5px;
+    outline: none;
+    transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 0px rgba(0,0,0,0);
+}
+
+.theme-toggle-button:hover {
+    color: var(--theme-toggle-hover-color);
+    transform: scale(1.1);
+    border-color: var(--theme-toggle-hover-color);
+    box-shadow: 0 0 10px var(--theme-toggle-hover-shadow-color);
+}
+
+.theme-toggle-button .icon-light-mode {
+    display: inline-block;
+    line-height: 1;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none;
+    line-height: 1;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block;
 }
 
 /* Conteúdo principal centralizado */
 main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 160px 20px 40px;
-  min-height: calc(100vh - 200px); /* Garante centralização */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 160px 20px 40px;
+    min-height: calc(100vh - 200px); /* Garante centralização */
+    transition: padding-top 0.3s ease; /* Transição para o padding-top */
+    margin: 0 auto; /* ADICIONADO: Garante que o 'main' seja centralizado se tiver uma largura definida */
 }
 
 .main-container {
-  width: 100%;
-  max-width: 450px;
+    width: 100%;
+    max-width: 500px;
 }
 
 /* Título */
 h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #ffd700;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--main-title-color);
+    transition: color 0.3s ease;
 }
 
 /* Mensagem de erro */
 .mensagem-erro {
-  color: #ff7f7f;
-  background-color: #330000;
-  padding: 8px;
-  border-radius: 6px;
-  text-align: center;
-  margin-bottom: 15px;
-  font-weight: bold;
+    color: var(--mensagem-erro-color);
+    background-color: var(--mensagem-erro-bg);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 /* Formulário com fundo branco */
 form {
-  background-color: #ffffff;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    background-color: var(--main-bg);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: var(--form-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Labels */
 label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 6px;
-  font-size: 1rem;
-  color: #333;
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: var(--label-color);
+    transition: color 0.3s ease;
 }
 
 /* Campos de entrada */
 input[type="email"],
 input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--main-bg);
+    color: var(--input-text-color);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Foco visível para acessibilidade */
 input[type="email"]:focus,
-input[type="password"]:focus,
-button[type="submit"]:focus {
-  outline: 2px solid #ffd700;
-  outline-offset: 2px;
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 5px 1px var(--input-focus-shadow);
 }
 
 /* Botão de envio */
 button[type="submit"] {
-  width: 100%;
-  padding: 14px 0;
-  background-color: #ffd700;
-  border: none;
-  border-radius: 8px;
-  color: #4a1e18;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 14px 0;
+    background-color: var(--button-submit-bg);
+    border: none;
+    border-radius: 8px;
+    color: var(--button-submit-text);
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #e6c200;
+    background-color: var(--button-submit-hover-bg);
 }
 
 /* Links abaixo do botão */
 .links {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .links a {
-  color: #4a1e18;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
 }
 
 .links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* Rodapé */
 footer.rodape-completo {
-  width: 100%; /* ocupa toda a largura */
-  left: 0; /* alinha à esquerda */
-  position: relative;
-  bottom: 0;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
+    width: 100%;
+    left: 0;
+    position: relative;
+    bottom: 0;
+    background-color: var(--footer-bg);
+    color: var(--footer-text-color);
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+    font-size: 0.95em;
+    box-shadow: var(--footer-shadow);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 
 .rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--footer-text-color);
+    font-size: 1.2em;
+    transition: color 0.3s ease;
 }
 
 .contato a,
 .redes-sociais a {
-  color: #ffd700;
-  text-decoration: none;
+    color: var(--footer-text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .redes-sociais img {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-  vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+    vertical-align: middle;
 }
 
 .redes-sociais img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .copyright {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #ffd700;
-}
-
-/* Responsivo para telas menores que 2560px */
-@media (max-width: 2560px) {
-  header {
-    padding: 15px 20px;
-  }
-
-  .logo {
-    max-height: 120px;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  .main-container {
-    max-width: 600px;
-  }
-
-  .links a {
-    font-size: 1.2rem;
-  }
-
-  button[type="submit"] {
-    font-size: 1.2rem;
-  }
-
-  footer {
-    padding: 15px;
-  }
-}
-
-/* Responsivo para telas de 1440px */
-@media (max-width: 1440px) {
-  header {
-    padding: 15px 10px;
-  }
-
-  .logo {
-    max-height: 100px;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  .main-container {
-    max-width: 550px;
-  }
-
-  footer {
-    padding: 12px;
-  }
-}
-
-/* Responsivo para telas de 1024px */
-@media (max-width: 1024px) {
-  header {
-    padding: 15px 10px;
-  }
-
-  .logo {
-    max-height: 90px;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-  .links {
-    gap: 10px;
-  }
-
-  .links a {
-    font-size: 1rem;
-  }
-
-  form {
-    padding: 15px;
-  }
-
-  button[type="submit"] {
-    font-size: 1.1rem;
-  }
-
-  footer {
-    padding: 12px;
-  }
-}
-
-/* Responsivo para telas de 768px */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 15px;
     text-align: center;
-  }
-
-  .logo {
-    max-height: 80px;
-  }
-
-  .voltar-index {
-    font-size: 1rem;
-  }
-
-  main {
-    padding-top: 120px;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-    margin-top: 50px;
-  }
-
-  .links {
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .links a {
-    width: 100%;
-    text-align: center;
-  }
-
-  form {
-    padding: 12px;
-  }
-
-  button[type="submit"] {
-    font-size: 1rem;
-    padding: 10px 0;
-  }
-
-  footer {
-    padding: 10px;
-  }
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--copyright-color);
+    transition: color 0.3s ease;
 }
 
-/* Responsivo para telas de 425px */
-@media (max-width: 425px) {
-  header {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-    padding: 15px 10px;
-  }
-
-  .logo {
-    max-height: 70px;
-  }
-
-  .voltar-index {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-
-  main {
-    padding-top: 120px;
-    max-width: 100%;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  .links a {
-    font-size: 0.9rem;
-  }
-
-  form {
-    padding: 12px;
-  }
-
-  input[type="email"],
-  input[type="password"] {
-    padding: 12px;
-  }
-
-  button[type="submit"] {
-    font-size: 1rem;
-    padding: 12px 0;
-  }
-
-  footer {
-    padding: 8px;
-  }
-}
-
-/* Responsivo para telas de 375px */
-@media (max-width: 375px) {
-  header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    padding: 15px 10px;
-  }
-
-  .logo {
-    max-height: 65px;
-  }
-
-  .voltar-index {
-    font-size: 0.85rem;
-    padding: 5px 10px;
-  }
-
-  main {
-    padding-top: 120px;
-    max-width: 100%;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  .links a {
-    font-size: 0.85rem;
-  }
-
-  form {
-    padding: 10px;
-  }
-
-  input[type="email"],
-  input[type="password"] {
-    padding: 10px;
-  }
-
-  button[type="submit"] {
-    font-size: 1rem;
-    padding: 12px 0;
-  }
-
-  footer {
-    padding: 6px;
-  }
-}
-
-/* Responsivo para telas de 320px */
+/* Responsividade - Telas pequenas (320px) */
 @media (max-width: 320px) {
-  header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    padding: 15px 10px;
-  }
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
 
-  .logo {
-    max-height: 60px;
-  }
+    .logo {
+        max-height: 70px;
+        margin-bottom: 15px;
+    }
+    .header-actions {
+        flex-direction: column; /* Empilha os botões */
+        width: 100%; /* Ocupa a largura total */
+        gap: 10px; /* Espaçamento entre eles */
+    }
+    .voltar-index {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        width: 100%; /* Ocupa a largura total */
+    }
+    .theme-toggle-button {
+        font-size: 1.2em;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto; /* Centraliza o botão de tema */
+    }
 
-  .voltar-index {
-    font-size: 0.75rem;
-    padding: 5px 8px;
-  }
+    main {
+        padding-top: 250px; /* Ajusta padding para acomodar header maior */
+        width: 95%;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
 
-  main {
-    padding-top: 10px;
-    max-width: 100%;
-  }
+    form {
+        padding: 20px;
+        width: 100%;
+    }
 
-  h2 {
-    font-size: 1.2rem;
-  }
+    h2 {
+        font-size: 1.4rem;
+    }
 
-  .links a {
-    font-size: 0.75rem;
-  }
+    input[type="email"],
+    input[type="password"] {
+        font-size: 0.9rem;
+        padding: 12px;
+        margin-bottom: 16px;
+    }
 
-  form {
-    padding: 8px;
-  }
+    button[type="submit"] {
+        padding: 12px;
+        font-size: 1rem;
+    }
 
-  input[type="email"],
-  input[type="password"] {
-    padding: 8px;
-  }
+    .links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
 
-  button[type="submit"] {
-    font-size: 1rem;
-    padding: 10px 0;
-  }
+    .links a {
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+    }
+}
 
-  footer {
-    padding: 6px;
-  }
+/* Responsividade - Telas 375px */
+@media (max-width: 375px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .logo {
+        max-height: 80px;
+        margin-bottom: 15px;
+    }
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+    .voltar-index {
+        font-size: 0.9rem;
+        padding: 6px 14px;
+        width: 100%;
+    }
+    .theme-toggle-button {
+        font-size: 1.3em;
+        width: 35px;
+        height: 35px;
+        margin: 0 auto;
+    }
+
+    main {
+        padding-top: 230px;
+        width: 95%;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
+
+    form {
+        padding: 20px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        font-size: 1rem;
+        padding: 14px;
+        margin-bottom: 18px;
+    }
+
+    button[type="submit"] {
+        padding: 14px;
+        font-size: 1.1rem;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 25px;
+    }
+
+    .links a {
+        font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Responsividade - Telas 425px */
+@media (max-width: 425px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .logo {
+        max-height: 90px;
+        margin-bottom: 20px;
+    }
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    .voltar-index {
+        font-size: 1rem;
+        padding: 6px 16px;
+        width: 100%;
+    }
+    .theme-toggle-button {
+        font-size: 1.5em;
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+    }
+
+    main {
+        padding-top: 210px;
+        width: 95%;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
+
+    form {
+        padding: 25px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        font-size: 1rem;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    button[type="submit"] {
+        padding: 14px;
+        font-size: 1.2rem;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .links a {
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Responsividade - Telas 768px (Tablets) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 30px;
+    }
+
+    .logo {
+        max-height: 100px;
+        margin: 0; /* Remove margin auto */
+    }
+    .header-actions {
+        flex-direction: row; /* Volta para linha */
+        width: auto;
+        gap: 20px;
+    }
+
+    .voltar-index {
+        font-size: 1.1rem;
+        padding: 8px 18px;
+        width: auto; /* Volta para largura automática */
+    }
+    .theme-toggle-button {
+        font-size: 1.6em;
+        width: 45px;
+        height: 45px;
+        margin: 0; /* Remove margem */
+    }
+
+    main {
+        padding-top: 160px; /* Ajusta para o header menor novamente */
+        width: 80%;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
+
+    form {
+        padding: 30px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        font-size: 1.1rem;
+        padding: 16px;
+        margin-bottom: 22px;
+    }
+
+    button[type="submit"] {
+        padding: 16px;
+        font-size: 1.3rem;
+    }
+
+    .links {
+        flex-direction: row; /* Volta para linha */
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    .links a {
+        font-size: 1.1rem;
+        width: auto; /* Volta para largura automática */
+    }
+}
+
+/* Responsividade - Telas 1024px (Desktops) */
+@media (max-width: 1024px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 40px;
+    }
+
+    .logo {
+        max-height: 120px;
+    }
+    .header-actions {
+        gap: 25px;
+    }
+
+    .voltar-index {
+        font-size: 1.2rem;
+        padding: 8px 20px;
+    }
+    .theme-toggle-button {
+        font-size: 1.7em;
+        width: 48px;
+        height: 48px;
+    }
+
+    main {
+        padding-top: 160px; /* Mantém o padding top consistente */
+        width: 70%;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
+
+    form {
+        padding: 35px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        font-size: 1.2rem;
+        padding: 18px;
+        margin-bottom: 24px;
+    }
+
+    button[type="submit"] {
+        padding: 18px;
+        font-size: 1.4rem;
+    }
+
+    .links {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .links a {
+        font-size: 1.2rem;
+        width: auto;
+    }
+}
+
+/* Responsividade - Telas 1440px */
+@media (min-width: 1440px) {
+    main {
+        max-width: 600px;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
+    form {
+        padding: 40px 50px;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    input[type="email"],
+    input[type="password"] {
+        font-size: 1.1rem;
+        padding: 16px;
+    }
+    button[type="submit"] {
+        font-size: 1.5rem;
+        padding: 20px 0;
+    }
+    header {
+        padding: 25px 50px;
+    }
+    .logo {
+        max-height: 140px;
+    }
+    .header-actions {
+        gap: 30px;
+    }
+    .voltar-index {
+        font-size: 1.3rem;
+        padding: 10px 22px;
+    }
+    .theme-toggle-button {
+        font-size: 1.9em;
+        width: 50px;
+        height: 50px;
+    }
+    main {
+        padding-top: 180px; /* Ajusta padding para telas maiores */
+    }
+}
+
+/* Responsividade - Telas 2560px */
+@media (min-width: 2560px) {
+    main {
+        max-width: 700px;
+        margin: 0 auto; /* ADICIONADO: Centraliza o main */
+    }
+    form {
+        padding: 50px 60px;
+    }
+    h2 {
+        font-size: 3rem;
+    }
+    input[type="email"],
+    input[type="password"] {
+        font-size: 1.2rem;
+        padding: 18px;
+    }
+    button[type="submit"] {
+        font-size: 1.6rem;
+        padding: 22px 0;
+    }
+    header {
+        padding: 30px 60px;
+    }
+    .logo {
+        max-height: 160px;
+    }
+    .header-actions {
+        gap: 35px;
+    }
+    .voltar-index {
+        font-size: 1.4rem;
+        padding: 12px 25px;
+    }
+    .theme-toggle-button {
+        font-size: 2.2em;
+        width: 55px;
+        height: 55px;
+    }
+    main {
+        padding-top: 200px; /* Ajusta padding para telas maiores */
+    }
 }

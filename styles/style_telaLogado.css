@@ -5,236 +5,367 @@
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
 }
 
+/* --- Variáveis CSS para Tema (Padrão: Tema Claro) --- */
+:root {
+    /* Cores de fundo */
+    --body-bg: #f8f9fa;
+    --header-bg: #451107;
+    --menu-button-bg: #ffd700;
+    --menu-button-hover-bg: #fff0a0;
+    --anuncio-bg: #fff;
+    --noticia-bg: #fff;
+    --footer-bg: #451107;
+
+    /* Cores de texto */
+    --text-color: #333;
+    --header-text: #ffd700;
+    --menu-button-text: #541212;
+    --perfil-text: #ffd700;
+    --anuncio-text: #555;
+    --noticia-title-color: #4a1e18;
+    --noticia-meta-color: #777;
+    --noticia-content-color: #333;
+    --leia-mais-color: #b30000;
+    --footer-text: #ffd700;
+    --footer-link-color: #ffd700;
+    --copyright-color: #ffd700;
+    --menu-toggle-color: #fff;
+
+    /* Cores de borda/elementos específicos */
+    --perfil-border: #ffd700;
+    --noticia-border-left: #541212;
+    --btn-alterar-bg: #4CAF50;
+    --btn-alterar-color: white;
+    --btn-alterar-border: #4CAF50;
+    --btn-excluir-bg: #f44336;
+    --btn-excluir-color: white;
+    --btn-excluir-border: #f44336;
+
+    /* Sombras */
+    --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --box-shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Estilos do Tema Escuro --- */
+body.dark-mode {
+    /* Cores de fundo */
+    --body-bg: #222222;
+    --header-bg: #1a1a1a;
+    --menu-button-bg: #444444;
+    --menu-button-hover-bg: #555555;
+    --anuncio-bg: #333333;
+    --noticia-bg: #2b2b2b;
+    --footer-bg: #1a1a1a;
+
+    /* Cores de texto */
+    --text-color: #e0e0e0;
+    --header-text: #f0c040;
+    --menu-button-text: #f0c040;
+    --perfil-text: #f0c040;
+    --anuncio-text: #cccccc;
+    --noticia-title-color: #f0c040;
+    --noticia-meta-color: #aaaaaa;
+    --noticia-content-color: #cccccc;
+    --leia-mais-color: #ff6666;
+    --footer-text: #f0c040;
+    --footer-link-color: #f0c040;
+    --copyright-color: #f0c040;
+    --menu-toggle-color: #e0e0e0;
+}
+
+/* --- Aplicação das Variáveis e Estilos Gerais --- */
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f8f9fa; /* Fundo claro para o corpo */
-    color: #333; /* Cor de texto padrão */
-    padding-top: 210px; /* Espaço para o cabeçalho fixo */
-    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    background: var(--body-bg);
+    color: var(--text-color);
+    padding-top: 210px;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
 }
 
 /* --- Cabeçalho --- */
 header {
-    position: fixed; /* Cabeçalho fixo no topo da página */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: #451107; /* Cor de fundo escura */
-    color: #ffd700; /* Cor de texto para o cabeçalho */
+    background: var(--header-bg);
+    color: var(--header-text);
     padding: 20px;
-    display: flex; /* Habilita Flexbox para alinhamento */
-    justify-content: space-between; /* Espaça logo e área do usuário */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
-    flex-wrap: wrap; /* Permite que os itens do cabeçalho quebrem linha em telas menores */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    flex-wrap: wrap;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .logo {
     max-height: 130px;
     height: auto;
     width: auto;
-    margin: 0 auto; /* Centraliza o logo horizontalmente em telas maiores */
+    margin: 0 auto; /* Mantém a logo centralizada horizontalmente no cabeçalho se houver espaço */
 }
 
 /* Ícone do menu sanduíche (para mobile) */
 .menu-toggle {
-    display: none; /* Escondido por padrão em telas maiores */
+    display: none;
     font-size: 28px;
-    color: #fff;
+    color: var(--menu-toggle-color);
     cursor: pointer;
-    margin-left: auto; /* Empurra para a direita em mobile quando visível */
+    margin-left: auto;
+    transition: color 0.3s ease;
 }
 
 /* Área do usuário (foto e nome) */
 .usuario-area {
     display: flex;
-    flex-direction: column; /* Itens em coluna */
-    align-items: flex-end; /* Alinha os itens à direita */
-    flex-basis: auto; /* Permite que ocupe a largura necessária */
+    flex-direction: column; /* Mantém a direção de coluna para empilhar */
+    align-items: flex-end; /* Alinha os itens para a direita (perfil, botão, menu) */
+    flex-basis: auto;
+    /* Adicione um gap vertical se quiser espaço entre perfil, botão e menu */
+    gap: 10px; /* Adicionado para espaçamento entre os elementos empilhados */
 }
 
 .perfil-usuario {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaçamento entre foto e nome */
-    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 0; /* Removido, o gap do .usuario-area agora lida com isso */
+    /* Se quiser um espaço maior entre o perfil e o botão/menu, pode colocar um margin-bottom aqui */
+    /* margin-bottom: 10px; */
 }
 
 .perfil-usuario img {
     width: 50px;
     height: 50px;
-    border-radius: 50%; /* Torna a imagem circular */
-    border: 2px solid #ffd700; /* Borda amarela */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+    border-radius: 50%;
+    border: 2px solid var(--perfil-border);
+    object-fit: cover;
+    transition: border-color 0.3s ease;
 }
 
 .perfil-usuario p {
     font-weight: bold;
-    color: #ffd700;
+    color: var(--perfil-text);
+    transition: color 0.3s ease;
 }
 
 /* Menu de ações (botões) */
 .menu {
-    display: flex; /* Visível por padrão em telas maiores */
-    gap: 15px; /* Espaçamento entre os botões */
-    flex-wrap: wrap; /* Permite que os botões do menu quebrem linha */
-    justify-content: flex-end; /* Alinha os botões à direita */
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Alinha os botões do menu à direita */
+    /* Remover margin-left aqui. O gap do .usuario-area já cuida do espaçamento, ou você pode dar um padding no .usuario-area. */
+    /* margin-left: 10px; */
 }
 
 .menu a {
-    background-color: #ffd700; /* Cor de fundo dos botões */
-    color: #541212; /* Cor do texto dos botões */
+    background-color: var(--menu-button-bg);
+    color: var(--menu-button-text);
     padding: 6px 12px;
-    margin-left: 10px;
+    margin-left: 0; /* Remover margin-left: 10px aqui, para que o gap do menu controle o espaçamento */
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
-    transition: background 0.3s ease; /* Transição suave no hover */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu a:hover {
-    background-color: #fff0a0;
+    background-color: var(--menu-button-hover-bg);
 }
+
+/* --- Botão de Tema (Adicionado e Estilizado) --- */
+.theme-toggle-button {
+    background: none;
+    border: 2px solid var(--perfil-border); /* Borda da cor do perfil para consistência */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    /* Estas margens serão ajustadas dentro do media query para desktop */
+    margin-top: 0; /* Inicialmente 0, ajustaremos via gap ou margem específica se necessário */
+    margin-left: 0; /* Inicialmente 0 */
+    margin-right: 0; /* Inicialmente 0 */
+    flex-shrink: 0; /* Garante que o botão não encolha */
+    font-size: 1.5rem; /* Define o tamanho do emoji */
+}
+
+.theme-toggle-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Lógica para mostrar/esconder ícones de sol/lua (usando as classes corrigidas) */
+body.dark-mode .theme-toggle-button .icon-light-mode { /* CORRIGIDO */
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode { /* CORRIGIDO */
+    display: block;
+}
+
+body:not(.dark-mode) .theme-toggle-button .icon-light-mode { /* CORRIGIDO */
+    display: block;
+}
+
+body:not(.dark-mode) .theme-toggle-button .icon-dark-mode { /* CORRIGIDO */
+    display: none;
+}
+
 
 /* --- Área Principal de Conteúdo --- */
 main {
-    /* Margens ajustadas para dar espaço aos anúncios laterais em telas grandes */
-    margin: 0 160px; /* Largura padrão para as laterais */
-    padding-bottom: 40px; /* Espaçamento inferior */
-    position: relative; /* Necessário para z-index dos anúncios se for o caso */
+    margin: 0 160px;
+    padding-bottom: 40px;
+    position: relative;
 }
 
 /* --- Anúncios Laterais Fixos --- */
 .anuncio-lateral {
-    position: fixed; /* Fixa o anúncio na tela */
-    top: 50%; /* Começa no meio da altura da tela */
-    transform: translateY(-50%); /* Centraliza verticalmente o anúncio */
-    width: 140px; /* Largura dos anúncios laterais */
-    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;
+    background-color: var(--anuncio-bg);
     border-radius: 0.5em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: var(--box-shadow-light); /* Usando a variável de sombra */
     padding: 10px;
     text-align: center;
-    z-index: 999; /* Fica abaixo do cabeçalho fixo */
+    z-index: 999;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .anuncio-lateral {
+    box-shadow: var(--box-shadow-dark); /* Sombra mais escura no modo escuro */
 }
 
 .anuncio-lateral img {
     max-width: 100%;
     height: auto;
-    display: block; /* Remove espaço extra abaixo da imagem */
-    margin: 0 auto 5px auto; /* Centraliza e adiciona margem inferior */
+    display: block;
+    margin: 0 auto 5px auto;
     border-radius: 4px;
 }
 
 .anuncio-lateral p {
     font-size: 0.85em;
-    color: #555;
+    color: var(--anuncio-text);
+    transition: color 0.3s ease;
 }
 
 .anuncio-esquerda {
-    left: 10px; /* Alinha o anúncio esquerdo a 10px da borda esquerda */
+    left: 10px;
 }
 
 .anuncio-direita {
-    right: 10px; /* Alinha o anúncio direito a 10px da borda direita */
+    right: 10px;
 }
 
 /* --- Conteúdo Principal das Notícias --- */
 .noticias-principal {
-    max-width: 1200px; /* Limita a largura máxima do bloco de notícias */
-    margin: 0 auto; /* Centraliza o bloco de notícias na área principal */
-    padding: 20px 0; /* Espaçamento interno */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
-/* Mensagem quando não há notícia */
 .mensagem-vazia {
     text-align: center;
     font-size: 1.2em;
     margin-top: 40px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
-/* Grade de notícias (CSS Grid) */
 .noticias-grid {
-    display: grid; /* Ativa o CSS Grid */
-    /* Cria colunas responsivas: mínimo de 280px, máximo de 1 fração do espaço.
-      Isso garante 3 colunas em telas grandes e se adapta para 2 ou 1. */
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px; /* Espaçamento entre as notícias (cards) */
+    gap: 25px;
 }
 
 /* Cada notícia (card individual) */
 article.noticia {
     display: flex;
-    flex-direction: column; /* Itens do card em coluna */
-    background-color: #fff;
-    border-left: 5px solid #541212; /* Borda lateral decorativa */
+    flex-direction: column;
+    background-color: var(--noticia-bg);
+    border-left: 5px solid var(--noticia-border-left);
     padding: 16px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out; /* Efeito de zoom suave no hover */
-    min-height: 420px; /* Altura mínima para os cards de notícias para uniformidade */
-    width: 100%; /* Ocupa 100% da célula do grid */
+    box-shadow: var(--box-shadow-light);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    min-height: 420px;
+    width: 100%;
     position: relative;
     overflow: hidden;
-    cursor: default; /* Remova o cursor pointer do artigo inteiro para que os links internos funcionem melhor */
+    cursor: default;
+}
+
+body.dark-mode article.noticia {
+    box-shadow: var(--box-shadow-dark);
 }
 
 article.noticia:hover {
-    transform: scale(1.01); /* Leve zoom no hover */
+    transform: scale(1.01);
 }
 
-/* Estilos para o link que envolve o conteúdo da notícia (agora separado dos botões) */
 .noticia-link-conteudo {
-    text-decoration: none; /* Remove sublinhado do link */
-    color: inherit; /* Herda a cor do texto do pai */
-    display: block; /* Faz o link ocupar o espaço necessário */
-    flex-grow: 1; /* Permite que o conteúdo do link ocupe o espaço restante no flex container */
-    cursor: pointer; /* Adiciona o cursor pointer aqui para indicar que é clicável */
-    /* Removido 'height: 100%;' para evitar conflitos com os botões */
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex-grow: 1;
+    cursor: pointer;
 }
 
 article.noticia h2 {
-    color: #4a1e18;
+    color: var(--noticia-title-color);
     font-size: 1.5em;
     margin-bottom: 10px;
     text-align: center;
+    transition: color 0.3s ease;
 }
 
 .autor-data {
     font-size: 0.9em;
-    color: #777;
+    color: var(--noticia-meta-color);
     margin-bottom: 10px;
     text-align: center;
+    transition: color 0.3s ease;
 }
 
 article.noticia img {
     width: 100%;
-    max-height: 200px; /* Altura máxima para as imagens das notícias */
-    object-fit: cover; /* Recorta a imagem para cobrir o espaço sem distorcer */
+    max-height: 200px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
 }
 
 article.noticia p {
-    /* Mantém o truncamento de texto */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* Limita o texto a 4 linhas */
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     font-size: 1em;
-    flex-grow: 1; /* Permitindo que o parágrafo ocupe o espaço para empurrar o resto */
+    flex-grow: 1;
     margin-bottom: 10px;
+    color: var(--noticia-content-color);
+    transition: color 0.3s ease;
 }
 
 article.noticia .leia-mais {
-    display: block; /* Faz o "Leia mais" ir para a próxima linha */
-    color: #b30000; /* Cor vermelha para destaque */
+    display: block;
+    color: var(--leia-mais-color);
     font-weight: bold;
     text-decoration: none;
     margin-top: 5px;
-    margin-bottom: 10px; /* Margem para separar das ações */
-    flex-shrink: 0; /* Garante que "Leia Mais" não encolha */
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
 }
 
 article.noticia .leia-mais:hover {
@@ -242,34 +373,34 @@ article.noticia .leia-mais:hover {
 }
 
 .acoes-noticia {
-    margin-top: auto; /* Empurra as ações para a parte inferior do flex container */
+    margin-top: auto;
     text-align: center;
-    flex-shrink: 0; /* Garante que este elemento não encolha */
-    padding-top: 10px; /* Mais espaço acima dos botões */
-    padding-bottom: 5px; /* Adicionado para garantir espaço inferior */
-    z-index: 2; /* Garante que fique acima de qualquer conteúdo sobreposto */
-    display: flex; /* Adicione display flex para alinhar os botões */
-    justify-content: center; /* Centraliza os botões */
-    gap: 10px; /* Espaçamento entre os botões */
+    flex-shrink: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* Estilos para os botões Alterar e Excluir */
 .acoes-noticia .btn-alterar,
 .acoes-noticia .btn-excluir {
-    display: inline-block; /* Para que padding e margem funcionem corretamente */
+    display: inline-block;
     padding: 8px 15px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease;
-    white-space: nowrap; /* Evita que o texto do botão quebre linha */
-    text-align: center; /* Garante que o texto dentro do botão esteja centralizado */
+    transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .acoes-noticia .btn-alterar {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-    border: 1px solid #4CAF50;
+    background-color: var(--btn-alterar-bg);
+    color: var(--btn-alterar-color);
+    border: 1px solid var(--btn-alterar-border);
 }
 
 .acoes-noticia .btn-alterar:hover {
@@ -278,9 +409,9 @@ article.noticia .leia-mais:hover {
 }
 
 .acoes-noticia .btn-excluir {
-    background-color: #f44336; /* Vermelho */
-    color: white;
-    border: 1px solid #f44336;
+    background-color: var(--btn-excluir-bg);
+    color: var(--btn-excluir-color);
+    border: 1px solid var(--btn-excluir-border);
 }
 
 .acoes-noticia .btn-excluir:hover {
@@ -292,35 +423,38 @@ article.noticia .leia-mais:hover {
 /* --- Rodapé --- */
 footer.rodape-completo {
     width: 100%;
-    background-color: #451107;
-    color: #ffd700;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     padding: 30px 20px 15px;
     margin-top: 40px;
     font-size: 0.95em;
-    position: relative; /* Para posicionamento de sub-elementos, se houver */
+    position: relative;
     bottom: 0;
     left: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .rodape-conteudo {
     display: flex;
-    justify-content: space-between; /* Espaça contato e redes sociais */
-    flex-wrap: wrap; /* Permite que os itens quebrem linha */
-    gap: 30px; /* Espaçamento entre as seções do rodapé */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
     max-width: 1200px;
-    margin: 0 auto; /* Centraliza o conteúdo do rodapé */
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
     margin-bottom: 10px;
-    color: #ffd700;
+    color: var(--footer-text);
     font-size: 1.2em;
+    transition: color 0.3s ease;
 }
 
 .contato a,
 .redes-sociais a {
-    color: #ffd700;
+    color: var(--footer-link-color);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contato a:hover,
@@ -328,12 +462,15 @@ footer.rodape-completo {
     text-decoration: underline;
 }
 
+/* Estilos para os ícones de redes sociais no rodapé */
 .redes-sociais img {
-    width: 48px;
+    width: 48px; /* Tamanho ajustado para visibilidade */
     height: 48px;
     margin-right: 10px;
     transition: transform 0.2s ease-in-out;
-    vertical-align: middle; /* Alinha ícones com o texto */
+    vertical-align: middle;
+    border-radius: 50%; /* Se quiser que os ícones sejam redondos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
 }
 
 .redes-sociais img:hover {
@@ -344,7 +481,8 @@ footer.rodape-completo {
     text-align: center;
     margin-top: 30px;
     font-size: 0.9em;
-    color: #ffd700;
+    color: var(--copyright-color);
+    transition: color 0.3s ease;
 }
 
 
@@ -387,10 +525,17 @@ footer.rodape-completo {
         width: 100%; /* Ocupa largura total */
         align-items: center; /* Centraliza os itens */
         margin-top: 5px;
+        flex-direction: column; /* Para alinhar perfil e botão de tema verticalmente */
     }
 
     .perfil-usuario {
         margin-bottom: 5px;
+    }
+
+    .theme-toggle-button {
+        margin-top: 5px; /* Espaço menor em mobile */
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .menu {
@@ -480,6 +625,17 @@ footer.rodape-completo {
         width: 100%;
         align-items: center;
         margin-top: 10px;
+        flex-direction: column; /* Para alinhar perfil e botão de tema verticalmente */
+    }
+
+    .perfil-usuario {
+        margin-bottom: 5px;
+    }
+
+    .theme-toggle-button {
+        margin-top: 8px;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .menu {
@@ -541,10 +697,45 @@ footer.rodape-completo {
     }
 }
 
+/* Reverter comportamento em telas maiores para o button */
+@media (min-width: 769px) {
+    .usuario-area {
+        flex-direction: column; /* Permanece coluna */
+        align-items: flex-end; /* Alinha à direita */
+        /* Removido margin-left: auto; daqui, pois não queremos que toda a area-usuario ocupe 100% e depois se alinhe. */
+        /* O cabeçalho já está usando space-between para empurrar logo e usuario-area para as extremidades. */
+        gap: 10px; /* Mantém um gap entre os itens empilhados: perfil, botão, menu */
+    }
+    .theme-toggle-button {
+        margin-top: 0; /* Remove margem superior excessiva, o gap da area-usuario já cria espaço */
+        /* Centralizar o botão horizontalmente dentro do .usuario-area.
+           Se o .usuario-area tem align-items: flex-end, ele já empurra tudo para a direita.
+           Para centralizar *dentro* do flex-end, pode-se usar margens auto. */
+        margin-left: auto; /* Empurra o botão para a direita dentro do flex-end */
+        margin-right: auto; /* Centraliza o botão dentro do espaço disponível no flex-end */
+        /* OU, se você quer que ele se alinhe com a foto de perfil/nome,
+           você pode ajustar o padding do .usuario-area ou usar align-self no botão. */
+    }
+    .perfil-usuario {
+        margin-bottom: 0; /* O gap do .usuario-area cuida do espaçamento */
+    }
+    .menu {
+        display: flex; /* Garante que o menu esteja visível em desktop */
+        flex-direction: row; /* Mantém os botões do menu em linha */
+        gap: 15px; /* Espaçamento entre os botões do menu */
+        justify-content: flex-end; /* Alinha os botões do menu à direita */
+        /* Se você quer que o menu comece debaixo do perfil, não use margin-left: auto. */
+        /* margin-left: auto; */
+    }
+    .menu a {
+        margin-left: 0; /* O gap do .menu já cuida do espaçamento */
+    }
+}
+
 /* Desktops e Laptops (769px a 1200px) */
 @media (min-width: 769px) and (max-width: 1200px) {
     body {
-        padding-top: 200px; /* Ajusta o padding para o cabeçalho */
+        padding-top: 200px;
     }
 
     header {
@@ -552,11 +743,11 @@ footer.rodape-completo {
     }
 
     main {
-        margin: 0 60px; /* Reduz margem lateral para anúncios ainda invisíveis */
+        margin: 0 60px;
     }
 
     .noticias-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2 ou 3 colunas */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 25px;
     }
 
@@ -568,11 +759,11 @@ footer.rodape-completo {
 /* Desktops grandes (1201px a 1440px) */
 @media (min-width: 1201px) and (max-width: 1440px) {
     main {
-        margin: 0 160px; /* Margens para acomodar anúncios */
+        margin: 0 160px;
     }
 
     .noticias-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
+        grid-template-columns: repeat(3, 1fr);
         gap: 30px;
     }
 
@@ -584,16 +775,16 @@ footer.rodape-completo {
 /* Telas ultra-wide (acima de 1440px) */
 @media (min-width: 1441px) {
     main {
-        margin: 0 160px; /* Mantém margem para anúncios */
+        margin: 0 160px;
     }
 
     .noticias-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
+        grid-template-columns: repeat(3, 1fr);
         gap: 30px;
     }
 
     article.noticia {
-        min-height: 500px; /* Pode ser ajustado para mais altura em telas grandes */
+        min-height: 500px;
     }
 
     .noticia h2 {

@@ -1,361 +1,698 @@
-/* Reset geral */ 
+/* Reset geral */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* --- Variáveis CSS para Tema (Padrão: Tema Claro) --- */
+:root {
+    /* Cores de fundo */
+    --body-bg: #f8f9fa;
+    --header-bg: #451107;
+    --header-border-bottom: #541212;
+    --main-bg: #ffffff;
+    --menu-link-bg: #ffd700; /* Fundo dos links do menu */
+    --menu-link-hover-bg: #fff0a0;
+    --form-button-bg: #4a1e18; /* Fundo do botão Salvar */
+    --form-button-hover-bg: #5a2b24;
+    --input-border-color: #ccc;
+    --footer-bg: #451107;
+    --menu-hamburguer-line: #ffd700;
+    --theme-toggle-bg: none; /* Fundo do botão de tema */
+    --theme-toggle-hover-shadow-color: #fff0a0; /* Cor da sombra do hover do botão de tema */
+
+    /* Cores de texto */
+    --text-color: #333;
+    --header-text: #ffd700;
+    --perfil-usuario-text: #ffd700;
+    --menu-link-text: #541212; /* Texto dos links do menu */
+    --main-title-color: #4a1e18;
+    --mensagem-erro-color: red;
+    --mensagem-sucesso-color: green;
+    --foto-perfil-border: #4a1e18;
+    --label-color: #4a1e18;
+    --form-button-text: #ffd700; /* Texto do botão Salvar */
+    --botao-excluir-color: #b30000;
+    --footer-text-color: #ffd700;
+    --copyright-color: #ffd700;
+    --theme-toggle-icon-color: #ffd700; /* Cor dos ícones do botão de tema */
+    --theme-toggle-border-color: #ffd700; /* Cor da borda do botão de tema */
+    --theme-toggle-hover-color: #fff0a0; /* Cor do ícone no hover do botão de tema */
+}
+
+/* --- Estilos do Tema Escuro --- */
+body.dark-mode {
+    /* Cores de fundo */
+    --body-bg: #222222;
+    --header-bg: #1a1a1a;
+    --header-border-bottom: #3a0a07;
+    --main-bg: #333333;
+    --menu-link-bg: #f0c040;
+    --menu-link-hover-bg: #d4a733;
+    --form-button-bg: #f0c040; /* Fundo do botão Salvar (amarelo mais escuro) */
+    --form-button-hover-bg: #d4a733;
+    --input-border-color: #666;
+    --footer-bg: #1a1a1a;
+    --menu-hamburguer-line: #f0c040;
+    --theme-toggle-bg: none;
+    --theme-toggle-hover-shadow-color: #d4a733;
+
+
+    /* Cores de texto */
+    --text-color: #e0e0e0;
+    --header-text: #f0c040;
+    --perfil-usuario-text: #f0c040;
+    --menu-link-text: #1a1a1a; /* Texto dos links do menu (preto) */
+    --main-title-color: #f0c040;
+    --mensagem-erro-color: #ff6666;
+    --mensagem-sucesso-color: #90ee90;
+    --foto-perfil-border: #f0c040;
+    --label-color: #f0c040;
+    --form-button-text: #1a1a1a; /* Texto do botão Salvar (preto ou escuro para contraste) */
+    --botao-excluir-color: #ff9999;
+    --footer-text-color: #f0c040;
+    --copyright-color: #f0c040;
+    --theme-toggle-icon-color: #f0c040;
+    --theme-toggle-border-color: #f0c040;
+    --theme-toggle-hover-color: #d4a733;
+
+
+    /* Sombras (podem ser mais escuras no dark mode) */
+    --box-shadow-main: 0 0 20px rgba(0, 0, 0, 0.4);
+    --header-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    --footer-shadow: 0 -2px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Aplicação das Variáveis e Estilos Gerais */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-  padding-top: 210px;
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    padding-top: 210px; /* Mantido conforme original */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh; /* Garante que o body ocupa a altura mínima da viewport */
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição para o tema */
 }
 
 /* Cabeçalho */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #451107;
-  color: #ffd700;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    flex-wrap: wrap;
+    border-bottom: 5px solid var(--header-border-bottom); /* Adiciona borda inferior para consistência */
+    box-shadow: var(--header-shadow); /* Adiciona sombra */
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo {
-  max-height: 130px;
-  height: auto;
-  width: auto;
-  margin: 0 auto;
+    max-height: 130px;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
 }
 
 .usuario-area {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
 }
 
-.perfil-usuario p {
-  font-weight: bold;
-  color: #ffd700;
-  margin: 0;
+.perfil-usuario {
+    font-weight: bold;
+    color: var(--perfil-usuario-text);
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+/* Container para os botões do cabeçalho (menu e toggle) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre o menu e o toggle */
 }
 
 /* Menu normal */
 .menu {
-  display: flex;
+    display: flex;
+    gap: 8px; /* Espaçamento entre os links do menu */
 }
 
 .menu a {
-  background-color: #ffd700;
-  color: #541212;
-  padding: 8px 16px;
-  margin-left: 8px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s ease;
+    background-color: var(--menu-link-bg);
+    color: var(--menu-link-text);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .menu a:hover {
-  background-color: #fff0a0;
+    background-color: var(--menu-link-hover-bg);
 }
 
 /* Ícone do menu hamburguer */
 .menu-hamburguer {
-  display: none;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
-  justify-content: space-between;
-  width: 30px;
-  height: 20px;
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
 }
 
 .menu-hamburguer span {
-  width: 100%;
-  height: 4px;
-  background-color: #ffd700;
+    width: 100%;
+    height: 4px;
+    background-color: var(--menu-hamburguer-line);
+    transition: background-color 0.3s ease;
+}
+
+/* Estilos para o Botão de Alternância de Tema (theme-toggle) */
+.theme-toggle-button {
+    background: var(--theme-toggle-bg);
+    border: 2px solid var(--theme-toggle-border-color); /* Borda amarela */
+    color: var(--theme-toggle-icon-color); /* Cor dos ícones (sol/lua) */
+    cursor: pointer;
+    font-size: 1.5em; /* Tamanho dos ícones */
+    padding: 5px;
+    outline: none; /* Remove o outline de foco padrão */
+    transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição para a cor da borda */
+    display: flex; /* Para centralizar os ícones */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Faz o botão ser circular */
+    width: 40px; /* Largura */
+    height: 40px; /* Altura */
+    box-shadow: 0 0 0px rgba(0,0,0,0); /* Inicia sem sombra */
+}
+
+.theme-toggle-button:hover {
+    color: var(--theme-toggle-hover-color);
+    transform: scale(1.1); /* Um leve zoom ao passar o mouse */
+    border-color: var(--theme-toggle-hover-color);
+    box-shadow: 0 0 10px var(--theme-toggle-hover-shadow-color); /* Efeito de "glow" */
+}
+
+/* Esconde e mostra os ícones de sol e lua */
+.theme-toggle-button .icon-light-mode {
+    display: inline-block; /* Visível por padrão no tema claro */
+    line-height: 1;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none; /* Oculto por padrão no tema claro */
+    line-height: 1;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none; /* Oculta o sol no modo escuro */
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block; /* Exibe a lua no modo escuro */
 }
 
 /* Conteúdo principal */
 main {
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--main-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-main);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1; /* Permite que o main cresça para empurrar o footer */
 }
 
 main h1 {
-  color: #4a1e18;
-  text-align: center;
-  margin-bottom: 20px;
+    color: var(--main-title-color);
+    text-align: center;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
 }
 
 /* Mensagens */
 .mensagem-erro {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
+    color: var(--mensagem-erro-color);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
 }
 
 .mensagem-sucesso {
-  color: green;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
+    color: var(--mensagem-sucesso-color);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
 }
 
 /* Foto atual */
 .foto-perfil-atual {
-  display: block;
-  margin: 10px auto 20px auto;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #4a1e18;
+    display: block;
+    margin: 10px auto 20px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--foto-perfil-border);
+    transition: border-color 0.3s ease;
 }
 
 /* Formulário */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 form label {
-  font-weight: bold;
-  color: #4a1e18;
+    font-weight: bold;
+    color: var(--label-color);
+    transition: color 0.3s ease;
 }
 
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
 form input[type="file"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 6px;
+    width: 100%;
+    background-color: var(--main-bg); /* Garante que o input mude de cor no dark mode */
+    color: var(--text-color); /* Cor do texto dentro do input */
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 form button {
-  background-color: #4a1e18;
-  color: #ffd700;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
+    background-color: var(--form-button-bg);
+    color: var(--form-button-text); /* AGORA CORRIGIDO PARA USAR A VARIÁVEL ESPECÍFICA DO TEXTO DO BOTÃO */
+    padding: 12px;
+    border: none; /* Mantido sem borda conforme original */
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 form button:hover {
-  background-color: #5a2b24;
+    background-color: var(--form-button-hover-bg);
 }
 
 .botao-excluir {
-  display: inline-block;
-  margin-top: 10px;
-  color: #b30000;
-  text-decoration: none;
-  font-weight: bold;
-  text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--botao-excluir-color);
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .botao-excluir:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* Rodapé */
 footer.rodape-completo {
-  width: 100%; /* ocupa toda a largura */
-  left: 0; /* alinha à esquerda */
-  position: relative;
-  bottom: 0;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
-}
-
-footer.rodape-completo {
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
+    width: 100%; /* ocupa toda a largura */
+    left: 0; /* alinha à esquerda */
+    position: relative;
+    bottom: 0;
+    background-color: var(--footer-bg);
+    color: var(--footer-text-color);
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+    font-size: 0.95em;
+    box-shadow: var(--footer-shadow); /* Adiciona sombra */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--footer-text-color);
+    font-size: 1.2em;
+    transition: color 0.3s ease;
 }
 
 .contato a,
 .redes-sociais a {
-  color: #ffd700;
-  text-decoration: none;
+    color: var(--footer-text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .redes-sociais img {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-  vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+    vertical-align: middle;
 }
 
 .redes-sociais img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .copyright {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #ffd700;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--copyright-color);
+    transition: color 0.3s ease;
 }
 
 /* ===== Responsividade ===== */
 
 /* 320px */
 @media (max-width: 320px) {
-  .logo {
-    max-height: 60px;
-  }
+    header {
+        padding: 10px;
+        min-height: 180px;
+    }
+    .logo {
+        max-height: 60px;
+        margin-bottom: 5px;
+    }
+    .usuario-area {
+        align-items: center;
+        width: 100%;
+        gap: 5px;
+        margin-top: 5px;
+    }
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 5px;
+    }
+    .menu {
+        width: 100%;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .menu a {
+        font-size: 0.9rem;
+        padding: 8px;
+        text-align: center;
+    }
+    .theme-toggle-button {
+        font-size: 1.2em;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+    }
 
-  main {
-    padding: 20px 10px;
-  }
-
-  main h1 {
-    font-size: 1.5rem;
-  }
-
-  .menu a {
-    font-size: 0.9rem;
-  }
+    body {
+        padding-top: 190px;
+    }
+    main {
+        padding: 20px 10px;
+    }
+    main h1 {
+        font-size: 1.5rem;
+    }
 }
 
 /* 375px */
 @media (max-width: 375px) {
-  .logo {
-    max-height: 70px;
-  }
-
-  main {
-    padding: 25px 15px;
-  }
-
-  main h1 {
-    font-size: 1.7rem;
-  }
+    header {
+        min-height: 190px;
+    }
+    .logo {
+        max-height: 70px;
+    }
+    .usuario-area {
+        gap: 6px;
+    }
+    .header-actions {
+        gap: 8px;
+    }
+    .menu a {
+        font-size: 0.95rem;
+    }
+    .theme-toggle-button {
+        font-size: 1.3em;
+        width: 35px;
+        height: 35px;
+    }
+    body {
+        padding-top: 200px;
+    }
+    main {
+        padding: 25px 15px;
+    }
+    main h1 {
+        font-size: 1.7rem;
+    }
 }
 
 /* 425px */
 @media (max-width: 425px) {
-  .logo {
-    max-height: 80px;
-  }
-
-  main {
-    padding: 28px 20px;
-  }
+    header {
+        min-height: 200px;
+    }
+    .logo {
+        max-height: 80px;
+    }
+    body {
+        padding-top: 210px;
+    }
+    main {
+        padding: 28px 20px;
+    }
 }
 
 /* 768px */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px 20px;
+        min-height: 160px;
+    }
 
-  .logo {
-    margin-bottom: 10px;
-  }
+    .logo {
+        margin-bottom: 10px;
+    }
 
-  .usuario-area {
-    align-items: center;
-  }
+    .usuario-area {
+        flex-direction: row;
+        align-items: center;
+        width: auto;
+        margin-top: 10px;
+        gap: 15px;
+    }
 
-  .menu {
-    display: none;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
+    .perfil-usuario {
+        margin-right: 15px;
+    }
 
-  .menu-hamburguer {
-    display: flex;
-  }
 
-  .menu.open {
-    display: flex;
-  }
+    .header-actions {
+        flex-direction: row;
+        gap: 10px;
+        width: auto;
+    }
 
-  .menu a {
-    width: 100%;
-    padding: 12px 0;
-    text-align: center;
-  }
+    .menu {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        margin-top: 10px;
+    }
 
-  main {
-    margin: 20px;
-    width: 90%;
-  }
+    .menu-hamburguer {
+        display: flex;
+        order: 1;
+    }
+
+    .menu.open {
+        display: flex;
+    }
+
+    .menu a {
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .theme-toggle-button {
+        font-size: 1.6em;
+        width: 45px;
+        height: 45px;
+        margin: 0;
+    }
+
+    body {
+        padding-top: 180px;
+    }
+
+    main {
+        margin: 20px auto;
+        width: 90%;
+        max-width: 600px;
+    }
+    .rodape-conteudo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
 }
 
 /* 1024px */
 @media (max-width: 1024px) {
-  main {
-    max-width: 90%;
-  }
+    main {
+        max-width: 90%;
+    }
+    @media (min-width: 769px) {
+        header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            min-height: 120px;
+        }
+        .logo {
+            max-height: 100px;
+            margin: 0;
+        }
+        .usuario-area {
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-actions {
+            flex-direction: row;
+            gap: 15px;
+            margin-left: 20px;
+        }
+        .menu {
+            display: flex;
+            gap: 10px;
+        }
+        .menu-hamburguer {
+            display: none;
+        }
+        .theme-toggle-button {
+            font-size: 1.7em;
+            width: 48px;
+            height: 48px;
+        }
+        body {
+            padding-top: 140px;
+        }
+        main {
+            margin: 30px auto;
+        }
+        .rodape-conteudo {
+            gap: 30px;
+        }
+    }
 }
 
 /* 1440px */
 @media (max-width: 1440px) {
-  main {
-    max-width: 700px;
-  }
+    main {
+        max-width: 700px;
+    }
+    @media (min-width: 1025px) {
+        header {
+            padding: 20px 40px;
+            min-height: 130px;
+        }
+        .logo {
+            max-height: 120px;
+        }
+        .usuario-area {
+            gap: 20px;
+        }
+        .header-actions {
+            gap: 20px;
+        }
+        .theme-toggle-button {
+            font-size: 1.8em;
+            width: 50px;
+            height: 50px;
+        }
+        body {
+            padding-top: 150px;
+        }
+        main {
+            margin: 40px auto;
+        }
+    }
 }
 
 /* 2560px */
 @media (min-width: 1441px) {
-  main {
-    max-width: 800px;
-    font-size: 1.1rem;
-  }
+    main {
+        max-width: 800px;
+        font-size: 1.1rem;
+        padding: 40px;
+        margin: 50px auto;
+    }
 
-  form input,
-  form button {
-    font-size: 1rem;
-  }
+    form input,
+    form button {
+        font-size: 1rem;
+    }
+    header {
+        padding: 25px 50px;
+        min-height: 140px;
+    }
+    .logo {
+        max-height: 130px;
+    }
+    .usuario-area {
+        gap: 25px;
+    }
+    .header-actions {
+        gap: 25px;
+    }
+    .theme-toggle-button {
+        font-size: 2em;
+        width: 55px;
+        height: 55px;
+    }
+    body {
+        padding-top: 160px;
+    }
+    .rodape-conteudo {
+        max-width: 1400px;
+        gap: 40px;
+    }
 }

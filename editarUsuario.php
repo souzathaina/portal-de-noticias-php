@@ -99,16 +99,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
         <div class="usuario-area">
-            <p class="nome-usuario"><?= htmlspecialchars($_SESSION['nome']) ?></p>
-            <div class="menu">
-                <a href="telaLogado.php">Voltar</a>
-                <a href="logout.php">Logout</a>
-            </div>
-            <!-- Menu Hamburguer -->
-            <div class="menu-hamburguer" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+            <p class="perfil-usuario"><?= htmlspecialchars($_SESSION['nome']) ?></p>
+            <div class="header-actions"> <div class="menu">
+                    <a href="telaLogado.php">Voltar</a>
+                    <a href="logout.php">Logout</a>
+                </div>
+                <button id="theme-toggle" class="theme-toggle-button" aria-label="Alternar tema">
+                    <span class="icon-light-mode">☀️</span>
+                    <span class="icon-dark-mode">🌙</span>
+                </button>
+                <div class="menu-hamburguer" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
     </header>
@@ -174,10 +178,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
 
     <script>
-        function toggleMenu() {
-            const menu = document.querySelector('.menu');
-            menu.classList.toggle('open');
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const menuHamburguer = document.querySelector('.menu-hamburguer'); // Seleciona o hamburguer
+            const menu = document.querySelector('.menu'); // Seleciona o menu real
+
+            // Função para alternar o menu mobile
+            window.toggleMenu = function() {
+                menu.classList.toggle('open');
+            };
+
+            // Carregar o tema salvo no localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                body.classList.add(savedTheme);
+            } else {
+                // Se não houver tema salvo, verificar a preferência do sistema
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.add('light-mode'); // Adiciona explicitamente 'light-mode' se não for dark
+                }
+            }
+
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light-mode');
+                } else {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark-mode');
+                }
+            });
+
+            // Opcional: Atualizar o tema se a preferência do sistema mudar
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (!localStorage.getItem('theme')) { // Só muda se o usuário não tiver setado uma preferência manual
+                    if (event.matches) {
+                        body.classList.add('dark-mode');
+                        body.classList.remove('light-mode');
+                    } else {
+                        body.classList.add('light-mode');
+                        body.classList.remove('dark-mode');
+                    }
+                }
+            });
+        });
     </script>
 </body>
 

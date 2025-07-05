@@ -92,13 +92,18 @@ try {
             <p><small>Por <?= htmlspecialchars($noticia['autor']) ?> em
                         <?= date('d/m/Y H:i', strtotime($noticia['data'])) ?></small></p>
         </div>
-        <?php
-        if (usuarioLogado()) { // Assumo que essa função existe no funcoes.php
-            echo '<a href="telaLogado.php" class="botao-voltar">⬅ Voltar para o início</a>';
-        } else {
-            echo '<a href="index.php" class="botao-voltar">⬅ Voltar para o início</a>';
-        }
-        ?>
+        <div class="header-actions"> <?php
+            if (usuarioLogado()) { // Assumo que essa função existe no funcoes.php
+                echo '<a href="telaLogado.php" class="botao-voltar">⬅ Voltar para o início</a>';
+            } else {
+                echo '<a href="index.php" class="botao-voltar">⬅ Voltar para o início</a>';
+            }
+            ?>
+            <button id="theme-toggle" class="theme-toggle-button" aria-label="Alternar tema">
+                <span class="icon-light-mode">☀️</span>
+                <span class="icon-dark-mode">🌙</span>
+            </button>
+        </div>
     </header>
 
     <div class="container">
@@ -118,7 +123,7 @@ try {
             <section class="noticia-conteudo">
                 <?php if (!empty($noticia['imagem'])): ?>
                     <img src="imagens/<?= htmlspecialchars($noticia['imagem']) ?>?v=<?= time() ?>"
-                         alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" loading="lazy" />
+                            alt="Imagem da notícia: <?= htmlspecialchars($noticia['titulo']) ?>" loading="lazy" />
                 <?php endif; ?>
 
                 <p>
@@ -126,7 +131,7 @@ try {
                     $textoNoticia = htmlspecialchars($noticia['noticia']);
                     // Adiciona quebras de linha a cada 800 caracteres se não houver quebra de linha natural
                     // Isso é uma heurística para textos muito longos sem formatação
-                    if (strpos($textoNoticia, "\n") === false && strlen($textoNoticia) > 800) { 
+                    if (strpos($textoNoticia, "\n") === false && strlen($textoNoticia) > 800) {
                         $textoFormatado = wordwrap($textoNoticia, 800, "<br /><br />\n", true);
                         echo $textoFormatado;
                     } else {
@@ -176,6 +181,51 @@ try {
             <p>&copy; <?= date("Y") ?> Portal Luz & Verdade - Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            // Carregar o tema salvo no localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                body.classList.add(savedTheme);
+            } else {
+                // Se não houver tema salvo, verificar a preferência do sistema
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.add('light-mode'); // Adiciona explicitamente 'light-mode' se não for dark
+                }
+            }
+
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light-mode');
+                } else {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark-mode');
+                }
+            });
+
+            // Opcional: Atualizar o tema se a preferência do sistema mudar
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (!localStorage.getItem('theme')) { // Só muda se o usuário não tiver setado uma preferência manual
+                    if (event.matches) {
+                        body.classList.add('dark-mode');
+                        body.classList.remove('light-mode');
+                    } else {
+                        body.classList.add('light-mode');
+                        body.classList.remove('dark-mode');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

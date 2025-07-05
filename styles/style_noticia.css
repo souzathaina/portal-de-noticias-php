@@ -7,18 +7,78 @@
 
 body,
 html {
-    height: 100%; 
+    height: 100%;
 }
 
+/* --- Variáveis CSS para Tema (Padrão: Tema Claro) --- */
+:root {
+    /* Cores de fundo */
+    --body-bg: #f8f9fa;
+    --header-bg: #451107;
+    --header-border-bottom: #541212;
+    --button-bg: #ffd700; /* Botões genéricos, como o "Voltar" */
+    --button-hover-bg: #6b1e1e;
+    --main-bg: #fff; /* Fundo do conteúdo principal da notícia */
+    --aside-bg: #fff; /* Fundo dos anúncios laterais */
+    --aside-border: #eee;
+    --footer-bg: #451107;
+
+    /* Cores de texto */
+    --text-color: #333;
+    --header-text: #ffd700;
+    --header-subtitle-text: #ffe98d;
+    --button-text: #541212;
+    --button-hover-text: #ffd700;
+    --main-title-color: #333; /* Título da notícia */
+    --main-text-color: #444; /* Texto da notícia */
+    --aside-text-color: #555; /* Texto dos anúncios */
+    --footer-text: #ffd700;
+    --footer-link-color: #ffd700;
+    --copyright-color: #ffd700;
+
+    /* Sombras */
+    --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --box-shadow-dark: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Estilos do Tema Escuro --- */
+body.dark-mode {
+    /* Cores de fundo */
+    --body-bg: #222222;
+    --header-bg: #1a1a1a;
+    --header-border-bottom: #3a0a07;
+    --button-bg: #f0c040;
+    --button-hover-bg: #d4a733;
+    --main-bg: #333333;
+    --aside-bg: #333333;
+    --aside-border: #555;
+    --footer-bg: #1a1a1a;
+
+    /* Cores de texto */
+    --text-color: #e0e0e0;
+    --header-text: #f0c040;
+    --header-subtitle-text: #d4a733;
+    --button-text: #1a1a1a;
+    --button-hover-text: #1a1a1a;
+    --main-title-color: #f0c040;
+    --main-text-color: #d0d0d0;
+    --aside-text-color: #c0c0c0;
+    --footer-text: #f0c040;
+    --footer-link-color: #f0c040;
+    --copyright-color: #f0c040;
+}
+
+/* Aplicação das Variáveis e Estilos Gerais */
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f8f9fa; 
-    color: #333;
+    background: var(--body-bg);
+    color: var(--text-color);
     line-height: 1.6;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
 }
 
 /* Cabeçalho fixo */
@@ -27,18 +87,19 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background: #451107;
-    color: #ffd700;
+    background: var(--header-bg);
+    color: var(--header-text);
     padding: 15px 20px;
     display: flex;
     flex-direction: column; /* Mobile: elementos em coluna */
     align-items: center;
     justify-content: center;
-    border-bottom: 5px solid #541212;
+    border-bottom: 5px solid var(--header-border-bottom);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     height: auto;
     min-height: 140px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .logo {
@@ -50,8 +111,8 @@ header {
 
 .header-texto {
     text-align: center;
-    flex: 1; 
-    min-width: 280px; 
+    flex: 1;
+    min-width: 280px;
     padding: 0 10px;
 }
 
@@ -59,41 +120,95 @@ header {
     font-size: 1.5em;
     margin-bottom: 5px;
     line-height: 1.2;
-    color: #ffd700;
+    color: var(--header-text);
+    transition: color 0.3s ease;
 }
 
 .header-texto p {
     font-size: 0.85em;
-    color: #ffe98d;
+    color: var(--header-subtitle-text);
+    transition: color 0.3s ease;
+}
+
+.header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espaço entre o botão voltar e o botão de tema */
+    margin-top: 12px;
 }
 
 .botao-voltar {
     display: inline-block;
     text-decoration: none;
-    background-color: #ffd700;
-    color: #541212;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     padding: 7px 14px;
     border-radius: 6px;
     transition: background 0.3s ease, color 0.3s ease;
     font-weight: bold;
-    margin-top: 12px;
-    white-space: nowrap; 
+    white-space: nowrap;
     font-size: 0.9em;
 }
 
 .botao-voltar:hover {
-    background-color: #6b1e1e;
-    color: #ffd700;
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+}
+
+/* Estilos para o Botão de Alternância de Tema (theme-toggle) */
+.theme-toggle-button {
+    background: none;
+    border: 2px solid var(--header-text); /* Borda amarela */
+    color: var(--header-text); /* Cor dos ícones (sol/lua) */
+    cursor: pointer;
+    font-size: 1.5em; /* Tamanho dos ícones */
+    padding: 5px;
+    outline: none; /* Remove o outline de foco padrão */
+    transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Adiciona transição para a cor da borda */
+    display: flex; /* Para centralizar os ícones */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Faz o botão ser circular */
+    width: 40px; /* Largura */
+    height: 40px; /* Altura */
+    box-shadow: 0 0 0px rgba(0,0,0,0); /* Inicia sem sombra */
+}
+
+.theme-toggle-button:hover {
+    color: var(--button-hover-text); /* Cor de destaque ao passar o mouse */
+    transform: scale(1.1); /* Um leve zoom ao passar o mouse */
+    border-color: var(--button-hover-text); /* Muda a cor da borda ao passar o mouse */
+    box-shadow: 0 0 10px var(--button-hover-text); /* Efeito de "glow" */
+}
+
+/* Esconde e mostra os ícones de sol e lua */
+.theme-toggle-button .icon-light-mode {
+    display: inline-block; /* Visível por padrão no tema claro */
+    line-height: 1;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none; /* Oculto por padrão no tema claro */
+    line-height: 1;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none; /* Oculta o sol no modo escuro */
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block; /* Exibe a lua no modo escuro */
 }
 
 /* Container principal para conteúdo (notícia + asides) */
 .container {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column; /* Padrão mobile: empilhar */
     align-items: center; /* Centraliza itens na coluna */
-    width: 100%; 
-    max-width: 100%; 
+    width: 100%;
+    max-width: 100%;
     padding: 20px 15px; /* Padding padrão para mobile */
     padding-top: 160px; /* Espaço para o header fixo */
     padding-bottom: 40px;
@@ -105,15 +220,20 @@ aside {
     display: none; /* Inicia oculto */
     padding: 15px;
     text-align: center;
-    background-color: #fff;
+    background-color: var(--aside-bg);
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-light);
     margin: 20px 0; /* Margem padrão, será sobrescrita em desktop */
-    flex-shrink: 0; 
-    border: 1px solid #eee;
-    overflow: hidden; 
-    box-sizing: border-box; 
-    min-width: 0; 
+    flex-shrink: 0;
+    border: 1px solid var(--aside-border);
+    overflow: hidden;
+    box-sizing: border-box;
+    min-width: 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode aside {
+    box-shadow: var(--box-shadow-dark);
 }
 
 aside a {
@@ -126,75 +246,85 @@ aside img {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
-    margin: 0 auto 10px auto; 
-    display: block; 
+    margin: 0 auto 10px auto;
+    display: block;
 }
 
 aside p {
     margin-top: 0;
     font-size: 0.9em;
-    color: #555;
+    color: var(--aside-text-color);
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 /* Conteúdo principal da notícia */
 main {
-    flex: 1; 
+    flex: 1;
     max-width: 800px; /* Será ajustado nas media queries */
     width: 98%; /* Ocupa a maioria da largura disponível */
     margin: 20px auto;
     padding: 25px;
-    background-color: #fff;
+    background-color: var(--main-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-shadow-light);
     line-height: 1.7;
     box-sizing: border-box;
-    min-width: 0; 
+    min-width: 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode main {
+    box-shadow: var(--box-shadow-dark);
 }
 
 .noticia-conteudo h2 {
     font-size: 1.8em;
-    color: #333;
+    color: var(--main-title-color);
     margin-bottom: 15px;
+    transition: color 0.3s ease;
 }
 
 main img {
-    width: 100%; 
+    width: 100%;
     height: auto;
-    max-height: 550px; 
-    object-fit: cover; 
+    max-height: 550px;
+    object-fit: cover;
     object-position: center;
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--aside-border); /* Usando a cor de borda das asides para consistência */
     display: block;
-    margin: 25px auto; 
+    margin: 25px auto;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: border-color 0.3s ease;
 }
 
 main p {
     font-size: 1.05em;
     margin-bottom: 1.5em;
-    color: #444;
+    color: var(--main-text-color);
     text-align: justify;
     line-height: 1.8;
-    
+
     /* Propriedades para forçar a quebra de palavras */
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     white-space: normal;
+    transition: color 0.3s ease;
 }
 
 /* Rodapé */
 footer.rodape-completo {
-    background-color: #451107;
-    color: #ffd700;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     padding: 30px 20px 15px;
     margin-top: auto;
     font-size: 0.95em;
     width: 100%;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .rodape-conteudo {
@@ -214,16 +344,18 @@ footer.rodape-completo {
 
 .rodape-completo h3 {
     margin-bottom: 10px;
-    color: #ffd700;
+    color: var(--footer-text);
     font-size: 1.1em;
+    transition: color 0.3s ease;
 }
 
 .contato a,
 .redes-sociais a {
-    color: #ffd700;
+    color: var(--footer-link-color);
     text-decoration: none;
     display: block;
     margin-bottom: 5px;
+    transition: color 0.3s ease;
 }
 
 .contato a:hover,
@@ -237,6 +369,8 @@ footer.rodape-completo {
     margin: 5px;
     transition: transform 0.2s ease-in-out;
     vertical-align: middle;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .redes-sociais img:hover {
@@ -247,7 +381,8 @@ footer.rodape-completo {
     text-align: center;
     margin-top: 20px;
     font-size: 0.85em;
-    color: #ffd700;
+    color: var(--copyright-color);
+    transition: color 0.3s ease;
 }
 
 
@@ -257,12 +392,22 @@ footer.rodape-completo {
 @media (max-width: 375px) {
     header {
         min-height: 110px;
-        padding: 8px; 
+        padding: 8px;
     }
     .logo { max-height: 70px; }
     .header-texto h1 { font-size: 1.3em; }
     .header-texto p { font-size: 0.75em; }
-    .botao-voltar { padding: 5px 10px; font-size: 0.8em; margin-top: 8px; }
+    .header-actions {
+        margin-top: 8px;
+        flex-direction: row; /* Mantém os itens lado a lado em telas muito pequenas */
+        gap: 5px; /* Reduz o gap */
+    }
+    .botao-voltar { padding: 5px 10px; font-size: 0.8em; }
+    .theme-toggle-button {
+        font-size: 1.2em; /* Reduz um pouco o tamanho do ícone */
+        width: 30px;
+        height: 30px;
+    }
 
     .container {
         padding-top: 120px;
@@ -271,8 +416,8 @@ footer.rodape-completo {
     }
     main {
         padding: 10px;
-        width: 100%; 
-        max-width: 100%; 
+        width: 100%;
+        max-width: 100%;
         margin: 5px auto;
     }
     main p {
@@ -291,7 +436,17 @@ footer.rodape-completo {
     .logo { max-height: 80px; }
     .header-texto h1 { font-size: 1.4em; }
     .header-texto p { font-size: 0.8em; }
-    .botao-voltar { padding: 6px 12px; font-size: 0.85em; margin-top: 10px; }
+    .header-actions {
+        margin-top: 10px;
+        flex-direction: row;
+        gap: 8px;
+    }
+    .botao-voltar { padding: 6px 12px; font-size: 0.85em; }
+    .theme-toggle-button {
+        font-size: 1.3em;
+        width: 35px;
+        height: 35px;
+    }
 
     .container {
         padding-top: 130px;
@@ -300,8 +455,8 @@ footer.rodape-completo {
     }
     main {
         padding: 15px;
-        width: 100%; 
-        max-width: 100%; 
+        width: 100%;
+        max-width: 100%;
         margin: 10px auto;
     }
     main p {
@@ -320,21 +475,31 @@ footer.rodape-completo {
     .logo { max-height: 100px; }
     .header-texto h1 { font-size: 1.8em; }
     .header-texto p { font-size: 0.9em; }
+    .header-actions {
+        margin-top: 12px;
+        flex-direction: row;
+        gap: 10px;
+    }
     .botao-voltar { padding: 8px 18px; font-size: 1em; }
+    .theme-toggle-button {
+        font-size: 1.5em;
+        width: 40px;
+        height: 40px;
+    }
 
     .container {
         padding-top: 150px;
-        padding-left: 20px; 
-        padding-right: 20px; 
+        padding-left: 20px;
+        padding-right: 20px;
     }
     main {
-        width: 100%; 
-        max-width: 700px; 
+        width: 100%;
+        max-width: 700px;
         padding: 20px;
         margin: 15px auto;
     }
-    main p { 
-        font-size: 1em; 
+    main p {
+        font-size: 1em;
         margin-bottom: 1.2em;
     }
 }
@@ -352,16 +517,22 @@ footer.rodape-completo {
     .header-texto { text-align: left; margin-right: auto; min-width: unset; }
     .header-texto h1 { font-size: 2em; }
     .header-texto p { font-size: 1em; }
-    .botao-voltar { margin-top: 0; margin-left: 20px; }
+    .header-actions {
+        flex-direction: row; /* Em desktop, sempre lado a lado */
+        margin-top: 0; /* Remove margem superior desnecessária */
+        margin-left: 20px; /* Adiciona espaço à esquerda do grupo de ações */
+    }
+    .botao-voltar { margin-left: 0; /* Reseta */ }
+
 
     /* Container não é mais Grid. Apenas centraliza o Main */
     .container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 100%; 
-        padding-left: 0; 
-        padding-right: 0; 
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
         padding-top: 120px; /* Garante espaço para o cabeçalho fixo */
     }
 
@@ -375,7 +546,10 @@ footer.rodape-completo {
         z-index: 999; /* Garante que fique acima do conteúdo, mas abaixo do header */
         height: auto; /* Altura se ajusta ao conteúdo */
         padding: 10px; /* Ajusta o padding para anúncios */
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra mais destacada */
+        box-shadow: var(--box-shadow-light); /* Sombra mais destacada */
+    }
+    body.dark-mode aside {
+        box-shadow: var(--box-shadow-dark);
     }
 
     /* Definimos um gap para o cálculo, por exemplo, 30px */
@@ -383,18 +557,18 @@ footer.rodape-completo {
         --desktop-gap-l: 30px; /* Gap para telas Large */
     }
 
-    aside.esquerda { 
+    aside.esquerda {
         /* Calcula posição à esquerda do main (800px/2 + 150px (largura aside) + var(--desktop-gap-l)) */
-        left: max(20px, calc(50% - (800px / 2) - 150px - var(--desktop-gap-l))); 
+        left: max(20px, calc(50% - (800px / 2) - 150px - var(--desktop-gap-l)));
     }
-    aside.direita { 
+    aside.direita {
         /* Calcula posição à direita do main */
-        right: max(20px, calc(50% - (800px / 2) - 150px - var(--desktop-gap-l))); 
+        right: max(20px, calc(50% - (800px / 2) - 150px - var(--desktop-gap-l)));
     }
 
     main {
         margin: 0 auto; /* Centraliza o main horizontalmente */
-        width: auto; 
+        width: auto;
         max-width: 800px; /* Largura fixa para o conteúdo principal */
         padding-left: 25px; /* Padding interno */
         padding-right: 25px; /* Padding interno */
@@ -415,17 +589,17 @@ footer.rodape-completo {
     :root {
         --desktop-gap-xl: 40px; /* Gap para telas Extra Large */
     }
-    aside.esquerda { 
+    aside.esquerda {
         /* Main de 900px, aside de 200px */
-        left: max(30px, calc(50% - (900px / 2) - 200px - var(--desktop-gap-xl))); 
+        left: max(30px, calc(50% - (900px / 2) - 200px - var(--desktop-gap-xl)));
     }
-    aside.direita { 
-        right: max(30px, calc(50% - (900px / 2) - 200px - var(--desktop-gap-xl))); 
+    aside.direita {
+        right: max(30px, calc(50% - (900px / 2) - 200px - var(--desktop-gap-xl)));
     }
 
     main { max-width: 900px; padding: 30px; }
-    main p { 
-        font-size: 1.1em; 
+    main p {
+        font-size: 1.1em;
         margin-bottom: 1.5em;
     }
     .container {
@@ -447,21 +621,20 @@ footer.rodape-completo {
     :root {
         --desktop-gap-xxl: 50px; /* Gap para telas Ultra-Wide */
     }
-    aside.esquerda { 
+    aside.esquerda {
         /* Main de 1100px, aside de 250px */
-        left: max(40px, calc(50% - (1100px / 2) - 250px - var(--desktop-gap-xxl))); 
+        left: max(40px, calc(50% - (1100px / 2) - 250px - var(--desktop-gap-xxl)));
     }
-    aside.direita { 
-        right: max(40px, calc(50% - (1100px / 2) - 250px - var(--desktop-gap-xxl))); 
+    aside.direita {
+        right: max(40px, calc(50% - (1100px / 2) - 250px - var(--desktop-gap-xxl)));
     }
 
     main { max-width: 1100px; padding: 40px; }
-    main p { 
-        font-size: 1.15em; 
+    main p {
+        font-size: 1.15em;
         margin-bottom: 1.5em;
     }
     .container {
         padding-top: 150px;
     }
-/*feito*/
-  }
+}

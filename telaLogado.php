@@ -75,6 +75,15 @@ $sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, no
         ORDER BY noticias.data DESC";
 $stmt = $pdo->query($sql);
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// --- Lógica para determinar a classe do tema ---
+$themeClass = '';
+// Verifica se há um cookie de tema ou uma preferência de sistema
+// Esta lógica será mais robusta no JavaScript, mas é bom ter uma base aqui para evitar o "flash"
+if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
+    $themeClass = 'dark-mode';
+}
+// O theme.js irá sobrescrever/aplicar isso dinamicamente no cliente
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +96,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Portal de Notícias</title>
 </head>
 
-<body>
+<body class="<?= $themeClass ?>">
     <header>
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
@@ -102,6 +111,11 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <img src="<?= htmlspecialchars($fotoUsuario) ?>" alt="Foto do perfil">
                 <p><?= htmlspecialchars($_SESSION['nome']) ?></p>
             </div>
+            <button id="theme-toggle" class="theme-toggle-button">
+                    <span class="icon-light-mode">☀️</span>
+                    <span class="icon-dark-mode">🌙</span>
+                </button>
+
 
             <nav class="menu" id="menu">
                 <a href="cadastrarNoticia.php">Criar notícia</a>
@@ -200,7 +214,7 @@ $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </footer>
 
-    <script>
+    <script src="js/theme.js"></script> <script>
         document.getElementById('menu-toggle').addEventListener('click', function () {
             document.getElementById('menu').classList.toggle('show');
         });

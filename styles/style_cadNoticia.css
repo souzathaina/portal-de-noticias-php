@@ -1,478 +1,801 @@
-/* Reset e base */ 
+/* --- Reset e Base --- */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* --- Variáveis CSS para Tema (Padrão: Tema Claro) --- */
+:root {
+    /* Cores de fundo */
+    --body-bg: #f8f9fa;
+    --header-bg: #451107;
+    --menu-button-bg: #ffd700;
+    --menu-button-hover-bg: #fff0a0;
+    --form-bg: #fff;
+    --footer-bg: #451107;
+
+    /* Cores de texto */
+    --text-color: #333;
+    --header-text: #ffd700;
+    --menu-button-text: #541212;
+    --perfil-text: #ffd700; /* Se o perfil for mostrado */
+    --main-title-color: #4a1e18;
+    --label-color: #541212;
+    --input-border-color: #ccc;
+    --input-focus-border-color: #4a1e18;
+    --submit-button-bg: #4a1e18;
+    --submit-button-text: #ffd700;
+    --submit-button-hover-bg: #300f0f;
+    --footer-text: #ffd700;
+    --footer-link-color: #ffd700;
+    --copyright-color: #ffd700;
+    --menu-toggle-color: #fff; /* Cor para o ícone de hambúrguer */
+
+    /* Cores de borda/elementos específicos */
+    --perfil-border: #ffd700; /* Se o perfil for mostrado */
+
+    /* Sombras */
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --box-shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Estilos do Tema Escuro --- */
+body.dark-mode {
+    /* Cores de fundo */
+    --body-bg: #222222;
+    --header-bg: #1a1a1a;
+    --menu-button-bg: #444444;
+    --menu-button-hover-bg: #555555;
+    --form-bg: #333333;
+    --footer-bg: #1a1a1a;
+
+    /* Cores de texto */
+    --text-color: #e0e0e0;
+    --header-text: #f0c040;
+    --menu-button-text: #f0c040;
+    --perfil-text: #f0c040;
+    --main-title-color: #f0c040;
+    --label-color: #f0c040;
+    --input-border-color: #555;
+    --input-focus-border-color: #f0c040;
+    --submit-button-bg: #f0c040;
+    --submit-button-text: #1a1a1a;
+    --submit-button-hover-bg: #d4a733;
+    --footer-text: #f0c040;
+    --footer-link-color: #f0c040;
+    --copyright-color: #f0c040;
+    --menu-toggle-color: #e0e0e0;
+
+    /* Cores de borda/elementos específicos */
+    --perfil-border: #f0c040;
+}
+
+/* --- Aplicação das Variáveis e Estilos Gerais --- */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-  padding-top: 200px; /* Espaço para o cabeçalho fixo */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    padding-top: 200px; /* Espaço para o cabeçalho fixo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
 }
 
 /* Cabeçalho fixo */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #451107;
-  color: #ffd700;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    flex-wrap: wrap;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .logo {
-  max-height: 130px;
-  height: auto;
-  width: auto;
-  margin: 0 auto;
+    max-height: 130px;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
 }
 
+/* Ícone do menu sanduíche (para mobile) */
+.menu-toggle {
+    display: none; /* Escondido por padrão, mostrado em mobile */
+    font-size: 28px; /* Tamanho do ícone (simulado por barras) */
+    color: var(--menu-toggle-color);
+    cursor: pointer;
+    margin-left: auto; /* Empurra para a direita */
+    transition: color 0.3s ease;
+    flex-direction: column; /* Para as barras empilhadas */
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--menu-toggle-color);
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+/* Ajustes para a área do usuário no cabeçalho */
 .usuario-area {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+    display: flex;
+    /* Alterado de column para row para alinhar o menu e o botão de tema na mesma linha */
+    flex-direction: row; 
+    align-items: center; /* Alinha verticalmente os itens */
+    gap: 15px; /* Espaço entre menu, perfil (se visível) e botão de tema */
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha se não houver espaço */
+    justify-content: flex-end; /* Alinha os itens à direita dentro da sua área */
 }
 
 .perfil-usuario {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .perfil-usuario img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #ffd700;
-  object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--perfil-border);
+    object-fit: cover;
+    transition: border-color 0.3s ease;
 }
 
 .perfil-usuario p {
-  font-weight: bold;
-  color: #ffd700;
+    font-weight: bold;
+    color: var(--perfil-text);
+    transition: color 0.3s ease;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Alinha os botões do menu à direita */
 }
 
 .menu a {
-  background-color: #ffd700;
-  color: #541212;
-  padding: 6px 12px;
-  margin-left: 10px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
+    background-color: var(--menu-button-bg);
+    color: var(--menu-button-text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu a:hover {
-  background-color: #fff0a0;
+    background-color: var(--menu-button-hover-bg);
+}
+
+/* --- Estilos para o Botão de Alternância de Tema (theme-toggle) --- */
+.theme-toggle-button {
+    background: none;
+    border: 2px solid var(--header-text); /* Adiciona a borda amarela */
+    color: var(--header-text); /* Cor dos ícones (sol/lua) */
+    cursor: pointer;
+    font-size: 1.5em; /* Tamanho dos ícones */
+    padding: 5px;
+    outline: none; /* Remove o outline de foco padrão */
+    transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Adiciona transição para a cor da borda */
+    display: flex; /* Para centralizar os ícones, se necessário */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Faz o botão ser circular */
+    width: 40px; /* Largura */
+    height: 40px; /* Altura */
+    box-shadow: 0 0 0px rgba(0,0,0,0); /* Inicia sem sombra */
+}
+
+.theme-toggle-button:hover {
+    color: var(--menu-button-hover-bg); /* Cor de destaque ao passar o mouse */
+    transform: scale(1.1); /* Um leve zoom ao passar o mouse */
+    border-color: var(--menu-button-hover-bg); /* Muda a cor da borda ao passar o mouse */
+    /* Você pode adicionar um box-shadow aqui para um efeito de "glow" */
+    box-shadow: 0 0 10px var(--menu-button-hover-bg);
+}
+
+.theme-toggle-button:hover {
+    color: var(--menu-button-hover-bg); /* Cor de destaque ao passar o mouse */
+    transform: scale(1.1); /* Um leve zoom ao passar o mouse */
+    /* Você pode adicionar um box-shadow aqui para um efeito de "glow" */
+    box-shadow: 0 0 10px var(--menu-button-hover-bg); 
+}
+
+/* Esconde e mostra os ícones de sol e lua */
+.theme-toggle-button .icon-light-mode {
+    display: inline-block; /* Visível por padrão no tema claro */
+    line-height: 1;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none; /* Oculto por padrão no tema claro */
+    line-height: 1;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none; /* Oculta o sol no modo escuro */
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block; /* Exibe a lua no modo escuro */
 }
 
 /* Título principal */
 main h1 {
-  color: #4a1e18;
-  margin-bottom: 30px;
-  text-align: center;
+    color: var(--main-title-color);
+    margin-bottom: 30px;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 /* Formulário */
 form {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
+    background-color: var(--form-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-light);
+    width: 100%;
+    max-width: 600px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode form {
+    box-shadow: var(--box-shadow-dark);
 }
 
 /* Labels */
 label {
-  font-weight: bold;
-  color: #541212;
-  display: block;
-  margin-bottom: 6px;
+    font-weight: bold;
+    color: var(--label-color);
+    display: block;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
 }
 
 /* Campos de texto, textarea e file */
 input[type="text"],
 textarea,
 input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  font-size: 1em;
-  transition: border 0.3s ease;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: var(--text-color); /* Garante que o texto digitado também mude de cor */
+    background-color: var(--form-bg); /* Garante que o fundo do input mude */
+    transition: border 0.3s ease, color 0.3s ease, background-color 0.3s ease;
 }
 
 input[type="text"]:focus,
 textarea:focus,
 input[type="file"]:focus {
-  border-color: #4a1e18;
-  outline: none;
+    border-color: var(--input-focus-border-color);
+    outline: none;
 }
 
 /* Botão cadastrar */
 button[type="submit"] {
-  background-color: #4a1e18;
-  color: #ffd700;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1em;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
+    background-color: var(--submit-button-bg);
+    color: var(--submit-button-text);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #300f0f;
+    background-color: var(--submit-button-hover-bg);
 }
 
 /* Rodapé */
 footer.rodape-completo {
-  width: 100%; /* ocupa toda a largura */
-  left: 0; /* alinha à esquerda */
-  position: relative;
-  bottom: 0;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
-}
-
-footer.rodape-completo {
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
+    width: 100%;
+    left: 0;
+    position: relative; /* Mudado de fixed para relative para seguir o fluxo do documento */
+    bottom: 0;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--footer-text);
+    font-size: 1.2em;
+    transition: color 0.3s ease;
 }
 
 .contato a,
 .redes-sociais a {
-  color: #ffd700;
-  text-decoration: none;
+    color: var(--footer-link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .redes-sociais img {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-  vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+    vertical-align: middle;
+    border-radius: 50%; /* Adicionado para consistência */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adicionado para profundidade */
 }
 
 .redes-sociais img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .copyright {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #ffd700;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--copyright-color);
+    transition: color 0.3s ease;
 }
 
+/* --- Media Queries --- */
 
-/* Pequenas telas: 320px (muito comum em celulares pequenos) */
-@media (max-width: 320px) {
-  body {
-    padding-top: 160px; /* menos espaço para o cabeçalho */
-  }
+/* Esconde anúncios laterais em telas menores que 1024px (se houver, neste caso não tem) */
+@media (max-width: 1024px) {
+    /* Main não tem margem lateral explícita neste layout, mas se tivesse, seria reduzida */
+    /* main {
+        margin: 0 50px;
+    } */
+}
 
-  header {
-    padding: 15px;
-  }
+/* Telas muito pequenas (até 480px, smartphones) */
+@media (max-width: 480px) {
+    body {
+        padding-top: 150px; /* Ajusta o padding para o cabeçalho menor */
+    }
 
-  .logo {
-    max-height: 80px;
-    margin: 0 auto;
-  }
+    header {
+        flex-direction: column; /* Cabeçalho em coluna */
+        align-items: center;
+        padding: 10px;
+    }
 
-  main h1 {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    padding: 0 10px;
-  }
+    .logo {
+        max-height: 80px;
+        margin: 0 auto; /* Centraliza a logo */
+    }
 
-  form {
-    padding: 20px;
-    max-width: 280px;
-  }
+    .menu-toggle {
+        display: flex; /* Mostra o ícone do menu sanduíche */
+        margin: 10px auto;
+        width: 100%;
+        text-align: center;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 0.9em;
-    padding: 8px;
-  }
+    /* Oculta o perfil de usuário e os botões de ação padrão no cabeçalho em mobile
+       quando o menu sanduíche estiver ativo ou para simplificar.
+       Se quiser manter o perfil e o botão de tema visíveis em mobile, ajuste aqui. */
+    .usuario-area {
+        width: 100%;
+        align-items: center;
+        margin-top: 5px;
+        flex-direction: column; /* Garante que em mobile, a área do usuário seja coluna */
+        gap: 5px;
+    }
 
-  button[type="submit"] {
-    font-size: 0.9em;
-    padding: 8px 15px;
-  }
+    .perfil-usuario {
+        display: none; /* Oculta o perfil em mobile se desejar */
+    }
 
-  .menu {
-    top: 50px;
-  }
+    .menu {
+        display: none; /* Esconde o menu por padrão em mobile */
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .menu.active { /* Classe JavaScript para mostrar o menu */
+        display: flex;
+    }
+
+    .menu a {
+        width: 90%; /* Botões do menu ocupam mais largura */
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    /* Ajustes específicos para o botão de tema em mobile */
+    .theme-toggle-button {
+        font-size: 1.3em; /* Reduz um pouco o tamanho em mobile */
+        width: 35px;
+        height: 35px;
+        margin-top: 5px; /* Espaço após o menu ou perfil */
+    }
+
+    main {
+        margin: 0 10px; /* Margem menor para o conteúdo principal */
+        width: calc(100% - 20px); /* Ajusta a largura do main para compensar a margem */
+    }
+
+    main h1 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    form {
+        padding: 20px;
+        max-width: 100%; /* Permite que o formulário ocupe toda a largura disponível */
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    button[type="submit"] {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    .rodape-conteudo {
+        flex-direction: column; /* Itens do rodapé em coluna */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .redes-sociais {
+        display: flex; /* Para centralizar os ícones */
+        justify-content: center;
+    }
 }
 
 /* Pequenas telas: 375px (iPhone 6/7/8 padrão) */
 @media (min-width: 321px) and (max-width: 375px) {
-  body {
-    padding-top: 170px;
-  }
+    body {
+        padding-top: 170px;
+    }
 
-  header {
-    padding: 18px;
-  }
+    header {
+        padding: 18px;
+    }
 
-  .logo {
-    max-height: 90px;
-  }
+    .logo {
+        max-height: 90px;
+    }
 
-  main h1 {
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-    padding: 0 15px;
-  }
+    main h1 {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+        padding: 0 15px;
+    }
 
-  form {
-    padding: 25px;
-    max-width: 320px;
-  }
+    form {
+        padding: 25px;
+        max-width: 320px;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1em;
-    padding: 9px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1em;
+        padding: 9px;
+    }
 
-  button[type="submit"] {
-    font-size: 1em;
-    padding: 9px 18px;
-  }
+    button[type="submit"] {
+        font-size: 1em;
+        padding: 9px 18px;
+    }
 }
 
 /* Pequenas telas: 425px (largura padrão celulares maiores) */
 @media (min-width: 376px) and (max-width: 425px) {
-  body {
-    padding-top: 180px;
-  }
+    body {
+        padding-top: 180px;
+    }
 
-  header {
-    padding: 20px;
-  }
+    header {
+        padding: 20px;
+    }
 
-  .logo {
-    max-height: 100px;
-  }
+    .logo {
+        max-height: 100px;
+    }
 
-  main h1 {
-    font-size: 1.8rem;
-    margin-bottom: 28px;
-    padding: 0 20px;
-  }
+    main h1 {
+        font-size: 1.8rem;
+        margin-bottom: 28px;
+        padding: 0 20px;
+    }
 
-  form {
-    padding: 28px;
-    max-width: 400px;
-  }
+    form {
+        padding: 28px;
+        max-width: 400px;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.05em;
-    padding: 10px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.05em;
+        padding: 10px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.05em;
-    padding: 10px 20px;
-  }
+    button[type="submit"] {
+        font-size: 1.05em;
+        padding: 10px 20px;
+    }
 }
 
 /* Tablets pequenos e grandes celulares: 768px */
 @media (min-width: 426px) and (max-width: 768px) {
-  body {
-    padding-top: 190px;
-  }
+    body {
+        padding-top: 190px;
+    }
 
-  header {
-    padding: 22px 25px;
-  }
+    header {
+        padding: 22px 25px;
+    }
 
-  .logo {
-    max-height: 110px;
-  }
+    .logo {
+        max-height: 110px;
+    }
 
-  main h1 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    padding: 0 25px;
-  }
+    main h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        padding: 0 25px;
+    }
 
-  form {
-    padding: 30px;
-    max-width: 550px;
-  }
+    form {
+        padding: 30px;
+        max-width: 550px;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.1em;
-    padding: 12px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.1em;
+        padding: 12px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.1em;
-    padding: 12px 25px;
-  }
+    button[type="submit"] {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
+    .perfil-usuario {
+        /* Para tablets, você pode querer mostrar o perfil,
+           ou mantê-lo oculto e usar o menu hambúrguer, dependendo do design. */
+        display: flex; /* Exibe o perfil do usuário em tablets */
+    }
+    .menu-toggle {
+        display: none; /* Oculta o botão de menu sanduíche se o menu completo for mostrado */
+    }
+    .menu {
+        display: flex; /* Garante que o menu esteja visível em tablets */
+        flex-direction: row; /* Coloca os itens do menu em linha */
+        justify-content: flex-end;
+        width: auto; /* Permite que o menu ocupe apenas o espaço necessário */
+        margin-top: 0;
+    }
+    .menu a {
+        width: auto;
+    }
+    .usuario-area {
+        flex-direction: row; /* Alinha perfil, menu e botão de tema lado a lado */
+        align-items: center; /* Centraliza verticalmente */
+        gap: 15px; /* Espaço entre os itens */
+    }
 }
 
 /* Tela média / laptops: 769px a 1024px */
 @media (min-width: 769px) and (max-width: 1024px) {
-  body {
-    padding-top: 200px;
-  }
+    body {
+        padding-top: 200px;
+    }
 
-  header {
-    padding: 25px 35px;
-  }
+    header {
+        padding: 25px 35px;
+    }
 
-  .logo {
-    max-height: 120px;
-  }
+    .logo {
+        max-height: 120px;
+    }
 
-  main h1 {
-    font-size: 2.2rem;
-    margin-bottom: 32px;
-    padding: 0 30px;
-  }
+    main h1 {
+        font-size: 2.2rem;
+        margin-bottom: 32px;
+        padding: 0 30px;
+    }
 
-  form {
-    max-width: 600px;
-    padding: 35px;
-  }
+    form {
+        max-width: 600px;
+        padding: 35px;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.15em;
-    padding: 14px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.15em;
+        padding: 14px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.15em;
-    padding: 14px 30px;
-  }
+    button[type="submit"] {
+        font-size: 1.15em;
+        padding: 14px 30px;
+    }
+    .perfil-usuario {
+        display: flex;
+    }
+    .menu-toggle {
+        display: none;
+    }
+    .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
+        margin-top: 0;
+    }
+    .menu a {
+        width: auto;
+    }
+    .usuario-area {
+        flex-direction: row; /* Alinha perfil, menu e botão de tema lado a lado */
+        align-items: center; /* Centraliza verticalmente */
+        gap: 15px; /* Espaço entre os itens */
+    }
 }
 
 /* Tela grande: 1025px a 1440px */
 @media (min-width: 1025px) and (max-width: 1440px) {
-  body {
-    padding-top: 210px;
-  }
+    body {
+        padding-top: 210px;
+    }
 
-  header {
-    padding: 25px 50px;
-  }
+    header {
+        padding: 25px 50px;
+    }
 
-  .logo {
-    max-height: 130px;
-  }
+    .logo {
+        max-height: 130px;
+    }
 
-  main h1 {
-    font-size: 2.4rem;
-    margin-bottom: 35px;
-  }
+    main h1 {
+        font-size: 2.4rem;
+        margin-bottom: 35px;
+    }
 
-  form {
-    max-width: 650px;
-    padding: 40px;
-  }
+    form {
+        max-width: 650px;
+        padding: 40px;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.2em;
-    padding: 15px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.2em;
+        padding: 15px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.2em;
-    padding: 15px 35px;
-  }
+    button[type="submit"] {
+        font-size: 1.2em;
+        padding: 15px 35px;
+    }
+    .perfil-usuario {
+        display: flex;
+    }
+    .menu-toggle {
+        display: none;
+    }
+    .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
+        margin-top: 0;
+    }
+    .menu a {
+        width: auto;
+    }
+    .usuario-area {
+        flex-direction: row; /* Alinha perfil, menu e botão de tema lado a lado */
+        align-items: center; /* Centraliza verticalmente */
+        gap: 15px; /* Espaço entre os itens */
+    }
 }
 
 /* Telas muito grandes (4K e ultra wide): acima de 1440px até 2560px */
 @media (min-width: 1441px) and (max-width: 2560px) {
-  body {
-    padding-top: 230px;
-  }
+    body {
+        padding-top: 230px;
+    }
 
-  header {
-    padding: 30px 80px;
-  }
+    header {
+        padding: 30px 80px;
+    }
 
-  .logo {
-    max-height: 150px;
-  }
+    .logo {
+        max-height: 150px;
+    }
 
-  main h1 {
-    font-size: 2.8rem;
-    margin-bottom: 40px;
-  }
+    main h1 {
+        font-size: 2.8rem;
+        margin-bottom: 40px;
+    }
 
-  form {
-    max-width: 700px;
-    padding: 45px;
-  }
+    form {
+        max-width: 700px;
+        padding: 45px;
+    }
 
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    font-size: 1.3em;
-    padding: 18px;
-  }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+        font-size: 1.3em;
+        padding: 18px;
+    }
 
-  button[type="submit"] {
-    font-size: 1.3em;
-    padding: 18px 40px;
-  }
+    button[type="submit"] {
+        font-size: 1.3em;
+        padding: 18px 40px;
+    }
+    .perfil-usuario {
+        display: flex;
+    }
+    .menu-toggle {
+        display: none;
+    }
+    .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
+        margin-top: 0;
+    }
+    .menu a {
+        width: auto;
+    }
+    .usuario-area {
+        flex-direction: row; /* Alinha perfil, menu e botão de tema lado a lado */
+        align-items: center; /* Centraliza verticalmente */
+        gap: 15px; /* Espaço entre os itens */
+    }
 }
