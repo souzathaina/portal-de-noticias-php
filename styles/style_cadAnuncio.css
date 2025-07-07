@@ -1,261 +1,398 @@
 /* Reset geral */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* ---------------------------------------------------- */
+/* VARIÁVEIS DE COR PARA TEMA CLARO (Padrão) */
+/* ---------------------------------------------------- */
+:root {
+    --primary-bg: #f8f9fa; /* Fundo principal (body) */
+    --secondary-bg: #FFFFFF; /* Fundo de elementos (cards, pop-up, formulário) */
+    --text-primary: #333333; /* Cor de texto principal */
+    --text-secondary: #666666; /* Cor de texto secundário */
+
+    --header-bg: #451107; /* Fundo do cabeçalho */
+    --header-text: #ffd700; /* Texto do cabeçalho */
+    --header-link-bg: #8b0000; /* Fundo dos links/botões do header */
+    --header-link-text: #f0f0f0; /* Texto dos links/botões do header */
+    --header-link-hover-bg: #a52a2a; /* Hover dos links/botões do header */
+
+    --form-bg: var(--secondary-bg); /* Fundo do container do formulário */
+    --form-shadow: rgba(0,0,0,0.1); /* Sombra do container do formulário */
+    --form-title-color: #451107; /* Título do formulário */
+    --form-label-color: #451107; /* Cor dos labels do formulário */
+    --input-border: #ddd; /* Borda dos inputs */
+    --input-focus-border: #ffd700; /* Borda dos inputs em foco */
+    --button-bg: #ffd700; /* Fundo dos botões */
+    --button-text: #451107; /* Texto dos botões */
+    --button-hover-bg: #fff0a0; /* Hover dos botões */
+
+    --footer-bg: #451107; /* Fundo do rodapé */
+    --footer-text: #ffd700; /* Texto do rodapé */
+    --footer-link: #ffd700; /* Link do rodapé */
+
+    --theme-toggle-bg: #f0f0f0; /* Fundo do botão de tema */
+    --theme-toggle-text: #333; /* Cor do texto do botão de tema */
+    --theme-toggle-shadow: rgba(0,0,0,0.2); /* Sombra do botão de tema */
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA O MODO ESCURO (aplicados via .dark-mode) */
+/* ---------------------------------------------------- */
+body.dark-mode {
+    --primary-bg: #121212; /* Preto suave (cinza carvão) */
+    --secondary-bg: #1E1E1E; /* Cinza grafite (para cards, pop-up, formulário) */
+    --text-primary: #E0E0E0; /* Cinza gelo */
+    --text-secondary: #B0B0B0; /* Cinza claro */
+
+    --header-bg: #1A1A1A; /* Fundo do cabeçalho dark */
+    --header-text: #FFFFFF; /* Branco puro */
+    --header-link-bg: #4A4A4A; /* Azul bebê claro */
+    --header-link-text: #E0E0E0; /* Texto escuro */
+    --header-link-hover-bg: #606060; /* Branco puro para hover */
+
+    --form-bg: #282828; /* Fundo do container do formulário dark */
+    --form-shadow: rgba(0,0,0,0.4); /* Sombra do container do formulário dark */
+    --form-title-color: #E0E0E0; /* Título do formulário dark */
+    --form-label-color: #B0B0B0; /* Cor dos labels do formulário dark */
+    --input-border: #444; /* Borda dos inputs dark */
+    --input-focus-border: #90CAF9; /* Borda dos inputs em foco dark */
+    --button-bg: #90CAF9; /* Fundo dos botões dark */
+    --button-text: #1E1E1E; /* Texto dos botões dark */
+    --button-hover-bg: #B0D9FF; /* Hover dos botões dark */
+
+    --footer-bg: #1A1A1A; /* Fundo do rodapé dark */
+    --footer-text: #999999; /* Texto do rodapé dark */
+    --footer-link: #90CAF9; /* Link do rodapé dark */
+
+    --theme-toggle-bg: #333; /* Fundo do botão de tema dark */
+    --theme-toggle-text: #E0E0E0; /* Cor do texto do botão de tema dark */
+    --theme-toggle-shadow: rgba(255,255,255,0.1); /* Sombra do botão de tema dark */
+}
+
+
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f8f9fa;
-  color: #333;
-  padding-top: 210px; /* espaço para o cabeçalho fixo */
-  overflow-x: hidden;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--primary-bg); /* Usa variável */
+    color: var(--text-primary); /* Usa variável */
+    padding-top: 210px; /* espaço para o cabeçalho fixo */
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
 }
 
 /* Cabeçalho fixo */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #451107; /* bordô escuro */
-  color: #ffd700; /* dourado */
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--header-bg); /* Usa variável */
+    color: var(--header-text); /* Usa variável */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    flex-wrap: wrap;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
 }
 
 .logo {
-  max-height: 130px;
-  height: auto;
-  width: auto;
-  margin: 0 auto;
+    max-height: 130px;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
 }
 
 .menu {
-  display: flex;
-  gap: 15px;
-  z-index: 1100;
+    display: flex;
+    gap: 15px;
+    z-index: 1100;
+    align-items: center; /* Alinha o botão de tema com os links */
 }
 
 .menu a {
-  text-decoration: none;
-  color: #f0f0f0;
-  background-color: #8b0000; /* bordô */
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background 0.3s;
+    text-decoration: none;
+    color: var(--header-link-text); /* Usa variável */
+    background-color: var(--header-link-bg); /* Usa variável */
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
 }
 
 .menu a:hover {
-  background-color: #a52a2a;
+    background-color: var(--header-link-hover-bg); /* Usa variável */
 }
 
 .menu-toggle {
-  display: none;
-  font-size: 28px;
-  color: #fff;
-  cursor: pointer;
-  margin-left: auto;
+    display: none;
+    font-size: 28px;
+    color: var(--header-text); /* Usa variável */
+    cursor: pointer;
+    margin-left: auto;
+    transition: color 0.5s ease; /* Transição suave */
+}
+
+/* Botão de alternar tema */
+.theme-toggle-button {
+    background-color: var(--theme-toggle-bg);
+    color: var(--theme-toggle-text);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px var(--theme-toggle-shadow);
+}
+
+.theme-toggle-button:hover {
+    opacity: 0.9;
+}
+
+/* Ícones do botão de tema */
+.theme-toggle-button .icon-light-mode {
+    display: inline-block;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block;
 }
 
 /* Responsividade do menu */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .logo {
-    max-height: 120px;
-    margin-bottom: 10px;
-  }
+    .logo {
+        max-height: 120px;
+        margin-bottom: 10px;
+    }
 
-  .menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 130px;
-    right: 20px;
-    background-color: #8b0000;
-    padding: 10px;
-    border-radius: 8px;
-  }
+    .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute; /* Ajustado para melhor posicionamento no mobile */
+        top: 130px; /* Ajuste a 'top' conforme a altura do seu logo/header */
+        right: 20px;
+        background-color: var(--header-link-bg); /* Usa variável */
+        padding: 10px;
+        border-radius: 8px;
+        width: calc(100% - 40px); /* Ocupa quase toda a largura */
+        align-items: center; /* Centraliza os itens no menu aberto */
+    }
 
-  .menu.show {
-    display: flex;
-  }
+    .menu.show {
+        display: flex;
+    }
 
-  .menu-toggle {
-    display: block;
-  }
+    .menu a,
+    .menu .theme-toggle-button { /* Aplica os estilos também ao botão de tema no menu mobile */
+        width: 90%; /* Deixa os links e botão ocuparem a largura */
+        text-align: center;
+        margin-left: 0;
+        margin-bottom: 8px; /* Espaçamento entre os itens */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
 }
 
 /* Container do formulário */
 .form-container {
-  max-width: 600px;
-  background: #fff;
-  padding: 30px 40px;
-  margin: 0 auto 60px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-width: 600px;
+    background: var(--form-bg); /* Usa variável */
+    padding: 30px 40px;
+    margin: 0 auto 60px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--form-shadow); /* Usa variável */
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição suave */
 }
 
 /* Título do formulário */
 .form-container h2 {
-  text-align: center;
-  color: #451107;
-  margin-bottom: 25px;
-  font-size: 2em;
-  font-weight: 700;
+    text-align: center;
+    color: var(--form-title-color); /* Usa variável */
+    margin-bottom: 25px;
+    font-size: 2em;
+    font-weight: 700;
+    transition: color 0.5s ease; /* Transição suave */
 }
 
 /* Formulário e seus elementos */
 form.form-anunciante label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #451107;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--form-label-color); /* Usa variável */
+    transition: color 0.5s ease; /* Transição suave */
 }
 
 form.form-anunciante input[type="text"],
-form.form-anunciante input[type="number"] {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 20px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: border-color 0.3s;
+form.form-anunciante input[type="number"],
+form.form-anunciante input[type="file"] { /* Adicionado input file */
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--input-border); /* Usa variável */
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: var(--secondary-bg); /* Garante que o input mude de cor */
+    color: var(--text-primary); /* Garante que o texto digitado mude de cor */
+    transition: border-color 0.3s, background-color 0.5s ease, color 0.5s ease; /* Transição suave */
 }
 
 form.form-anunciante input[type="text"]:focus,
-form.form-anunciante input[type="number"]:focus {
-  border-color: #ffd700;
-  outline: none;
+form.form-anunciante input[type="number"]:focus,
+form.form-anunciante input[type="file"]:focus {
+    border-color: var(--input-focus-border); /* Usa variável */
+    outline: none;
 }
 
 form.form-anunciante input[type="checkbox"] {
-  margin-right: 8px;
-  transform: scale(1.2);
-  vertical-align: middle;
+    margin-right: 8px;
+    transform: scale(1.2);
+    vertical-align: middle;
 }
 
 form.form-anunciante label > input[type="checkbox"] {
-  margin-right: 8px;
+    margin-right: 8px;
 }
+
+/* Estilo para o label dos checkboxes no dark mode */
+body.dark-mode form.form-anunciante label {
+    color: var(--text-primary); /* Ajusta a cor para um contraste melhor */
+}
+
 
 /* Botões */
 .botoes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .botoes button,
 .botoes .btn-voltar {
-  background-color: #ffd700;
-  color: #451107;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 1em;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  display: inline-block;
+    background-color: var(--button-bg); /* Usa variável */
+    color: var(--button-text); /* Usa variável */
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+    display: inline-block;
 }
 
 .botoes button:hover,
 .botoes .btn-voltar:hover {
-  background-color: #fff0a0;
-  color: #451107;
+    background-color: var(--button-hover-bg); /* Usa variável */
+    color: var(--button-text); /* Mantém a cor do texto do botão */
 }
 
 /* Footer */
 footer.rodape-completo {
-  width: 100%;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
-  position: relative;
-  bottom: 0;
-  left: 0;
+    width: 100%;
+    background-color: var(--footer-bg); /* Usa variável */
+    color: var(--footer-text); /* Usa variável */
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+    font-size: 0.95em;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
 }
 
 .rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--footer-text); /* Usa variável */
+    font-size: 1.2em;
+    transition: color 0.5s ease; /* Transição suave */
 }
 
 .contato a,
 .redes-sociais a {
-  color: #ffd700;
-  text-decoration: none;
+    color: var(--footer-link); /* Usa variável */
+    text-decoration: none;
+    transition: color 0.5s ease; /* Transição suave */
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .redes-sociais img {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-  vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+    vertical-align: middle;
 }
 
 .redes-sociais img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .copyright {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #ffd700;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--footer-text); /* Usa variável */
+    transition: color 0.5s ease; /* Transição suave */
 }
 
 /* Responsividade geral */
 @media (max-width: 425px) {
-  body {
-    padding-top: 160px;
-  }
+    body {
+        padding-top: 160px;
+    }
 
-  .form-container {
-    padding: 20px 15px;
-    margin: 0 10px 60px;
-  }
+    .form-container {
+        padding: 20px 15px;
+        margin: 0 10px 60px;
+    }
 
-  .botoes {
-    flex-direction: column;
-  }
+    .botoes {
+        flex-direction: column;
+    }
 
-  .botoes button,
-  .botoes .btn-voltar {
-    width: 100%;
-    text-align: center;
-  }
+    .botoes button,
+    .botoes .btn-voltar {
+        width: 100%;
+        text-align: center;
+    }
 }

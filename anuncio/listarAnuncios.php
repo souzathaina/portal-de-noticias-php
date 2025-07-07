@@ -83,14 +83,12 @@ $anuncios = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       <a href="cadastrarAnuncio.php">Cadastrar Anúncio</a>
       <a href="../telaLogado.php">Início</a>
       <a href="../logout.php">Logout</a>
+      <button class="theme-toggle-button" id="theme-toggle">
+          <span class="icon-light-mode">☀️</span>
+          <span class="icon-dark-mode">🌙</span>
+      </button>
     </nav>
   </header>
-
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-      document.getElementById('menu').classList.toggle('show');
-    });
-  </script>
 
   <main>
     <h1>Lista de Anunciantes</h1>
@@ -177,6 +175,39 @@ $anuncios = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </footer>
 
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('show');
+    });
+
+    // JavaScript para alternar o tema (dark mode)
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Função para aplicar o tema salvo
+    function applyTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+    }
+
+    // Aplica o tema ao carregar a página
+    applyTheme();
+
+    // Adiciona evento de clique para alternar o tema
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        // Salva a preferência do usuário
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
+  </script>
 </body>
 
 </html>

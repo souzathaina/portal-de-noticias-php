@@ -8,9 +8,114 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* ---------------------------------------------------- */
+/* VARIÁVEIS DE COR PARA TEMA CLARO (Padrão) */
+/* ---------------------------------------------------- */
+:root {
+    --primary-bg: #f8f9fa; /* Fundo principal (body) */
+    --secondary-bg: #FFFFFF; /* Fundo de elementos (cards, pop-up, formulário, tabela) */
+    --text-primary: #333333; /* Cor de texto principal */
+    --text-secondary: #666666; /* Cor de texto secundário */
+
+    --header-bg: #451107; /* Fundo do cabeçalho */
+    --header-text: #ffd700; /* Texto do cabeçalho */
+    --header-link-bg: #8b0000; /* Fundo dos links/botões do header */
+    --header-link-text: #f0f0f0; /* Texto dos links/botões do header */
+    --header-link-hover-bg: #a52a2a; /* Hover dos links/botões do header */
+
+    --table-header-bg: #451107; /* Fundo do cabeçalho da tabela */
+    --table-header-text: #ffd700; /* Texto do cabeçalho da tabela */
+    --table-header-border: #ffd700; /* Borda do cabeçalho da tabela */
+    --table-body-bg: var(--secondary-bg); /* Fundo do corpo da tabela */
+    --table-row-even-bg: #faf6f2; /* Fundo das linhas pares */
+    --table-row-hover-bg: #fff2cc; /* Fundo das linhas em hover */
+    --table-cell-border: #eee; /* Borda das células */
+    --table-shadow: rgba(0, 0, 0, 0.1); /* Sombra da tabela */
+
+    --h1-color: #451107; /* Cor do título H1 */
+    --new-ad-button-bg: #ffd700; /* Fundo do botão 'Novo Anunciante' */
+    --new-ad-button-text: #451107; /* Texto do botão 'Novo Anunciante' */
+    --new-ad-button-shadow: rgba(69, 17, 7, 0.3); /* Sombra do botão 'Novo Anunciante' */
+    --new-ad-button-hover-bg: #ffea47; /* Hover do botão 'Novo Anunciante' */
+    --new-ad-button-hover-shadow: rgba(69, 17, 7, 0.5); /* Hover da sombra do botão 'Novo Anunciante' */
+
+    --action-link-color: #451107; /* Cor dos links de ação (Editar | Excluir) */
+    --action-link-hover-bg: #ffd700; /* Hover dos links de ação */
+    --action-link-hover-shadow: #ffd700; /* Sombra do hover dos links de ação */
+
+    --boolean-true-color: #228B22; /* Cor para 'Sim' (verde) */
+    --boolean-false-color: #b30000; /* Cor para 'Não' (vermelho) */
+
+    --footer-bg: #451107; /* Fundo do rodapé */
+    --footer-text: #ffd700; /* Texto do rodapé */
+    --footer-link: #ffd700; /* Link do rodapé */
+
+    --tempo-box-bg: rgba(255, 255, 255, 0.1); /* Fundo da caixa de tempo */
+    --tempo-box-text: #f0f0f0; /* Texto da caixa de tempo */
+    --tempo-box-error-bg: #dc3545; /* Fundo da caixa de erro de tempo */
+    --tempo-box-error-text: #fff; /* Texto da caixa de erro de tempo */
+
+    --theme-toggle-bg: #f0f0f0; /* Fundo do botão de tema */
+    --theme-toggle-text: #333; /* Cor do texto do botão de tema */
+    --theme-toggle-shadow: rgba(0,0,0,0.2); /* Sombra do botão de tema */
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA O MODO ESCURO (aplicados via .dark-mode) */
+/* ---------------------------------------------------- */
+body.dark-mode {
+    --primary-bg: #121212; /* Preto suave (cinza carvão) */
+    --secondary-bg: #1E1E1E; /* Cinza grafite (para cards, pop-up, formulário, tabela) */
+    --text-primary: #E0E0E0; /* Cinza gelo */
+    --text-secondary: #B0B0B0; /* Cinza claro */
+
+    --header-bg: #1A1A1A; /* Fundo do cabeçalho dark */
+    --header-text: #FFFFFF; /* Branco puro */
+    --header-link-bg: #4A4A4A; /* Azul bebê claro */
+    --header-link-text: #E0E0E0; /* Texto escuro */
+    --header-link-hover-bg: #606060; /* Branco puro para hover */
+
+    --table-header-bg: #333333; /* Fundo do cabeçalho da tabela dark */
+    --table-header-text: #90CAF9; /* Texto do cabeçalho da tabela dark */
+    --table-header-border: #555555; /* Borda do cabeçalho da tabela dark */
+    --table-body-bg: var(--secondary-bg); /* Fundo do corpo da tabela dark */
+    --table-row-even-bg: #282828; /* Fundo das linhas pares dark */
+    --table-row-hover-bg: #3A3A3A; /* Fundo das linhas em hover dark */
+    --table-cell-border: #333333; /* Borda das células dark */
+    --table-shadow: rgba(255, 255, 255, 0.08); /* Sombra da tabela dark */
+
+    --h1-color: #90CAF9; /* Cor do título H1 dark */
+    --new-ad-button-bg: #90CAF9; /* Fundo do botão 'Novo Anunciante' dark */
+    --new-ad-button-text: #1E1E1E; /* Texto do botão 'Novo Anunciante' dark */
+    --new-ad-button-shadow: rgba(144, 202, 249, 0.2); /* Sombra do botão 'Novo Anunciante' dark */
+    --new-ad-button-hover-bg: #B0D9FF; /* Hover do botão 'Novo Anunciante' dark */
+    --new-ad-button-hover-shadow: rgba(144, 202, 249, 0.4); /* Hover da sombra do botão 'Novo Anunciante' dark */
+
+    --action-link-color: #90CAF9; /* Cor dos links de ação dark */
+    --action-link-hover-bg: #555555; /* Hover dos links de ação dark */
+    --action-link-hover-shadow: #90CAF9; /* Sombra do hover dos links de ação dark */
+
+    --boolean-true-color: #4CAF50; /* Cor para 'Sim' (verde) dark */
+    --boolean-false-color: #EF5350; /* Cor para 'Não' (vermelho) dark */
+
+    --footer-bg: #1A1A1A; /* Fundo do rodapé dark */
+    --footer-text: #999999; /* Texto do rodapé dark */
+    --footer-link: #90CAF9; /* Link do rodapé dark */
+
+    --tempo-box-bg: rgba(0, 0, 0, 0.3); /* Fundo da caixa de tempo dark */
+    --tempo-box-text: #FFFFFF; /* Texto da caixa de tempo dark */
+    --tempo-box-error-bg: #dc3545; /* Fundo da caixa de erro de tempo dark */
+    --tempo-box-error-text: #fff; /* Texto da caixa de erro de tempo dark */
+
+    --theme-toggle-bg: #333; /* Fundo do botão de tema dark */
+    --theme-toggle-text: #E0E0E0; /* Cor do texto do botão de tema dark */
+    --theme-toggle-shadow: rgba(255,255,255,0.1); /* Sombra do botão de tema dark */
+}
+
+
 body {
-    background-color: #f8f9fa; /* Mantém o fundo */
-    color: #333; /* Mantém a cor do texto */
+    background-color: var(--primary-bg); /* Mantém o fundo */
+    color: var(--text-primary); /* Mantém a cor do texto */
     /* Este padding-top SOBRESCRIVE o do style_index.css para esta página. */
     /* A altura do seu cabeçalho fixo é de 210px (do style_index.css). Adicione uma margem. */
     padding-top: 220px; /* Ajuste para acomodar o cabeçalho fixo + um pouco de respiro */
@@ -18,48 +123,115 @@ body {
     padding-left: 50px; /* Mantém o padding lateral original */
     padding-right: 50px; /* Mantém o padding lateral original */
     overflow-x: hidden; /* Mantém a prevenção de rolagem horizontal */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
 }
 
-/* Container principal - Sobrescreve as regras 'main' do style_index.css para esta página */
+/* Cabeçalho (do style_index.css, mas se sobrescrever aqui, o daqui prevalece) */
+header {
+    background: var(--header-bg); /* Usa variável */
+    color: var(--header-text); /* Usa variável */
+    /* ... outras propriedades existentes ... */
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.tempo-area .tempo-box {
+    background-color: var(--tempo-box-bg);
+    color: var(--tempo-box-text);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.tempo-area .tempo-box.erro {
+    background-color: var(--tempo-box-error-bg);
+    color: var(--tempo-box-error-text);
+}
+
+.menu a {
+    color: var(--header-link-text);
+    background-color: var(--header-link-bg);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu a:hover {
+    background-color: var(--header-link-hover-bg);
+}
+
+/* Botão de alternar tema */
+.theme-toggle-button {
+    background-color: var(--theme-toggle-bg);
+    color: var(--theme-toggle-text);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px var(--theme-toggle-shadow);
+}
+
+.theme-toggle-button:hover {
+    opacity: 0.9;
+}
+
+/* Ícones do botão de tema */
+.theme-toggle-button .icon-light-mode {
+    display: inline-block;
+}
+
+.theme-toggle-button .icon-dark-mode {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-light-mode {
+    display: none;
+}
+
+body.dark-mode .theme-toggle-button .icon-dark-mode {
+    display: inline-block;
+}
+
+
+/* Container principal */
 main {
-    max-width: 1200px; /* Mantém sua largura máxima desejada para a tabela */
-    margin: 0 auto; /* Centraliza a main horizontalmente */
-    /* As seguintes propriedades SOBRESCRIVEM o display: flex, justify-content, etc.,
-       definidos no style_index.css para a main. */
-    display: block; /* Volta a ser um bloco normal, não um flex container para grid de notícias */
-    padding-top: 20px; /* Adiciona um pequeno padding interno para separar do topo da main */
-    padding-left: 0; /* Garante que não haja padding lateral extra da main */
-    padding-right: 0; /* Garante que não haja padding lateral extra da main */
-    gap: 0; /* Remove qualquer gap que possa ter vindo do display: flex */
+    max-width: 1200px;
+    margin: 0 auto;
+    display: block;
+    padding-top: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0;
 }
 
 /* Título da página */
 h1 {
-    color: #451107; /* bordô escuro */
+    color: var(--h1-color); /* Usa variável */
     font-size: 2.2rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 30px;
+    transition: color 0.5s ease;
 }
 
 /* Botão de novo anunciante */
 a.novo-anuncio {
     display: inline-block;
-    background-color: #ffd700; /* dourado */
-    color: #451107;
+    background-color: var(--new-ad-button-bg); /* Usa variável */
+    color: var(--new-ad-button-text); /* Usa variável */
     padding: 12px 25px;
     border-radius: 8px;
     font-weight: 700;
     text-decoration: none;
     margin-bottom: 25px;
-    box-shadow: 0 4px 8px rgba(69, 17, 7, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px var(--new-ad-button-shadow); /* Usa variável */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 a.novo-anuncio:hover,
 a.novo-anuncio:focus {
-    background-color: #ffea47;
-    box-shadow: 0 6px 12px rgba(69, 17, 7, 0.5);
+    background-color: var(--new-ad-button-hover-bg); /* Usa variável */
+    box-shadow: 0 6px 12px var(--new-ad-button-hover-shadow); /* Usa variável */
     outline: none;
 }
 
@@ -67,24 +239,27 @@ a.novo-anuncio:focus {
 table {
     width: 100%;
     border-collapse: collapse;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    box-shadow: 0 0 20px var(--table-shadow); /* Usa variável */
+    background-color: var(--table-body-bg); /* Usa variável para o fundo padrão da tabela */
     border-radius: 10px;
     overflow: hidden;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 /* Cabeçalho da tabela */
 thead tr {
-    background-color: #451107;
-    color: #ffd700;
+    background-color: var(--table-header-bg); /* Usa variável */
+    color: var(--table-header-text); /* Usa variável */
     text-align: center;
     font-weight: 700;
     font-size: 1.1rem;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 thead th {
     padding: 15px 10px;
-    border-right: 1px solid #ffd700;
+    border-right: 1px solid var(--table-header-border); /* Usa variável */
+    transition: border-color 0.5s ease;
 }
 
 thead th:last-child {
@@ -93,16 +268,16 @@ thead th:last-child {
 
 /* Corpo da tabela */
 tbody tr {
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.25s ease;
+    border-bottom: 1px solid var(--table-cell-border); /* Usa variável */
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #faf6f2;
+    background-color: var(--table-row-even-bg); /* Usa variável */
 }
 
 tbody tr:hover {
-    background-color: #fff2cc;
+    background-color: var(--table-row-hover-bg); /* Usa variável */
     cursor: pointer;
 }
 
@@ -112,7 +287,9 @@ tbody td {
     padding: 15px 10px;
     font-size: 1rem;
     vertical-align: middle;
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--table-cell-border); /* Usa variável */
+    color: var(--text-primary); /* Garante que o texto da célula mude de cor */
+    transition: color 0.5s ease, border-color 0.25s ease;
 }
 
 tbody td:last-child {
@@ -125,38 +302,84 @@ tbody td img {
     max-height: 70px;
     object-fit: contain;
     border-radius: 6px;
-    box-shadow: 0 0 5px rgba(69, 17, 7, 0.15);
+    /* Manter a sombra da imagem no modo escuro pode ser interessante para dar destaque,
+       ou ajustar para uma sombra mais sutil. */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Ajustado para ser mais neutro */
 }
+
+/* Links em células da tabela (e.g., "Visitar") */
+tbody td a {
+    color: var(--action-link-color); /* Ajustado para seguir as cores do tema */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode tbody td a {
+    color: var(--action-link-color); /* Garante a cor no dark mode */
+}
+
 
 /* Links de ações */
 .acoes a {
-    color: #451107;
+    color: var(--action-link-color); /* Usa variável */
     font-weight: 600;
     text-decoration: none;
     margin: 0 8px;
     padding: 5px 10px;
     border-radius: 5px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .acoes a:hover {
-    background-color: #ffd700;
-    color: #451107;
+    background-color: var(--action-link-hover-bg); /* Usa variável */
+    color: var(--action-link-color); /* Mantém a cor do texto do link de ação */
     text-decoration: none;
-    box-shadow: 0 0 8px #ffd700;
+    box-shadow: 0 0 8px var(--action-link-hover-shadow); /* Usa variável */
 }
 
 /* Indicadores Sim / Não */
+td[data-boolean="1"] {
+    color: var(--boolean-true-color); /* Aplica a cor diretamente à célula */
+    transition: color 0.5s ease;
+}
+td[data-boolean="0"] {
+    color: var(--boolean-false-color); /* Aplica a cor diretamente à célula */
+    transition: color 0.5s ease;
+}
+
 td[data-boolean="1"]::before {
     content: "✔";
-    color: #228B22; /* verde */
+    color: var(--boolean-true-color); /* Usa variável */
     margin-right: 6px;
 }
 
 td[data-boolean="0"]::before {
     content: "✘";
-    color: #b30000; /* vermelho */
+    color: var(--boolean-false-color); /* Usa variável */
     margin-right: 6px;
+}
+
+/* Footer (do style_index.css, mas se sobrescrever aqui, o daqui prevalece) */
+footer.rodape-completo {
+    background-color: var(--footer-bg); /* Usa variável */
+    color: var(--footer-text); /* Usa variável */
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.rodape-completo h3 {
+    color: var(--footer-text); /* Usa variável */
+    transition: color 0.5s ease;
+}
+
+.contato a,
+.redes-sociais a {
+    color: var(--footer-link); /* Usa variável */
+    transition: color 0.5s ease;
+}
+
+.copyright {
+    color: var(--footer-text); /* Usa variável */
+    transition: color 0.5s ease;
 }
 
 /* --- Media Queries (Responsividade para a Lista de Anúncios) --- */
@@ -168,7 +391,7 @@ td[data-boolean="0"]::before {
         padding-left: 15px; /* Reduz padding lateral */
         padding-right: 15px; /* Reduz padding lateral */
     }
-    
+
     a.novo-anuncio {
         padding: 10px 20px;
         font-size: 0.95rem;
@@ -211,22 +434,23 @@ td[data-boolean="0"]::before {
     thead tr {
         display: none; /* Esconde o cabeçalho original da tabela */
     }
-    
+
     tbody tr {
         margin-bottom: 20px; /* Espaço entre os cards */
-        background-color: #fff;
+        background-color: var(--table-body-bg); /* Usa variável */
         border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra mais visível para os cards */
+        box-shadow: 0 4px 15px var(--table-shadow); /* Usa variável */
         padding: 15px; /* Padding interno para os cards */
         position: relative; /* Para posicionar os rótulos */
+        transition: background-color 0.5s ease, box-shadow 0.5s ease;
     }
 
     tbody tr:nth-child(even) {
-        background-color: #fff; /* Remove fundo zebra em mobile para cards */
+        background-color: var(--table-body-bg); /* Remove fundo zebra em mobile para cards, usa fundo padrão */
     }
 
     tbody tr:hover {
-        background-color: #fff2cc; /* Mantém hover */
+        background-color: var(--table-row-hover-bg); /* Mantém hover */
     }
 
     tbody td {
@@ -246,23 +470,24 @@ td[data-boolean="0"]::before {
         left: 15px; /* Alinha o rótulo à esquerda, dentro do padding do card */
         width: 90px; /* Largura ajustada para os rótulos */
         font-weight: 700;
-        color: #451107;
+        color: var(--h1-color); /* Usa a cor do H1 para os rótulos */
         text-align: left;
         white-space: normal; /* Permite quebra de linha para rótulos longos */
         overflow: hidden; /* Garante que não transborde se o rótulo for muito grande */
         text-overflow: ellipsis; /* Adiciona reticências se o rótulo for cortado */
+        transition: color 0.5s ease;
     }
 
     /* As regras abaixo são para adicionar o "✔" ou "✘" ao lado do data-label
        para as células de booleanos em mobile.
-       Se você já estiver adicionando o "✔" ou "✘" no HTML, pode remover a parte
-       do `content` e manter só os estilos de posição e cor. */
+       Como você já está adicionando no HTML, vamos apenas garantir a cor e posição. */
     td[data-boolean="1"] {
         padding-left: 110px; /* Mantém o padding para alinhamento */
+        color: var(--text-primary); /* Garante que o "Sim" ou "Não" tenha a cor do texto principal */
     }
     td[data-boolean="1"]::before {
         content: "✔ " attr(data-label); /* Adiciona o check antes do rótulo */
-        color: #228B22;
+        color: var(--boolean-true-color); /* Usa variável */
         position: absolute;
         left: 15px;
         width: 90px;
@@ -271,10 +496,11 @@ td[data-boolean="0"]::before {
 
     td[data-boolean="0"] {
         padding-left: 110px; /* Mantém o padding para alinhamento */
+        color: var(--text-primary); /* Garante que o "Sim" ou "Não" tenha a cor do texto principal */
     }
     td[data-boolean="0"]::before {
         content: "✘ " attr(data-label); /* Adiciona o X antes do rótulo */
-        color: #b30000;
+        color: var(--boolean-false-color); /* Usa variável */
         position: absolute;
         left: 15px;
         width: 90px;
