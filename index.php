@@ -124,6 +124,7 @@ foreach ($anuncios as $anuncio) {
                     <img src="https://openweathermap.org/img/wn/<?= $tempo['icone'] ?>.png" alt="Tempo">
                     <span><?= $tempo['temperatura'] ?>°C</span>
                     <span><?= htmlspecialchars($tempo['descricao']) ?></span>
+                    
                 </div>
             <?php else: ?>
                 <div class="tempo-box erro">
@@ -179,7 +180,6 @@ foreach ($anuncios as $anuncio) {
                 <p>Nenhum anúncio disponível para este espaço.</p>
             <?php endif; ?>
         </div>
-
         <section class="noticias-principal">
             <?php if (count($noticias) == 0): ?>
                 <p class="mensagem-vazia">Nenhuma notícia publicada ainda.</p>
@@ -313,7 +313,6 @@ foreach ($anuncios as $anuncio) {
 
         setInterval(() => mudarSlide(1), 5000);
     </script>
-
     <script src="js/theme.js"></script> 
 
 </body>

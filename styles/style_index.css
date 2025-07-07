@@ -867,7 +867,7 @@ footer.rodape-completo {
 
     .slide img {
         object-fit: contain; /* Volta para 'contain' como no seu original que funcionava bem */
-        background-color: #000; /* Garante fundo preto para 'contain' */
+        background-color: #000; /* Garante fundo preto para 'contain' */ /**/
     }
 
     .titulo-slide {
