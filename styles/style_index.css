@@ -276,18 +276,21 @@ main {
     gap: 20px;
 }
 
+/* --- Carrossel (ajustado com base no seu código funcional) --- */
 .carrossel-container {
     position: relative;
-    max-width: 100%;
-    height: 300px;
+    width: calc(100% - 320px); /* Remove 160px de cada lado (considerando os 160px do main) */
+    margin: 20px auto; /* Centraliza com margens laterais fixas */
+    aspect-ratio: 16 / 9; /* A altura será determinada pela largura para manter 16:9 */
     overflow: hidden;
-    margin-top: 20px;
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
+    max-width: 1000px; /* Mantém um limite superior de largura */
 }
 
 .carrossel {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    height: 100%;
+    height: 100%; /* Garante que o carrossel ocupe a altura do container */
 }
 
 .slide {
@@ -301,15 +304,23 @@ main {
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Usa 'contain' para garantir que a imagem inteira seja visível */
+    background-color: #000; /* Opcional: define um fundo preto para preencher espaços do 'contain' */
 }
 
-.titulo-slide h3 { /* OBS: seu HTML usa <div> para o título, não <h3>, verifique */
+.titulo-slide h3 {
     margin: 0;
     font-size: 1.4rem;
     color: var(--slide-title-text); /* Usa variável */
 }
-/* Estilo para a div .titulo-slide */
+
+.autor-slide {
+    margin-top: 5px;
+    font-size: 1rem;
+    color: var(--slide-author-text); /* Usa variável */
+    transition: color 0.5s ease; /* Transição suave */
+}
+
 .titulo-slide {
     position: absolute;
     bottom: 0;
@@ -320,13 +331,6 @@ main {
     font-size: 1.4rem;
     font-weight: bold;
     transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
-}
-
-.autor-slide {
-    margin-top: 5px;
-    font-size: 1rem;
-    color: var(--slide-author-text); /* Usa variável */
-    transition: color 0.5s ease; /* Transição suave */
 }
 
 .seta {
@@ -570,6 +574,13 @@ footer.rodape-completo {
         flex-direction: column;
         align-items: center;
     }
+
+    /* Ajuste do carrossel para telas menores que 1024px */
+    .carrossel-container {
+        width: 100%; /* Ocupa a largura total do main */
+        margin: 20px 0; /* Remove margens laterais fixas */
+        aspect-ratio: 16 / 9; /* Mantém a proporção */
+    }
 }
 
 /* Telas muito pequenas (até 480px, smartphones) */
@@ -628,6 +639,29 @@ footer.rodape-completo {
 
     main {
         margin: 0 10px;
+    }
+
+    .carrossel-container {
+        aspect-ratio: 4 / 3; /* Proporção mais adequada para mobile */
+        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */
+    }
+
+    .slide img {
+        object-fit: cover; /* Pode usar 'cover' aqui para melhor preenchimento em telas pequenas */
+    }
+
+    .titulo-slide {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+
+    .autor-slide {
+        font-size: 0.8rem;
+    }
+
+    .seta {
+        font-size: 1.5rem;
+        padding: 3px 8px;
     }
 
     .noticias-grid {
@@ -718,6 +752,28 @@ footer.rodape-completo {
         margin: 0 20px;
     }
 
+    .carrossel-container {
+        aspect-ratio: 16 / 9; /* Mantém 16:9 para tablets */
+        height: auto;
+    }
+
+    .slide img {
+        object-fit: cover; /* 'cover' funciona bem aqui */
+    }
+
+    .titulo-slide {
+        font-size: 1.3rem;
+        padding: 12px;
+    }
+
+    .autor-slide {
+        font-size: 0.9rem;
+    }
+
+    .seta {
+        font-size: 1.8rem;
+    }
+
     .noticias-grid {
         grid-template-columns: repeat(
             auto-fit,
@@ -770,6 +826,16 @@ footer.rodape-completo {
         margin: 0 60px;
     }
 
+    .carrossel-container {
+        width: calc(100% - 120px); /* Ajusta para as margens do main (2*60px) */
+        aspect-ratio: 16 / 9;
+        height: auto;
+    }
+
+    .slide img {
+        object-fit: cover; /* Continua com cover */
+    }
+
     .noticias-grid {
         grid-template-columns: repeat(
             auto-fit,
@@ -789,6 +855,26 @@ footer.rodape-completo {
         margin: 0 160px;
     }
 
+    /* Estilos do carrossel para telas grandes */
+    .carrossel-container {
+        /* As propriedades abaixo vêm do seu "código que funciona" */
+        width: calc(100% - 320px); /* Remove 160px de cada lado do main */
+        margin: 20px auto; /* Centraliza com margens laterais fixas */
+        aspect-ratio: 16 / 9; /* A altura será determinada pela largura para manter 16:9 */
+        max-width: 1000px; /* Mantém um limite superior de largura */
+        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */
+    }
+
+    .slide img {
+        object-fit: contain; /* Volta para 'contain' como no seu original que funcionava bem */
+        background-color: #000; /* Garante fundo preto para 'contain' */
+    }
+
+    .titulo-slide {
+        font-size: 1.5rem;
+        padding: 20px;
+    }
+
     .noticias-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
@@ -799,10 +885,29 @@ footer.rodape-completo {
     }
 }
 
-/* Telas ultra-wide (acima de 1440px) */
+/* Telas ultra-wide (acima de 1441px) */
 @media (min-width: 1441px) {
     main {
         margin: 0 160px;
+    }
+
+    /* Estilos do carrossel para telas ultra-wide, seguindo o padrão que funciona */
+    .carrossel-container {
+        width: calc(100% - 320px); /* Mantém o cálculo de largura */
+        margin: 20px auto;
+        aspect-ratio: 16 / 9;
+        max-width: 1000px; /* Mantém o limite */
+        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */
+    }
+
+    .slide img {
+        object-fit: contain; /* Mantém 'contain' */
+        background-color: #000;
+    }
+
+    .titulo-slide {
+        font-size: 1.6rem; /* Pode aumentar um pouco mais o texto */
+        padding: 25px;
     }
 
     .noticias-grid {
