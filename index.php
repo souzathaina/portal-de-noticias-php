@@ -47,43 +47,69 @@ $ultimasNoticias = $stmtUltimas->fetchAll(PDO::FETCH_ASSOC);
 
 // Pega todas as notícias do banco, juntando com o nome do autor (usuario)
 $sql = "SELECT noticias.id, noticias.titulo, noticias.noticia, noticias.data, noticias.imagem, usuarios.nome AS autor
-         FROM noticias
-         JOIN usuarios ON noticias.autor = usuarios.id
-         ORDER BY noticias.data DESC"; // Ordena da mais recente para a mais antiga
+           FROM noticias
+           JOIN usuarios ON noticias.autor = usuarios.id
+           ORDER BY noticias.data DESC"; // Ordena da mais recente para a mais antiga
 
 $stmt = $pdo->query($sql);
 $noticias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// --- CÓDIGO PARA PEGAR ANÚNCIOS ---
-// Ajustado para buscar 4 anúncios ativos e em destaque, ou os mais recentes
-$sqlAnuncios = "SELECT id, nome, imagem, link
-FROM anuncio WHERE ativo = 1 AND destaque = 0
-ORDER BY data_cadastro DESC LIMIT 4";
-$stmtAnuncios = $pdo->query($sqlAnuncios);
-$anuncios = $stmtAnuncios->fetchAll(PDO::FETCH_ASSOC);
+// --- CÓDIGO PARA PEGAR ANÚNCIOS (AJUSTADO PARA SER COMO TELA LOGADO) ---
+$anuncioDestaqueEsquerda = null;
+$anuncioDestaqueDireita = null;
 
-// Distribui os anúncios entre os lados, garantindo pelo menos um por lado se disponível
-$anunciosEsquerda = [];
-$anunciosDireita = [];
+try {
+    // 1. Tenta buscar TODOS os anúncios ativos e em destaque
+    $sqlDestaques = "SELECT nome, imagem, link FROM anuncio WHERE ativo = 1 AND destaque = 1 ORDER BY RAND()";
+    $stmtDestaques = $pdo->query($sqlDestaques);
+    $anunciosDestaque = $stmtDestaques->fetchAll(PDO::FETCH_ASSOC);
 
-// Tentativa de pegar até 2 anúncios para cada lado
-$maxAnunciosPorLado = 2;
-$countEsquerda = 0;
-$countDireita = 0;
+    // 2. Tenta buscar TODOS os anúncios ativos (para usar como fallback se não houver destaques suficientes)
+    $sqlAtivos = "SELECT nome, imagem, link FROM anuncio WHERE ativo = 1 ORDER BY RAND()";
+    $stmtAtivos = $pdo->query($sqlAtivos);
+    $anunciosAtivos = $stmtAtivos->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($anuncios as $anuncio) {
-    if ($countEsquerda < $maxAnunciosPorLado) {
-        $anunciosEsquerda[] = $anuncio;
-        $countEsquerda++;
-    } elseif ($countDireita < $maxAnunciosPorLado) {
-        $anunciosDireita[] = $anuncio;
-        $countDireita++;
-    } else {
-        // Se já preencheu os dois lados com o máximo, para..
-        break;
+    // Prioriza destaques
+    if (count($anunciosDestaque) >= 2) {
+        // Se tem pelo menos 2 destaques, pega 2 diferentes
+        $anuncioDestaqueEsquerda = array_shift($anunciosDestaque); // Pega o primeiro
+        $anuncioDestaqueDireita = array_shift($anunciosDestaque); // Pega o segundo
+    } elseif (count($anunciosDestaque) == 1) {
+        // Se tem apenas 1 destaque, ele vai para a esquerda
+        $anuncioDestaqueEsquerda = array_shift($anunciosDestaque);
+
+        // E tenta pegar um ativo diferente para a direita
+        foreach ($anunciosAtivos as $anuncio) {
+            if ($anuncio['imagem'] !== ($anuncioDestaqueEsquerda['imagem'] ?? '')) { // Garante que não é a mesma imagem
+                $anuncioDestaqueDireita = $anuncio;
+                break;
+            }
+        }
     }
-    //teste
+
+    // Se ainda faltar algum (e houver ativos disponíveis que não foram usados)
+    if (!$anuncioDestaqueEsquerda) {
+        if (!empty($anunciosAtivos)) {
+            $anuncioDestaqueEsquerda = array_shift($anunciosAtivos);
+        }
+    }
+
+    if (!$anuncioDestaqueDireita) {
+        foreach ($anunciosAtivos as $anuncio) {
+            // Garante que o anúncio da direita seja diferente do da esquerda, se a esquerda já tiver um
+            if (!$anuncioDestaqueEsquerda || $anuncio['imagem'] !== ($anuncioDestaqueEsquerda['imagem'] ?? '')) {
+                $anuncioDestaqueDireita = $anuncio;
+                break;
+            }
+        }
+    }
+
+} catch (PDOException $e) {
+    error_log("Erro ao buscar anúncios: " . $e->getMessage());
+    $anuncioDestaqueEsquerda = null;
+    $anuncioDestaqueDireita = null;
 }
+// --- Fim da lógica para buscar anúncios ---
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +150,7 @@ foreach ($anuncios as $anuncio) {
                     <img src="https://openweathermap.org/img/wn/<?= $tempo['icone'] ?>.png" alt="Tempo">
                     <span><?= $tempo['temperatura'] ?>°C</span>
                     <span><?= htmlspecialchars($tempo['descricao']) ?></span>
-                    
+
                 </div>
             <?php else: ?>
                 <div class="tempo-box erro">
@@ -162,22 +188,16 @@ foreach ($anuncios as $anuncio) {
 
     <main>
         <div class="anuncio-lateral anuncio-esquerda">
-            <?php if (!empty($anunciosEsquerda)): ?>
-                <?php foreach ($anunciosEsquerda as $anuncio): ?>
-                    <div class="anuncio-item">
-                        <?php if (!empty($anuncio['link'])): ?>
-                            <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank">
-                            <?php endif; ?>
-                            <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>"
-                                alt="<?= htmlspecialchars($anuncio['nome']) ?>">
-                            <?php if (!empty($anuncio['link'])): ?>
-                            </a>
-                        <?php endif; ?>
-                        <p><?= htmlspecialchars($anuncio['nome']) ?></p>
-                    </div>
-                <?php endforeach; ?>
+            <?php if ($anuncioDestaqueEsquerda): ?>
+                <a href="<?= htmlspecialchars($anuncioDestaqueEsquerda['link']) ?>" target="_blank"
+                    title="<?= htmlspecialchars($anuncioDestaqueEsquerda['nome']) ?>">
+                    <img src="imagens/<?= htmlspecialchars($anuncioDestaqueEsquerda['imagem']) ?>"
+                        alt="Anúncio: <?= htmlspecialchars($anuncioDestaqueEsquerda['nome']) ?>">
+                    <p><?= htmlspecialchars($anuncioDestaqueEsquerda['nome']) ?></p>
+                </a>
             <?php else: ?>
-                <p>Nenhum anúncio disponível para este espaço.</p>
+                <img src="./imagens/anuncio_exemplo_esquerda.png" alt="Seu anúncio aqui na Esquerda!">
+                <p>Seu anúncio aqui na Esquerda!</p>
             <?php endif; ?>
         </div>
         <section class="noticias-principal">
@@ -209,22 +229,16 @@ foreach ($anuncios as $anuncio) {
         </section>
 
         <div class="anuncio-lateral anuncio-direita">
-            <?php if (!empty($anunciosDireita)): ?>
-                <?php foreach ($anunciosDireita as $anuncio): ?>
-                    <div class="anuncio-item">
-                        <?php if (!empty($anuncio['link'])): ?>
-                            <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank">
-                            <?php endif; ?>
-                            <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>"
-                                alt="<?= htmlspecialchars($anuncio['nome']) ?>">
-                            <?php if (!empty($anuncio['link'])): ?>
-                            </a>
-                        <?php endif; ?>
-                        <p><?= htmlspecialchars($anuncio['nome']) ?></p>
-                    </div>
-                <?php endforeach; ?>
+            <?php if ($anuncioDestaqueDireita): ?>
+                <a href="<?= htmlspecialchars($anuncioDestaqueDireita['link']) ?>" target="_blank"
+                    title="<?= htmlspecialchars($anuncioDestaqueDireita['nome']) ?>">
+                    <img src="imagens/<?= htmlspecialchars($anuncioDestaqueDireita['imagem']) ?>"
+                        alt="Anúncio: <?= htmlspecialchars($anuncioDestaqueDireita['nome']) ?>">
+                    <p><?= htmlspecialchars($anuncioDestaqueDireita['nome']) ?></p>
+                </a>
             <?php else: ?>
-                <p>Nenhum anúncio disponível para este espaço.</p>
+                <img src="./imagens/anuncio_exemplo_direita.png" alt="O seu espaço aqui na Direita!">
+                <p>O seu espaço aqui na Direita!</p>
             <?php endif; ?>
         </div>
     </main>
@@ -313,7 +327,7 @@ foreach ($anuncios as $anuncio) {
 
         setInterval(() => mudarSlide(1), 5000);
     </script>
-    <script src="js/theme.js"></script> 
+    <script src="js/theme.js"></script>
 
 </body>
 
