@@ -1,394 +1,533 @@
-/* Reset geral */ 
+/* style_excluirNoticia.css */
+
+/* Reset e base */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* ---------------------------------------------------- */
+/* VARIÁVEIS DE COR PARA TEMA CLARO (Padrão) */
+/* ---------------------------------------------------- */
+:root {
+    --primary-bg: #f8f9fa; /* Fundo principal (body) */
+    --secondary-bg: #FFFFFF; /* Fundo de elementos (cards, pop-up, formulário, tabela) */
+    --text-primary: #333333; /* Cor de texto principal */
+    --text-secondary: #666666; /* Cor de texto secundário */
+
+    --header-bg: #451107; /* Fundo do cabeçalho */
+    --header-text: #ffd700; /* Texto do cabeçalho */
+    --header-link-bg: #8b0000; /* Fundo dos links/botões do header */
+    --header-link-text: #f0f0f0; /* Texto dos links/botões do header */
+    --header-link-hover-bg: #a52a2a; /* Hover dos links/botões do header */
+
+    /* Variáveis específicas para a tela de excluir/formulários (adaptadas da listarAnuncios) */
+    --main-card-bg: var(--secondary-bg); /* Fundo do card principal da main */
+    --main-card-shadow: rgba(0, 0, 0, 0.1); /* Sombra do card principal da main */
+    --main-title-color: #451107; /* Cor do título H2 da main */
+    --paragraph-color: var(--text-primary); /* Cor dos parágrafos */
+
+    --button-confirm-bg: #451107; /* Fundo do botão "Sim, excluir" */
+    --button-confirm-text: #ffd700; /* Texto do botão "Sim, excluir" */
+    --button-confirm-shadow: rgba(69, 17, 7, 0.3); /* Sombra do botão "Sim, excluir" */
+    --button-confirm-hover-bg: #6a1a0c; /* Hover do botão "Sim, excluir" */
+    --button-confirm-hover-shadow: rgba(69, 17, 7, 0.5); /* Sombra do hover do botão "Sim, excluir" */
+
+    --button-cancel-bg: #6c757d; /* Fundo do botão "Cancelar" */
+    --button-cancel-text: #fff; /* Texto do botão "Cancelar" */
+    --button-cancel-shadow: rgba(0, 0, 0, 0.15); /* Sombra do botão "Cancelar" */
+    --button-cancel-hover-bg: #5a6268; /* Hover do botão "Cancelar" */
+
+    --footer-bg: #451107; /* Fundo do rodapé */
+    --footer-text: #ffd700; /* Texto do rodapé */
+    --footer-link: #ffd700; /* Link do rodapé */
+
+    --theme-toggle-bg: #f0f0f0; /* Fundo do botão de tema */
+    --theme-toggle-text: #333; /* Cor do texto do botão de tema */
+    --theme-toggle-shadow: rgba(0,0,0,0.2); /* Sombra do botão de tema */
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA O MODO ESCURO (aplicados via .dark-mode) */
+/* ---------------------------------------------------- */
+body.dark-mode {
+    --primary-bg: #121212; /* Preto suave (cinza carvão) */
+    --secondary-bg: #1E1E1E; /* Cinza grafite */
+    --text-primary: #E0E0E0; /* Cinza gelo */
+    --text-secondary: #B0B0B0; /* Cinza claro */
+
+    --header-bg: #1A1A1A; /* Fundo do cabeçalho dark */
+    --header-text: #FFFFFF; /* Branco puro */
+    --header-link-bg: #4A4A4A; /* Azul bebê claro */
+    --header-link-text: #E0E0E0; /* Texto escuro */
+    --header-link-hover-bg: #606060; /* Branco puro para hover */
+
+    /* Variáveis específicas para a tela de excluir/formulários no dark mode */
+    --main-card-bg: var(--secondary-bg); /* Fundo do card principal da main dark */
+    --main-card-shadow: rgba(255, 255, 255, 0.08); /* Sombra do card principal da main dark */
+    --main-title-color: #90CAF9; /* Cor do título H2 da main dark */
+    --paragraph-color: var(--text-primary); /* Cor dos parágrafos dark */
+
+    --button-confirm-bg: #EF5350; /* Um vermelho mais vibrante para "Sim, excluir" no dark mode */
+    --button-confirm-text: #fff; /* Texto branco */
+    --button-confirm-shadow: rgba(239, 83, 80, 0.3); /* Sombra do botão confirmar dark */
+    --button-confirm-hover-bg: #E53935; /* Hover do botão confirmar dark */
+    --button-confirm-hover-shadow: rgba(239, 83, 80, 0.5); /* Sombra do hover do botão confirmar dark */
+
+    --button-cancel-bg: #4A4A4A; /* Fundo do botão "Cancelar" dark */
+    --button-cancel-text: #E0E0E0; /* Texto do botão "Cancelar" dark */
+    --button-cancel-shadow: rgba(255, 255, 255, 0.08); /* Sombra do botão cancelar dark */
+    --button-cancel-hover-bg: #606060; /* Hover do botão cancelar dark */
+
+    --footer-bg: #1A1A1A; /* Fundo do rodapé dark */
+    --footer-text: #999999; /* Texto do rodapé dark */
+    --footer-link: #90CAF9; /* Link do rodapé dark */
+
+    --theme-toggle-bg: #333; /* Fundo do botão de tema dark */
+    --theme-toggle-text: #E0E0E0; /* Cor do texto do botão de tema dark */
+    --theme-toggle-shadow: rgba(255,255,255,0.1); /* Sombra do botão de tema dark */
+}
+
+
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-  padding-top: 210px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    padding-top: 210px; /* Ajuste para o cabeçalho fixo */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Cabeçalho */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 20px 0;
-  z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .container-header {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .container-header img {
-  height: 100px;
-  width: auto;
+    height: 100px;
+    width: auto;
 }
 
 /* Navegação - desktop */
 .container-header nav {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  transition: transform 0.3s ease-in-out;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
 }
 
 .container-header nav a {
-  background-color: #ffd700;
-  color: #541212;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-  white-space: nowrap;
+    background-color: var(--header-link-bg);
+    color: var(--header-link-text);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
 }
 
 .container-header nav a:hover {
-  background-color: #fff0a0;
+    background-color: var(--header-link-hover-bg);
 }
 
 /* Botão menu sanduíche - escondido no desktop */
 .menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 22px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1100;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100;
 }
 
 .menu-toggle:focus {
-  outline: 2px solid #ffd700;
-  outline-offset: 3px;
+    outline: 2px solid var(--header-text);
+    outline-offset: 3px;
 }
 
 .menu-toggle .hamburger {
-  width: 100%;
-  height: 3.5px;
-  background-color: #ffd700;
-  border-radius: 2px;
+    width: 100%;
+    height: 3.5px;
+    background-color: var(--header-text);
+    border-radius: 2px;
 }
+
+/* Botão de alternar tema (Dark Mode) */
+.theme-toggle-button {
+    background-color: var(--theme-toggle-bg);
+    color: var(--theme-toggle-text);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px var(--theme-toggle-shadow);
+    margin-left: 10px; /* Espaço para separar dos links */
+}
+
+.theme-toggle-button:hover {
+    opacity: 0.9;
+}
+
+/* Ícones do botão de alternar tema */
+.icon-light-mode {
+    display: inline-block;
+}
+
+.icon-dark-mode {
+    display: none;
+}
+
+body.dark-mode .icon-light-mode {
+    display: none;
+}
+
+body.dark-mode .icon-dark-mode {
+    display: inline-block;
+}
+
 
 /* Conteúdo principal */
 main {
-  flex: 1;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
+    flex: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--main-card-bg); /* Usando secondary-bg como fundo do card */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px var(--main-card-shadow);
+    text-align: center;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, color 0.5s ease;
 }
 
 main h2 {
-  color: #4a1e18;
-  font-size: 2rem;
-  margin-bottom: 20px;
+    color: var(--main-title-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    transition: color 0.5s ease;
 }
 
 main p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: var(--paragraph-color);
+    transition: color 0.5s ease;
 }
 
 /* Botões */
 form {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 form button {
-  background-color: #4a1e18;
-  color: #ffd700;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--button-confirm-bg);
+    color: var(--button-confirm-text);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 8px var(--button-confirm-shadow);
 }
 
 form button:hover {
-  background-color: #5a2b24;
+    background-color: var(--button-confirm-hover-bg);
+    box-shadow: 0 6px 12px var(--button-confirm-hover-shadow);
 }
 
 a.cancelar {
-  background-color: #6c757d;
-  color: #fff;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background 0.3s ease;
-  display: inline-block;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--button-cancel-bg);
+    color: var(--button-cancel-text);
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 8px var(--button-cancel-shadow);
 }
 
 a.cancelar:hover {
-  background-color: #5a6268;
+    background-color: var(--button-cancel-hover-bg);
 }
 
 /* Rodapé */
 footer.rodape-completo {
-  width: 100%; /* ocupa toda a largura */
-  left: 0; /* alinha à esquerda */
-  position: relative;
-  bottom: 0;
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
-}
-
-footer.rodape-completo {
-  background-color: #451107;
-  color: #ffd700;
-  padding: 30px 20px 15px;
-  margin-top: 40px;
-  font-size: 0.95em;
+    width: 100%;
+    left: 0;
+    position: relative;
+    bottom: 0;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 30px 20px 15px;
+    margin-top: 40px;
+    font-size: 0.95em;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .rodape-completo h3 {
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--footer-text);
+    font-size: 1.2em;
+    transition: color 0.5s ease;
 }
 
 .contato a,
 .redes-sociais a {
-  color: #ffd700;
-  text-decoration: none;
+    color: var(--footer-link);
+    text-decoration: none;
+    transition: color 0.5s ease;
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .redes-sociais img {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-  vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+    vertical-align: middle;
 }
 
 .redes-sociais img:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .copyright {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #ffd700;
-}
-
-.container-footer {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--footer-text);
+    transition: color 0.5s ease;
 }
 
 /* ===== Responsividade ===== */
 
 /* 320px */
 @media (max-width: 320px) {
-  .container-header img {
-    height: 50px;
-  }
+    .container-header img {
+        height: 50px;
+    }
 
-  main {
-    padding: 20px 10px;
-  }
+    main {
+        padding: 20px 10px;
+    }
 
-  main h2 {
-    font-size: 1.5rem;
-  }
+    main h2 {
+        font-size: 1.5rem;
+    }
 
-  main p {
-    font-size: 1rem;
-  }
+    main p {
+        font-size: 1rem;
+    }
 }
 
 /* 375px */
 @media (max-width: 375px) {
-  .container-header img {
-    height: 60px;
-  }
+    .container-header img {
+        height: 60px;
+    }
 
-  main {
-    padding: 25px 15px;
-  }
+    main {
+        padding: 25px 15px;
+    }
 
-  main h2 {
-    font-size: 1.7rem;
-  }
+    main h2 {
+        font-size: 1.7rem;
+    }
 
-  main p {
-    font-size: 1.05rem;
-  }
+    main p {
+        font-size: 1.05rem;
+    }
 }
 
 /* 425px */
 @media (max-width: 425px) {
-  .container-header img {
-    height: 70px;
-  }
+    .container-header img {
+        height: 70px;
+    }
 
-  main {
-    padding: 30px 20px;
-  }
+    main {
+        padding: 30px 20px;
+    }
 
-  main h2 {
-    font-size: 1.8rem;
-  }
+    main h2 {
+        font-size: 1.8rem;
+    }
 
-  main p {
-    font-size: 1.1rem;
-  }
+    main p {
+        font-size: 1.1rem;
+    }
 }
 
 /* 768px */
 @media (max-width: 768px) {
-  .container-header {
-    flex-wrap: nowrap;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+    .container-header {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
-  .menu-toggle {
-    display: flex;
-  }
+    .menu-toggle {
+        display: flex;
+        order: -1; /* Coloca o toggle acima da navegação */
+        margin-top: 10px; /* Espaço acima do toggle */
+    }
 
-  .container-header nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #4a1e18;
-    flex-direction: column;
-    width: 220px;
-    border-radius: 0 0 0 10px;
-    padding: 10px 0;
-    transform: translateX(100%);
-    box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.3);
-  }
+    .container-header nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--header-link-bg); /* Ajuste para o fundo do menu */
+        flex-direction: column;
+        width: 220px;
+        border-radius: 0 0 0 10px;
+        padding: 10px 0;
+        transform: translateX(100%);
+        box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.3);
+        max-height: 0; /* Começa escondido */
+        overflow: hidden; /* Esconde o conteúdo */
+        transition: max-height 0.3s ease-in-out;
+    }
+    
+    .container-header nav.active {
+        transform: translateX(0);
+        max-height: 300px; /* Altura para mostrar o menu. Ajuste se o conteúdo for maior. */
+    }
 
-  .container-header nav.active {
-    transform: translateX(0);
-  }
+    .container-header nav a {
+        padding: 12px 20px;
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais suave */
+    }
 
-  .container-header nav a {
-    padding: 12px 20px;
-    margin: 0;
-    border-bottom: 1px solid #5a150f;
-  }
+    /* Estilos para o botão de toggle dentro do menu mobile */
+    .container-header nav .theme-toggle-button {
+        display: flex; /* Garante que o botão apareça no menu mobile */
+        width: auto;
+        border-radius: 0;
+        margin: 10px auto; /* Centraliza o botão dentro do menu */
+        background-color: transparent; /* Fundo transparente */
+        color: var(--header-text); /* Cor do ícone */
+        justify-content: center; /* Centraliza o ícone */
+    }
 
-  .container-header nav a:last-child {
-    border-bottom: none;
-  }
+    .container-header nav a:last-child {
+        border-bottom: none;
+    }
 
-  .container-header img {
-    height: 70px;
-  }
+    .container-header img {
+        height: 70px;
+        margin-bottom: 10px;
+    }
 
-  main {
-    margin: 20px;
-    padding: 30px 20px;
-  }
+    main {
+        margin: 20px;
+        padding: 30px 20px;
+    }
 
-  form {
-    flex-direction: column;
-    gap: 10px;
-  }
+    form {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-  button,
-  a.cancelar {
-    width: 100%;
-  }
+    button,
+    a.cancelar {
+        width: 100%;
+    }
 }
 
 /* 1024px */
 @media (max-width: 1024px) {
-  main {
-    max-width: 90%;
-    padding: 35px;
-  }
+    main {
+        max-width: 90%;
+        padding: 35px;
+    }
 
-  main h2 {
-    font-size: 2rem;
-  }
+    main h2 {
+        font-size: 2rem;
+    }
 
-  form {
-    gap: 15px;
-  }
+    form {
+        gap: 15px;
+    }
 }
 
 /* 1440px */
 @media (max-width: 1440px) {
-  .container-header {
-    max-width: 95%;
-  }
+    .container-header {
+        max-width: 95%;
+    }
 
-  main {
-    max-width: 700px;
-  }
+    main {
+        max-width: 700px;
+    }
 }
 
 /* 2560px */
 @media (min-width: 1441px) {
-  .container-header {
-    max-width: 1200px;
-  }
+    .container-header {
+        max-width: 1200px;
+    }
 
-  main {
-    max-width: 800px;
-    font-size: 1.15rem;
-  }
+    main {
+        max-width: 800px;
+        font-size: 1.15rem;
+    }
 
-  form button,
-  a.cancelar {
-    font-size: 1.1rem;
-  }
+    form button,
+    a.cancelar {
+        font-size: 1.1rem;
+    }
 }

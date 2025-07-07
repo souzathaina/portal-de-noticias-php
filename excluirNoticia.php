@@ -3,9 +3,14 @@ session_start();
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
 
-//require_once 'includes/verificaLogin.php';
+// Verifica se a função usuarioLogado existe, caso contrário, define uma versão simples.
+// Idealmente, funcoes.php deve ser carregado e conter essa função.
+if (!function_exists('usuarioLogado')) {
+    function usuarioLogado() {
+        return isset($_SESSION['id']);
+    }
+}
 
-// Verifica se o usuário está logado
 if (!usuarioLogado()) {
     header("location: login.php");
     exit;
@@ -35,11 +40,19 @@ if (!$noticia || $noticia['autor'] != $_SESSION['id']) {
 // Se o usuário confirmou a exclusão (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POST['confirmar'] === 'sim') {
     try {
+        // Opcional: Se quiser, pode também excluir a imagem do servidor (se quiser te passo como fazer)
+        /*
+        if (!empty($noticia['imagem'])) {
+            $caminhoImagem = 'caminho/para/suas/imagens/' . $noticia['imagem']; // AJUSTE ESTE CAMINHO
+            if (file_exists($caminhoImagem)) {
+                unlink($caminhoImagem);
+            }
+        }
+        */
+
         $sql = "DELETE FROM noticias WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([':id' => $id]);
-
-        // Opcional: Se quiser, pode também excluir a imagem do servidor (se quiser te passo como fazer)
 
         header("Location: telaLogado.php");
         exit;
@@ -65,18 +78,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
         <div class="container-header">
             <img src="imagens/logo/logo.png" alt="Logo do Site" />
 
-            <!-- Botão Menu Sanduíche -->
             <button class="menu-toggle" aria-label="Abrir menu">
                 <span class="hamburger"></span>
                 <span class="hamburger"></span>
                 <span class="hamburger"></span>
             </button>
 
-            <!-- Menu de navegação -->
             <nav>
                 <a href="telaLogado.php">Início</a>
                 <a href="editarUsuario.php">Editar Perfil</a>
                 <a href="logout.php">Sair</a>
+                <button id="theme-toggle" class="theme-toggle-button">
+                    <span class="icon-light-mode">☀️</span>
+                    <span class="icon-dark-mode">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -119,7 +134,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
         </div>
     </footer>
 
-    <!-- Script para o menu sanduíche -->
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('header nav');
@@ -127,6 +141,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar']) && $_POS
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             menuToggle.classList.toggle('active');
+        });
+
+        // JavaScript para alternar o tema (dark mode)
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Função para aplicar o tema salvo
+        function applyTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        }
+
+        // Aplica o tema ao carregar a página
+        applyTheme();
+
+        // Adiciona evento de clique para alternar o tema
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            // Salva a preferência do usuário
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
         });
     </script>
 </body>
