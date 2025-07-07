@@ -287,6 +287,7 @@ main {
     max-width: 1000px; /* Mantém um limite superior de largura */
 }
 
+
 .carrossel {
     display: flex;
     transition: transform 0.5s ease-in-out;
