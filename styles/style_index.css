@@ -862,7 +862,7 @@ footer.rodape-completo {
         margin: 20px auto; /* Centraliza com margens laterais fixas */
         aspect-ratio: 16 / 9; /* A altura será determinada pela largura para manter 16:9 */
         max-width: 1000px; /* Mantém um limite superior de largura */
-        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */
+        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */ /* */
     }
 
     .slide img {
