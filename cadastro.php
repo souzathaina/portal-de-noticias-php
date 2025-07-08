@@ -46,12 +46,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (!$mensagem) {
-            // Insere o usuário incluindo o caminho da foto (pode ser null)
-            $sql = "INSERT INTO usuarios (nome, email, senha, foto) VALUES (?, ?, ?, ?)";
+            // --- INÍCIO DA LÓGICA INCREMENTADA ---
+            // Define o perfil padrão para novos usuários como 'NORMAL'.
+            // Este valor será inserido na coluna `id_perfil` do banco de dados.
+            $perfilPadrao = 'NORMAL'; 
+            
+            // Insere o usuário incluindo o caminho da foto (pode ser null) E o novo campo 'id_perfil'
+            $sql = "INSERT INTO usuarios (nome, email, senha, foto, id_perfil) VALUES (?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
 
             try {
-                $stmt->execute([$nome, $email, $senhaHash, $caminhoFoto]);
+                // Adiciona $perfilPadrao aos parâmetros de execução
+                $stmt->execute([$nome, $email, $senhaHash, $caminhoFoto, $perfilPadrao]);
+                // --- FIM DA LÓGICA INCREMENTADA ---
                 header("Location: login.php");
                 exit;
             } catch (PDOException $e) {

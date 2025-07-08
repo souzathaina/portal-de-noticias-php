@@ -10,8 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST["email"]);
     $senha = trim($_POST["senha"]);
 
-    // Busca também o campo foto
-    $sql = "SELECT id, nome, senha, foto FROM usuarios WHERE email = ?";
+    // *** MUDANÇA AQUI ***
+    // Busca o campo 'id_perfil' junto com os outros dados do usuário
+    $sql = "SELECT id, nome, senha, foto, id_perfil FROM usuarios WHERE email = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$email]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -21,6 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['nome'] = $usuario['nome'];
         // Se foto estiver vazia, colocar imagem padrão
         $_SESSION['foto'] = !empty($usuario['foto']) ? $usuario['foto'] : 'imagens/perfil_padrao.png';
+        
+        // *** MUDANÇA AQUI ***
+        // Armazena o id_perfil do usuário na sessão
+        // Se, por algum motivo (ex: banco de dados antigo), id_perfil não existir, define como 'NORMAL'
+        $_SESSION['id_perfil'] = $usuario['id_perfil'] ?? 'NORMAL'; 
 
         header("location: telaLogado.php");
         exit;

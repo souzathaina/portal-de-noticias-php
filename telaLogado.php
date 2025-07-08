@@ -3,13 +3,17 @@ session_start();
 require_once 'includes/conexao.php';
 require_once 'includes/funcoes.php';
 
-// Verifica se o usuário está logado
+// Verifica se o usuário está logado. Se não, redireciona para a página de cadastro.
 if (!usuarioLogado()) {
     header("location: cadastro.php");
     exit;
 }
 
-// --- Lógica para buscar anúncios (AJUSTADA) ---
+// Variável para verificar se o usuário é ADMIN.
+// Isso assume que $_SESSION['id_perfil'] já foi definida em login.php.
+$isAdmin = ($_SESSION['id_perfil'] ?? '') === 'ADMIN';
+
+// --- Lógica para buscar anúncios ---
 $anuncioDestaqueEsquerda = null;
 $anuncioDestaqueDireita = null;
 
@@ -58,7 +62,6 @@ try {
             }
         }
     }
-
 
 } catch (PDOException $e) {
     error_log("Erro ao buscar anúncios: " . $e->getMessage());
@@ -112,16 +115,18 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
                 <p><?= htmlspecialchars($_SESSION['nome']) ?></p>
             </div>
             <button id="theme-toggle" class="theme-toggle-button">
-                    <span class="icon-light-mode">☀️</span>
-                    <span class="icon-dark-mode">🌙</span>
-                </button>
+                <span class="icon-light-mode">☀️</span>
+                <span class="icon-dark-mode">🌙</span>
+            </button>
 
 
             <nav class="menu" id="menu">
                 <a href="cadastrarNoticia.php">Criar notícia</a>
                 <a href="editarUsuario.php">Editar Usuário</a>
+                <?php if ($isAdmin): ?>
+                    <a href="./anuncio/listarAnuncios.php">Listar Anúncios</a>
+                <?php endif; ?>
                 <a href="logout.php">Logout</a>
-                <a href="./anuncio/listarAnuncios.php">Listar Anúncios</a>
             </nav>
         </div>
     </header>
@@ -160,14 +165,23 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
                                     <?= nl2br(htmlspecialchars(substr($noticia['noticia'], 0, 250))) ?>...
                                     <span class="leia-mais">Leia mais</span>
                                 </p>
-                            </a> <?php if ($noticia['id_autor'] == $_SESSION['id']): ?>
-                                <p class="acoes-noticia">
+                            </a>
+                            <p class="acoes-noticia">
+                                <?php 
+                                // Verifica se o usuário logado é o autor desta notícia
+                                $isAuthorOfThisNews = ($noticia['id_autor'] == $_SESSION['id']);
+                                ?>
+
+                                <?php if ($isAuthorOfThisNews): // Se for o autor, pode alterar e excluir ?>
                                     <a href="alterarNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
                                         class="btn-alterar">Alterar</a>
                                     <a href="excluirNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
                                         class="btn-excluir">Excluir</a>
-                                </p>
-                            <?php endif; ?>
+                                <?php elseif ($isAdmin): // Se for ADMIN (e não o autor), só pode excluir ?>
+                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($noticia['id']) ?>"
+                                        class="btn-excluir">Excluir</a>
+                                <?php endif; ?>
+                            </p>
                         </article>
                     <?php endforeach; ?>
                 </div>
@@ -214,13 +228,18 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
         </div>
     </footer>
 
-    <script src="js/theme.js"></script> <script>
+    <script src="js/theme.js"></script>
+    <script>
         document.getElementById('menu-toggle').addEventListener('click', function () {
             document.getElementById('menu').classList.toggle('show');
         });
 
         document.querySelectorAll('article.noticia').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (event) => {
+                // Previne o clique nos botões de ação de disparar o link da notícia
+                if (event.target.closest('.acoes-noticia')) {
+                    return;
+                }
                 const id = card.getAttribute('data-id');
                 if (id) {
                     window.location.href = `noticia.php?id=${id}`;
@@ -231,7 +250,8 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    card.click();
+                    // Ação de clique no link principal da notícia
+                    card.querySelector('.noticia-link-conteudo').click();
                 }
             });
         });
