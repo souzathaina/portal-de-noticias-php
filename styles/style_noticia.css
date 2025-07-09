@@ -263,7 +263,7 @@ main {
     flex: 1;
     max-width: 800px; /* Será ajustado nas media queries */
     width: 98%; /* Ocupa a maioria da largura disponível */
-    margin: 20px auto;
+    margin: 100px auto;
     padding: 25px;
     background-color: var(--main-bg);
     border-radius: 8px;
@@ -418,7 +418,7 @@ footer.rodape-completo {
         padding: 10px;
         width: 100%;
         max-width: 100%;
-        margin: 5px auto;
+        margin: 100px auto;
     }
     main p {
         font-size: 0.9em;
@@ -457,7 +457,7 @@ footer.rodape-completo {
         padding: 15px;
         width: 100%;
         max-width: 100%;
-        margin: 10px auto;
+        margin: 35px auto;
     }
     main p {
         font-size: 0.95em;
@@ -496,7 +496,7 @@ footer.rodape-completo {
         width: 100%;
         max-width: 700px;
         padding: 20px;
-        margin: 15px auto;
+        margin: 35px auto;
     }
     main p {
         font-size: 1em;
