@@ -1,926 +1,798 @@
 /* --- Reset Geral e Estilos Base --- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
 }
 
 /* ---------------------------------------------------- */
 /* VARIÁVEIS DE COR PARA TEMA CLARO (Padrão) */
 /* ---------------------------------------------------- */
 :root {
-    --primary-bg: #f8f9fa; /* Fundo principal (body) */
-    --secondary-bg: #FFFFFF; /* Fundo de elementos (cards, pop-up) */
-    --text-primary: #333333; /* Cor de texto principal */
-    --text-secondary: #666666; /* Cor de texto secundário (autor, data, msgs vazias) */
-    --header-bg: #451107; /* Fundo do cabeçalho */
-    --header-text: #ffd700; /* Texto do cabeçalho */
-    --header-link-bg: #ffd700; /* Fundo dos links/botões do header */
-    --header-link-text: #541212; /* Texto dos links/botões do header */
-    --header-link-hover-bg: #fff0a0; /* Hover dos links/botões do header */
-    --tempo-box-bg: rgba(255, 255, 255, 0.85); /* Fundo da caixa de tempo */
-    --tempo-box-text: #600; /* Texto da caixa de tempo */
-    --tempo-box-error-bg: rgba(255, 230, 230, 0.9); /* Fundo da caixa de erro do tempo */
-    --tempo-box-error-text: #900; /* Texto da caixa de erro do tempo */
-    --carousel-arrow-bg: rgba(15, 15, 15, 0.6); /* Fundo das setas do carrossel */
-    --carousel-arrow-color: white; /* Cor das setas do carrossel */
-    --slide-title-bg: rgba(0, 0, 0, 0.6); /* Fundo do título do slide */
-    --slide-title-text: #fff; /* Texto do título do slide */
-    --slide-author-text: #9b2d2d; /* Texto do autor do slide */
-    --ad-sidebar-bg: #fff; /* Fundo dos anúncios laterais */
-    --ad-sidebar-shadow: rgba(0, 0, 0, 0.1); /* Sombra dos anúncios laterais */
-    --ad-sidebar-text: #555; /* Texto dos anúncios laterais */
-    --news-card-bg: #fff; /* Fundo do card de notícia */
-    --news-card-border-left: #541212; /* Borda esquerda do card de notícia */
-    --news-card-shadow: rgba(0, 0, 0, 0.1); /* Sombra do card de notícia */
-    --news-title-color: #4a1e18; /* Título da notícia */
-    --news-author-date-color: #777; /* Autor e data da notícia */
-    --read-more-color: #b30000; /* Cor do "Leia mais" */
-    --footer-bg: #451107; /* Fundo do rodapé */
-    --footer-text: #ffd700; /* Texto do rodapé */
-    --footer-link: #ffd700; /* Link do rodapé */
-    --theme-toggle-bg: #f0f0f0; /* Fundo do botão de tema */
-    --theme-toggle-text: #333; /* Cor do texto do botão de tema */
-    --theme-toggle-shadow: rgba(0,0,0,0.2); /* Sombra do botão de tema */
+  --primary-bg: #f8f9fa; /* Fundo principal (body) */
+  --secondary-bg: #ffffff; /* Fundo de elementos (cards, pop-up) */
+  --text-primary: #333333; /* Cor de texto principal */
+  --text-secondary: #666666; /* Cor de texto secundário (autor, data, msgs vazias) */
+  --header-bg: #451107; /* Fundo do cabeçalho */
+  --header-text: #ffd700; /* Texto do cabeçalho */
+  --header-link-bg: #ffd700; /* Fundo dos links/botões do header */
+  --header-link-text: #541212; /* Texto dos links/botões do header */
+  --header-link-hover-bg: #fff0a0; /* Hover dos links/botões do header */
+  --tempo-box-bg: rgba(255, 255, 255, 0.85); /* Fundo da caixa de tempo */
+  --tempo-box-text: #600; /* Texto da caixa de tempo */
+  --tempo-box-error-bg: rgba(
+    255,
+    230,
+    230,
+    0.9
+  ); /* Fundo da caixa de erro do tempo */
+  --tempo-box-error-text: #900; /* Texto da caixa de erro do tempo */
+  --carousel-arrow-bg: rgba(15, 15, 15, 0.6); /* Fundo das setas do carrossel */
+  --carousel-arrow-color: white; /* Cor das setas do carrossel */
+  --slide-title-bg: rgba(0, 0, 0, 0.6); /* Fundo do título do slide */
+  --slide-title-text: #fff; /* Texto do título do slide */
+  --slide-author-text: #9b2d2d; /* Texto do autor do slide */
+  --ad-intercalated-bg: #f0f0f0; /* Fundo do anúncio intercalado */
+  --ad-intercalated-shadow: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* Sombra do anúncio intercalado */
+  --ad-final-bg: #e9ecef; /* Fundo dos anúncios no final */
+  --ad-final-shadow: rgba(0, 0, 0, 0.15); /* Sombra dos anúncios no final */
+  --news-card-bg: #fff; /* Fundo do card de notícia */
+  --news-card-border-left: #541212; /* Borda esquerda do card de notícia */
+  --news-card-shadow: rgba(0, 0, 0, 0.1); /* Sombra do card de notícia */
+  --news-title-color: #4a1e18; /* Título da notícia */
+  --news-author-date-color: #777; /* Autor e data da notícia */
+  --read-more-color: #b30000; /* Cor do "Leia mais" */
+  --footer-bg: #451107; /* Fundo do rodapé */
+  --footer-text: #ffd700; /* Texto do rodapé */
+  --footer-link: #ffd700; /* Link do rodapé */
+  --theme-toggle-bg: #f0f0f0; /* Fundo do botão de tema */
+  --theme-toggle-text: #333; /* Cor do texto do botão de tema */
+  --theme-toggle-shadow: rgba(0, 0, 0, 0.2); /* Sombra do botão de tema */
 }
 
 /* ---------------------------------------------------- */
 /* ESTILOS PARA O MODO ESCURO (aplicados via .dark-mode) */
 /* ---------------------------------------------------- */
 body.dark-mode {
-    --primary-bg: #121212; /* Preto suave (cinza carvão) */
-    --secondary-bg: #1E1E1E; /* Cinza grafite (para cards, pop-up) */
-    --text-primary: #E0E0E0; /* Cinza gelo */
-    --text-secondary: #B0B0B0; /* Cinza claro */
-    --header-bg: #1E1E1E; /* Fundo do cabeçalho dark */
-    --header-text: #FFFFFF; /* Branco puro */
-    --header-link-bg: #90CAF9; /* Azul bebê claro */
-    --header-link-text: #1E1E1E; /* Texto escuro */
-    --header-link-hover-bg: #FFFFFF; /* Branco puro para hover */
-    --tempo-box-bg: rgba(40, 40, 40, 0.85); /* Fundo da caixa de tempo dark */
-    --tempo-box-text: #E0E0E0; /* Texto da caixa de tempo dark */
-    --tempo-box-error-bg: rgba(60, 0, 0, 0.9); /* Fundo da caixa de erro do tempo dark */
-    --tempo-box-error-text: #FF6666; /* Texto da caixa de erro do tempo dark */
-    --carousel-arrow-bg: rgba(255, 255, 255, 0.2); /* Fundo das setas do carrossel dark */
-    --carousel-arrow-color: #E0E0E0; /* Cor das setas do carrossel dark */
-    --slide-title-bg: rgba(0, 0, 0, 0.7); /* Fundo do título do slide dark */
-    --slide-title-text: #E0E0E0; /* Texto do título do slide dark */
-    --slide-author-text: #B0B0B0; /* Texto do autor do slide dark */
-    --ad-sidebar-bg: #1E1E1E; /* Fundo dos anúncios laterais dark */
-    --ad-sidebar-shadow: rgba(0, 0, 0, 0.4); /* Sombra dos anúncios laterais dark */
-    --ad-sidebar-text: #B0B0B0; /* Texto dos anúncios laterais dark */
-    --news-card-bg: #1E1E1E; /* Fundo do card de notícia dark */
-    --news-card-border-left: #90CAF9; /* Borda esquerda do card de notícia dark (azul bebê) */
-    --news-card-shadow: rgba(0, 0, 0, 0.4); /* Sombra do card de notícia dark */
-    --news-title-color: #FFFFFF; /* Título da notícia dark (branco puro) */
-    --news-author-date-color: #B0B0B0; /* Autor e data da notícia dark */
-    --read-more-color: #90CAF9; /* Cor do "Leia mais" dark (azul bebê) */
-    --footer-bg: #1A1A1A; /* Fundo do rodapé dark */
-    --footer-text: #999999; /* Texto do rodapé dark */
-    --footer-link: #90CAF9; /* Link do rodapé dark */
-    --theme-toggle-bg: #333; /* Fundo do botão de tema dark */
-    --theme-toggle-text: #E0E0E0; /* Cor do texto do botão de tema dark */
-    --theme-toggle-shadow: rgba(255,255,255,0.1); /* Sombra do botão de tema dark */
+  --primary-bg: #121212; /* Preto suave (cinza carvão) */
+  --secondary-bg: #1e1e1e; /* Cinza grafite (para cards, pop-up) */
+  --text-primary: #e0e0e0; /* Cinza gelo */
+  --text-secondary: #b0b0b0; /* Cinza claro */
+  --header-bg: #1e1e1e; /* Fundo do cabeçalho dark */
+  --header-text: #ffffff; /* Branco puro */
+  --header-link-bg: #90caf9; /* Azul bebê claro */
+  --header-link-text: #1e1e1e; /* Texto escuro */
+  --header-link-hover-bg: #ffffff; /* Branco puro para hover */
+  --tempo-box-bg: rgba(40, 40, 40, 0.85); /* Fundo da caixa de tempo dark */
+  --tempo-box-text: #e0e0e0; /* Texto da caixa de tempo dark */
+  --tempo-box-error-bg: rgba(
+    60,
+    0,
+    0,
+    0.9
+  ); /* Fundo da caixa de erro do tempo dark */
+  --tempo-box-error-text: #ff6666; /* Texto da caixa de erro do tempo dark */
+  --carousel-arrow-bg: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fundo das setas do carrossel dark */
+  --carousel-arrow-color: #e0e0e0; /* Cor das setas do carrossel dark */
+  --slide-title-bg: rgba(0, 0, 0, 0.7); /* Fundo do título do slide dark */
+  --slide-title-text: #e0e0e0; /* Texto do título do slide dark */
+  --slide-author-text: #b0b0b0; /* Texto do autor do slide dark */
+  --ad-intercalated-bg: #282828; /* Fundo do anúncio intercalado dark */
+  --ad-intercalated-shadow: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* Sombra do anúncio intercalado dark */
+  --ad-final-bg: #222222; /* Fundo dos anúncios no final dark */
+  --ad-final-shadow: rgba(0, 0, 0, 0.5); /* Sombra dos anúncios no final dark */
+  --news-card-bg: #1e1e1e; /* Fundo do card de notícia dark */
+  --news-card-border-left: #90caf9; /* Borda esquerda do card de notícia dark (azul bebê) */
+  --news-card-shadow: rgba(0, 0, 0, 0.4); /* Sombra do card de notícia dark */
+  --news-title-color: #ffffff; /* Título da notícia dark (branco puro) */
+  --news-author-date-color: #b0b0b0; /* Autor e data da notícia dark */
+  --read-more-color: #90caf9; /* Cor do "Leia mais" dark (azul bebê) */
+  --footer-bg: #1a1a1a; /* Fundo do rodapé dark */
+  --footer-text: #999999; /* Texto do rodapé dark */
+  --footer-link: #90caf9; /* Link do rodapé dark */
+  --theme-toggle-bg: #333; /* Fundo do botão de tema dark */
+  --theme-toggle-text: #e0e0e0; /* Cor do texto do botão de tema dark */
+  --theme-toggle-shadow: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Sombra do botão de tema dark */
 }
-
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--primary-bg); /* Usa variável */
-    color: var(--text-primary); /* Usa variável */
-    padding-top: 210px;
-    overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+/* --- Pop-up de Anúncio --- */
 .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Mantido fixo para o overlay do pop-up */
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none; /* Controlado via JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .popup-conteudo {
-    position: relative;
-    background: var(--secondary-bg); /* Usa variável */
-    border-radius: 10px;
-    overflow: hidden;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 0 25px var(--ad-sidebar-shadow); /* Usa variável para a sombra */
+  position: relative;
+  background: var(--secondary-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 25px var(--ad-intercalated-shadow); /* Reutilizando a variável de sombra */
 }
 
 .popup .imagem-anuncio {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .popup .fechar {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    color: var(--header-text); /* Usa variável do header para um contraste bom */
-    background: var(--read-more-color); /* Usa variável do "Leia Mais" para consistência */
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    line-height: 35px;
-    cursor: pointer;
-    z-index: 10000;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  color: var(--header-text);
+  background: var(--read-more-color);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  z-index: 10000;
 }
 
 /* --- Cabeçalho --- */
 header {
-    position: fixed; /* Cabeçalho fixo no topo da página */
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: var(--header-bg); /* Usa variável */
-    color: var(--header-text); /* Usa variável */
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    flex-wrap: wrap;
-    border-bottom: 1px solid rgba(255,255,255,0.1); /* Adicionado para um leve separador */
-    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; /* Transição suave */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.5s ease, color 0.5s ease,
+    border-color 0.5s ease;
 }
 
 .logo {
-    max-height: 130px;
-    height: auto;
-    width: auto;
-    margin: 0 auto;
+  max-height: 130px;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
 }
 
 /* Tempo no header */
 .tempo-area {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    flex-basis: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-basis: auto;
 }
 
 .tempo-box {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background-color: var(--tempo-box-bg); /* Usa variável */
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--tempo-box-text); /* Usa variável */
-    box-shadow: 0 1px 3px var(--ad-sidebar-shadow); /* Usa variável para sombra */
-    margin-bottom: 10px;
-    transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease; /* Transição suave */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--tempo-box-bg);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--tempo-box-text);
+  box-shadow: 0 1px 3px var(--ad-intercalated-shadow); /* Reutilizado */
+  margin-bottom: 10px;
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .tempo-box img {
-    width: 28px;
-    height: 28px;
+  width: 28px;
+  height: 28px;
 }
 
 .tempo-box.erro {
-    color: var(--tempo-box-error-text); /* Usa variável */
-    background-color: var(--tempo-box-error-bg); /* Usa variável */
+  color: var(--tempo-box-error-text);
+  background-color: var(--tempo-box-error-bg);
 }
 
 /* Ícone do menu sanduíche (para mobile) */
 .menu-toggle {
-    display: none;
-    font-size: 28px;
-    color: var(--header-text); /* Usa variável */
-    cursor: pointer;
-    margin-left: auto;
-    transition: color 0.5s ease; /* Transição suave */
+  display: none;
+  font-size: 28px;
+  color: var(--header-text);
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.5s ease;
 }
 
 /* Menu de navegação (botões) */
 .menu {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .menu a {
-    background-color: var(--header-link-bg); /* Usa variável */
-    color: var(--header-link-text); /* Usa variável */
-    padding: 6px 12px;
-    margin-left: 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+  background-color: var(--header-link-bg);
+  color: var(--header-link-text);
+  padding: 6px 12px;
+  margin-left: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu a:hover {
-    background-color: var(--header-link-hover-bg); /* Usa variável */
+  background-color: var(--header-link-hover-bg);
 }
 
-/* Botão de alternar tema - NOVO */
+/* Botão de alternar tema */
 .theme-toggle-button {
-    background-color: var(--theme-toggle-bg);
-    color: var(--theme-toggle-text);
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 5px var(--theme-toggle-shadow);
+  background-color: var(--theme-toggle-bg);
+  color: var(--theme-toggle-text);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px var(--theme-toggle-shadow);
 }
 
 .theme-toggle-button:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 /* Ícones do botão de tema */
 .theme-toggle-button .icon-light-mode {
-    display: inline-block;
+  display: inline-block;
 }
 
 .theme-toggle-button .icon-dark-mode {
-    display: none;
+  display: none;
 }
 
 body.dark-mode .theme-toggle-button .icon-light-mode {
-    display: none;
+  display: none;
 }
 
 body.dark-mode .theme-toggle-button .icon-dark-mode {
-    display: inline-block;
+  display: inline-block;
 }
 
-
-/* --- Área Principal de Conteúdo --- */
-main {
-    margin: 0 160px;
-    padding-bottom: 40px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* --- Carrossel (ajustado com base no seu código funcional) --- */
+/* --- Carrossel --- */
 .carrossel-container {
-    position: relative;
-    width: calc(100% - 320px); /* Remove 160px de cada lado (considerando os 160px do main) */
-    margin: 20px auto; /* Centraliza com margens laterais fixas */
-    aspect-ratio: 16 / 9; /* A altura será determinada pela largura para manter 16:9 */
-    overflow: hidden;
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
-    max-width: 1000px; /* Mantém um limite superior de largura */
+  position: relative;
+  width: 100%;
+  margin: 20px auto 40px auto; /* Centraliza o carrossel */
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-width: 1200px;
+  /* Ajuste o padding-top padrão para acomodar cabeçalhos maiores em desktops/tablets.
+       Será sobrescrito nas media queries menores. */
+  padding-top: 200px;
 }
-
 
 .carrossel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    height: 100%; /* Garante que o carrossel ocupe a altura do container */
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
 }
 
 .slide {
-    min-width: 100%;
-    height: 100%;
-    position: relative;
-    text-decoration: none;
-    color: var(--slide-title-text); /* Usa variável */
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+  color: var(--slide-title-text);
 }
 
 .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Usa 'contain' para garantir que a imagem inteira seja visível */
-    background-color: #000; /* Opcional: define um fundo preto para preencher espaços do 'contain' */
-}
-
-.titulo-slide h3 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--slide-title-text); /* Usa variável */
-}
-
-.autor-slide {
-    margin-top: 5px;
-    font-size: 1rem;
-    color: var(--slide-author-text); /* Usa variável */
-    transition: color 0.5s ease; /* Transição suave */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000;
 }
 
 .titulo-slide {
-    position: absolute;
-    bottom: 0;
-    background: var(--slide-title-bg); /* Usa variável */
-    padding: 15px;
-    width: 100%;
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: bold;
-    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
+  position: absolute;
+  bottom: 0;
+  background: var(--slide-title-bg);
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  color: var(--slide-title-text);
+}
+
+.autor-slide {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: var(--slide-author-text);
+  transition: color 0.5s ease;
 }
 
 .seta {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--carousel-arrow-bg); /* Usa variável */
-    border: none;
-    color: var(--carousel-arrow-color); /* Usa variável */
-    font-size: 2rem;
-    padding: 5px 12px;
-    cursor: pointer;
-    z-index: 10;
-    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
+  position: absolute;
+  /* Ajustado de 50% para um valor fixo em pixels ou porcentagem menor,
+       ou ajustado na media query específica para mobile */
+  top: 55%; /* Levemente mais abaixo que o centro */
+  transform: translateY(-50%);
+  background: var(--carousel-arrow-bg);
+  border: none;
+  color: var(--carousel-arrow-color);
+  font-size: 2rem;
+  padding: 5px 12px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .anterior {
-    left: 10px;
+  left: 10px;
 }
 
 .proximo {
-    right: 10px;
+  right: 10px;
 }
 
-/* --- Anúncios Laterais Fixos --- */
-.anuncio-lateral {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 140px;
-    background-color: var(--ad-sidebar-bg); /* Usa variável */
-    border-radius: 0.5em;
-    box-shadow: 0 4px 12px var(--ad-sidebar-shadow); /* Usa variável */
-    padding: 10px;
-    text-align: center;
-    z-index: 999;
-    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição suave */
+/* --- Área Principal de Conteúdo (Notícias e Anúncios Intercalados) --- */
+main {
+  padding-top: 20px; /* Espaçamento inicial para o main */
+  padding-bottom: 40px;
+  max-width: 1200px; /* Largura máxima do conteúdo principal */
+  margin: 0 auto; /* Centraliza o conteúdo principal */
+  padding-left: 15px; /* Adiciona padding lateral para mobile */
+  padding-right: 15px; /* Adiciona padding lateral para mobile */
 }
 
-.anuncio-lateral img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto 5px auto;
-    border-radius: 4px;
+.conteudo-principal-intercalado {
+  display: grid;
+  /* Começa com 1 coluna para mobile */
+  grid-template-columns: 1fr;
+  gap: 25px; /* Espaçamento entre notícias e anúncios */
 }
 
-.anuncio-lateral p {
-    font-size: 0.85em;
-    color: var(--ad-sidebar-text); /* Usa variável */
-    transition: color 0.5s ease; /* Transição suave */
-}
-
-.anuncio-esquerda {
-    left: 10px;
-}
-
-.anuncio-direita {
-    right: 10px;
-}
-
-/* --- Conteúdo Principal das Notícias --- */
-.noticias-principal {
-    max-width: 1200px;
-    flex-grow: 1;
-    padding: 20px 0;
-}
-
-/* Mensagem quando não há notícia */
-.mensagem-vazia {
-    text-align: center;
-    font-size: 1.2em;
-    margin-top: 40px;
-    color: var(--text-secondary); /* Usa variável */
-    transition: color 0.5s ease; /* Transição suave */
-}
-
-/* Grade de notícias (CSS Grid) */
-.noticias-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-/* Cada notícia (card individual) */
+/* Estilo para cada card de notícia */
 article.noticia {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--news-card-bg); /* Usa variável */
-    border-left: 5px solid var(--news-card-border-left); /* Usa variável */
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px var(--news-card-shadow); /* Usa variável */
-    transition: transform 0.2s ease-in-out, background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease; /* Transições adicionadas */
-    min-height: 420px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--news-card-bg);
+  border-left: 5px solid var(--news-card-border-left);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px var(--news-card-shadow);
+  transition: transform 0.2s ease-in-out, background-color 0.5s ease,
+    border-color 0.5s ease, box-shadow 0.5s ease;
+  min-height: 420px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 article.noticia:hover {
-    transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 .noticia-link-conteudo {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    flex-grow: 1;
-    cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  flex-grow: 1;
+  cursor: pointer;
 }
 
 article.noticia h2 {
-    color: var(--news-title-color); /* Usa variável */
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    text-align: center;
-    transition: color 0.5s ease; /* Transição suave */
+  color: var(--news-title-color);
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  text-align: center;
+  transition: color 0.5s ease;
 }
 
 .autor-data {
-    font-size: 0.9em;
-    color: var(--news-author-date-color); /* Usa variável */
-    margin-bottom: 10px;
-    text-align: center;
-    transition: color 0.5s ease; /* Transição suave */
+  font-size: 0.9em;
+  color: var(--news-author-date-color);
+  margin-bottom: 10px;
+  text-align: center;
+  transition: color 0.5s ease;
 }
 
 article.noticia img {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 article.noticia p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    font-size: 1em;
-    flex-grow: 1;
-    margin-bottom: 10px;
-    color: var(--text-primary); /* Garante que o texto principal da notícia mude de cor */
-    transition: color 0.5s ease; /* Transição suave */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font-size: 1em;
+  flex-grow: 1;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  transition: color 0.5s ease;
 }
 
 article.noticia .leia-mais {
-    display: block;
-    color: var(--read-more-color); /* Usa variável */
-    font-weight: bold;
-    text-decoration: none;
-    margin-top: 5px;
-    margin-bottom: 0;
-    flex-shrink: 0;
-    text-align: right;
-    transition: color 0.5s ease; /* Transição suave */
+  display: block;
+  color: var(--read-more-color);
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  text-align: right;
+  transition: color 0.5s ease;
 }
 
 article.noticia .leia-mais:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+/* --- Estilo para Anúncios Intercalados (dentro do fluxo de notícias) --- */
+.anuncio-intercalado {
+  background-color: var(--ad-intercalated-bg);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--ad-intercalated-shadow);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.anuncio-intercalado a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.anuncio-intercalado img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block; /* Garante que a imagem se comporte como um bloco */
+  margin: 0 auto; /* Centraliza a imagem */
+}
+
+.anuncio-intercalado p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  transition: color 0.5s ease;
+}
+
+.mensagem-vazia {
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 40px;
+  color: var(--text-secondary);
+  transition: color 0.5s ease;
+}
+
+/* --- Anúncios no Final da Página --- */
+.anuncios-no-final {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: var(--ad-final-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px var(--ad-final-shadow);
+  text-align: center;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.anuncios-no-final h3 {
+  color: var(
+    --news-title-color
+  ); /* Usando a cor de título de notícia para consistência */
+  margin-bottom: 25px;
+  font-size: 1.8em;
+  transition: color 0.5s ease;
+}
+
+.anuncios-grid-final {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* 200px mínimo */
+  gap: 20px;
+  justify-items: center; /* Centraliza os itens na grade */
+}
+
+.anuncio-banner-final {
+  background-color: var(
+    --secondary-bg
+  ); /* Fundo branco ou claro para cada banner */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--ad-intercalated-shadow); /* Sombra mais suave */
+  transition: transform 0.2s ease-in-out, background-color 0.5s ease,
+    box-shadow 0.5s ease;
+  width: 100%; /* Garante que ocupe o espaço na grid */
+  max-width: 300px; /* Limite o tamanho individual para evitar banners gigantes */
+}
+
+.anuncio-banner-final:hover {
+  transform: translateY(-5px);
+}
+
+.anuncio-banner-final img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
 }
 
 /* --- Rodapé --- */
 footer.rodape-completo {
-    width: 100%;
-    background-color: var(--footer-bg); /* Usa variável */
-    color: var(--footer-text); /* Usa variável */
-    padding: 30px 20px 15px;
-    margin-top: 40px;
-    font-size: 0.95em;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    transition: background-color 0.5s ease, color 0.5s ease; /* Transição suave */
+  width: 100%;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 30px 20px 15px;
+  margin-top: 40px;
+  font-size: 0.95em;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .rodape-conteudo {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .rodape-completo h3 {
-    margin-bottom: 10px;
-    color: var(--footer-text); /* Usa variável */
-    transition: color 0.5s ease; /* Transição suave */
+  margin-bottom: 10px;
+  color: var(--footer-text);
+  transition: color 0.5s ease;
 }
 
 .contato a,
 .redes-sociais a {
-    color: var(--footer-link); /* Usa variável */
-    text-decoration: none;
-    transition: color 0.5s ease; /* Transição suave */
+  color: var(--footer-link);
+  text-decoration: none;
+  transition: color 0.5s ease;
 }
 
 .contato a:hover,
 .redes-sociais a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .redes-sociais img {
-    width: 48px;
-    height: 48px;
-    margin-right: 10px;
-    transition: transform 0.2s ease-in-out;
-    vertical-align: middle;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+  vertical-align: middle;
 }
 
 .redes-sociais img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .copyright {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: var(--footer-text); /* Usa variável */
-    transition: color 0.5s ease; /* Transição suave */
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: var(--footer-text);
+  transition: color 0.5s ease;
 }
 
 /* --- Media Queries (Responsividade) --- */
 
-/* Esconde anúncios laterais em telas menores que 1024px,
-    pois eles podem atrapalhar o conteúdo principal */
-@media (max-width: 1024px) {
-    .anuncio-lateral {
-        display: none;
-    }
+/* Mobile extra pequeno (até 480px, cobrindo 320px, 375px e 425px) */
 
-    main {
-        margin: 0 50px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Ajuste do carrossel para telas menores que 1024px */
-    .carrossel-container {
-        width: 100%; /* Ocupa a largura total do main */
-        margin: 20px 0; /* Remove margens laterais fixas */
-        aspect-ratio: 16 / 9; /* Mantém a proporção */
-    }
-}
-
-/* Telas muito pequenas (até 480px, smartphones) */
 @media (max-width: 480px) {
-    body {
-        padding-top: 150px;
-    }
+  .carrossel-container {
+    /* Aumentado o padding para garantir que o carrossel desça mais */
+    margin-top: 200px;
+    padding-top: 10px;
+    aspect-ratio: 4 / 3;
+  }
 
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
+  .seta {
+    /* Ajuste específico para mobile, para descer a seta */
+    top: 60%; /* Desce ainda mais a seta para não ficar na parte superior */
+  }
 
-    .logo {
-        max-height: 80px;
-    }
+  header {
+    justify-content: center;
+    padding: 10px;
+  }
 
-    .tempo-area {
-        width: 100%;
-        align-items: center;
-        margin-top: 5px;
-    }
+  .logo {
+    max-height: 80px;
+  }
 
-    .tempo-box {
-        margin-bottom: 5px;
-    }
+  .tempo-area {
+    margin-top: 10px;
+    align-items: center;
+  }
 
-    .menu-toggle {
-        display: block;
-        margin: 10px auto;
-        width: 100%;
-        text-align: center;
-    }
+  .menu-toggle {
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
 
-    .menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        gap: 8px;
-        margin-top: 10px;
-    }
+  .menu {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    display: none; /* Esconde o menu por padrão no mobile */
+  }
 
-    .menu.show {
-        display: flex;
-    }
+  .menu.show {
+    justify-content: center;
+    display: flex; /* Exibe o menu quando a classe 'show' é adicionada */
+  }
 
-    .menu a {
-        width: 90%;
-        text-align: center;
-        margin-left: 0;
-        font-size: 0.9rem;
-        padding: 8px;
-    }
+  .menu a {
+    width: 90%;
+    margin-left: 0;
+  }
 
-    main {
-        margin: 0 10px;
-    }
+  /* Conteúdo principal já é uma coluna para mobile por padrão */
+  .conteudo-principal-intercalado {
+    grid-template-columns: 1fr; /* Garante uma coluna */
+  }
 
-    .carrossel-container {
-        aspect-ratio: 4 / 3; /* Proporção mais adequada para mobile */
-        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */
-    }
+  article.noticia {
+    min-height: auto;
+  }
 
-    .slide img {
-        object-fit: cover; /* Pode usar 'cover' aqui para melhor preenchimento em telas pequenas */
-    }
+  .rodape-conteudo {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
 
-    .titulo-slide {
-        font-size: 1.2rem;
-        padding: 10px;
-    }
+  .redes-sociais {
+    justify-content: center;
+  }
 
-    .autor-slide {
-        font-size: 0.8rem;
-    }
-
-    .seta {
-        font-size: 1.5rem;
-        padding: 3px 8px;
-    }
-
-    .noticias-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    article.noticia {
-        min-height: 380px;
-        padding: 12px;
-    }
-
-    article.noticia h2 {
-        font-size: 1.3em;
-    }
-
-    article.noticia img {
-        max-height: 180px;
-    }
-
-    article.noticia p {
-        font-size: 0.95em;
-        -webkit-line-clamp: 5;
-    }
-
-    .rodape-conteudo {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-
-    .redes-sociais {
-        display: flex;
-        justify-content: center;
-    }
+  .anuncios-grid-final {
+    grid-template-columns: 1fr; /* Uma coluna para anúncios no final em mobile */
+  }
 }
 
-/* Tablets e smartphones maiores (481px a 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    body {
-        padding-top: 180px;
-    }
+/* Telas de tablet e smartphones (481px a 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .carrossel-container {
+    /* Aumentado o padding para garantir que o carrossel desça mais */
+    padding-top: 190px; /* Era 160px, agora 190px */
+    aspect-ratio: 4 / 3;
+  }
 
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
-    }
+  .seta {
+    /* Ajuste específico para tablet, para descer a seta */
+    top: 58%; /* Desce a seta */
+  }
 
-    .logo {
-        max-height: 100px;
-    }
+  .conteudo-principal-intercalado {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Permite que os cards se ajustem para 1 ou 2 colunas */
+  }
 
-    .tempo-area {
-        width: 100%;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .menu-toggle {
-        display: block;
-        margin: 10px auto;
-        width: 100%;
-        text-align: center;
-    }
-
-    .menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .menu.show {
-        display: flex;
-    }
-
-    .menu a {
-        width: 70%;
-        text-align: center;
-        margin-left: 0;
-        font-size: 0.95rem;
-    }
-
-    main {
-        margin: 0 20px;
-    }
-
-    .carrossel-container {
-        aspect-ratio: 16 / 9; /* Mantém 16:9 para tablets */
-        height: auto;
-    }
-
-    .slide img {
-        object-fit: cover; /* 'cover' funciona bem aqui */
-    }
-
-    .titulo-slide {
-        font-size: 1.3rem;
-        padding: 12px;
-    }
-
-    .autor-slide {
-        font-size: 0.9rem;
-    }
-
-    .seta {
-        font-size: 1.8rem;
-    }
-
-    .noticias-grid {
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(300px, 1fr)
-        ); /* Uma ou duas colunas */
-        gap: 20px;
-    }
-
-    article.noticia {
-        min-height: 400px;
-        padding: 14px;
-    }
-
-    article.noticia h2 {
-        font-size: 1.4em;
-    }
-
-    article.noticia img {
-        max-height: 190px;
-    }
-
-    article.noticia p {
-        font-size: 1em;
-        -webkit-line-clamp: 4;
-    }
-
-    .rodape-conteudo {
-        flex-direction: row;
-        justify-content: space-around;
-        text-align: left;
-        gap: 20px;
-    }
-
-    .redes-sociais {
-        justify-content: flex-start;
-    }
+  .anuncios-grid-final {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 
-/* Desktops e Laptops (769px a 1200px) */
-@media (min-width: 769px) and (max-width: 1200px) {
-    body {
-        padding-top: 200px;
-    }
+/* Telas de tablet e laptops (768px a 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .carrossel-container {
+    margin-top: 180px;
+    padding-top: 20px; /* Ajuste para acomodar o cabeçalho fixo */
+    width: 95%;
+  }
 
-    header {
-        padding: 18px 25px;
-    }
+  .seta {
+    top: 55%; /* Levemente mais para baixo no carrossel */
+  }
 
-    main {
-        margin: 0 60px;
-    }
+  main {
+    max-width: 900px; /* Aumenta a largura do conteúdo principal */
+  }
 
-    .carrossel-container {
-        width: calc(100% - 120px); /* Ajusta para as margens do main (2*60px) */
-        aspect-ratio: 16 / 9;
-        height: auto;
-    }
+  .conteudo-principal-intercalado {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(320px, 1fr)
+    ); /* Duas colunas ou mais */
+    gap: 30px;
+  }
 
-    .slide img {
-        object-fit: cover; /* Continua com cover */
-    }
-
-    .noticias-grid {
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(280px, 1fr)
-        ); /* 2 ou 3 colunas */
-        gap: 25px;
-    }
-
-    article.noticia {
-        min-height: 450px;
-    }
+  .anuncios-grid-final {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
 }
 
-/* Desktops grandes (1201px a 1440px) */
-@media (min-width: 1201px) and (max-width: 1440px) {
-    main {
-        margin: 0 160px;
-    }
+/* Telas maiores que 1024px (desktops e monitores grandes) */
+@media (min-width: 1025px) {
+  .carrossel-container {
+    padding-top: 200px; /* Mantenha um valor adequado para desktops */
+    margin-top: 0;
+  }
 
-    /* Estilos do carrossel para telas grandes */
-    .carrossel-container {
-        /* As propriedades abaixo vêm do seu "código que funciona" */
-        width: calc(100% - 320px); /* Remove 160px de cada lado do main */
-        margin: 20px auto; /* Centraliza com margens laterais fixas */
-        aspect-ratio: 16 / 9; /* A altura será determinada pela largura para manter 16:9 */
-        max-width: 1000px; /* Mantém um limite superior de largura */
-        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */ /* */
-    }
+  .seta {
+    top: 50%; /* Volta ao centro para telas maiores */
+  }
 
-    .slide img {
-        object-fit: contain; /* Volta para 'contain' como no seu original que funcionava bem */
-        background-color: #000; /* Garante fundo preto para 'contain' */ /**/
-    }
+  main {
+    padding-top: 40px;
+    display: block;
+  }
 
-    .titulo-slide {
-        font-size: 1.5rem;
-        padding: 20px;
-    }
+  .conteudo-principal-intercalado {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
+  }
 
-    .noticias-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-    }
-
-    article.noticia {
-        min-height: 480px;
-    }
-}
-
-/* Telas ultra-wide (acima de 1441px) */
-@media (min-width: 1441px) {
-    main {
-        margin: 0 160px;
-    }
-
-    /* Estilos do carrossel para telas ultra-wide, seguindo o padrão que funciona */
-    .carrossel-container {
-        width: calc(100% - 320px); /* Mantém o cálculo de largura */
-        margin: 20px auto;
-        aspect-ratio: 16 / 9;
-        max-width: 1000px; /* Mantém o limite */
-        height: auto; /* Deixa a altura ser definida pelo aspect-ratio */
-    }
-
-    .slide img {
-        object-fit: contain; /* Mantém 'contain' */
-        background-color: #000;
-    }
-
-    .titulo-slide {
-        font-size: 1.6rem; /* Pode aumentar um pouco mais o texto */
-        padding: 25px;
-    }
-
-    .noticias-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-    }
-
-    article.noticia {
-        min-height: 500px;
-    }
-
-    .noticia h2 {
-        font-size: 1.6em;
-    }
+  .anuncios-grid-final {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 }
