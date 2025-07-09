@@ -166,7 +166,8 @@ $anunciosRestantes = array_slice($anunciosParaExibir, 4);
         <img src="imagens/logo/logo.png" alt="Logo Luz & Verdade" class="logo">
 
         <div class="menu-toggle" id="menu-toggle">
-            <i class="fas fa-bars"></i> </div>
+            <i class="fas fa-bars"></i>
+        </div>
 
         <div class="tempo-area">
             <?php if ($tempo): ?>
@@ -185,8 +186,8 @@ $anunciosRestantes = array_slice($anunciosParaExibir, 4);
                 <a href="index.php">Início</a>
                 <a href="login.php">Login / Cadastro</a>
                 <button id="theme-toggle" class="theme-toggle-button">
-                    <i class="fas fa-sun icon-light-mode"></i>
-                    <i class="fas fa-moon icon-dark-mode"></i>
+                    <span class="icon-light-mode">☀️</span>
+                    <span class="icon-dark-mode">🌙</span>
                     Mudar Tema
                 </button>
             </nav>
@@ -218,8 +219,7 @@ $anunciosRestantes = array_slice($anunciosParaExibir, 4);
                 <?php foreach ($conteudoCombinado as $item): ?>
                     <?php if ($item['tipo'] === 'noticia'): ?>
                         <article class="noticia" data-id="<?= htmlspecialchars($item['dados']['id']) ?>">
-                            <a href="noticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>"
-                                class="noticia-link-conteudo">
+                            <a href="noticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>" class="noticia-link-conteudo">
                                 <h2><?= htmlspecialchars($item['dados']['titulo']) ?></h2>
                                 <p class="autor-data"><small>Por <?= htmlspecialchars($item['dados']['autor']) ?> em
                                         <?= date('d/m/Y H:i', strtotime($item['dados']['data'])) ?></small></p>
@@ -256,15 +256,17 @@ $anunciosRestantes = array_slice($anunciosParaExibir, 4);
         <?php
         // Exibir anúncios restantes (os que não foram intercalados)
         if (!empty($anunciosRestantes) && count(array_filter($anunciosRestantes)) > 0):
-        ?>
+            ?>
             <div class="anuncios-no-final">
                 <h3>Outros Anúncios</h3>
                 <div class="anuncios-grid-final">
-                    <?php foreach($anunciosRestantes as $anuncio): ?>
+                    <?php foreach ($anunciosRestantes as $anuncio): ?>
                         <?php if ($anuncio): // Garante que o anúncio não é nulo ?>
                             <div class="anuncio-banner-final">
-                                <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank" title="<?= htmlspecialchars($anuncio['nome']) ?>">
-                                    <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="Anúncio: <?= htmlspecialchars($anuncio['nome']) ?>">
+                                <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank"
+                                    title="<?= htmlspecialchars($anuncio['nome']) ?>">
+                                    <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>"
+                                        alt="Anúncio: <?= htmlspecialchars($anuncio['nome']) ?>">
                                 </a>
                             </div>
                         <?php endif; ?>

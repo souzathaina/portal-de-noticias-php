@@ -150,7 +150,7 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
         document.getElementById('menu-toggle').addEventListener('click', function () {
             const menu = document.getElementById('menu');
             // Use 'show' para consistência com 'telaLogado.php', ou 'active' se o CSS da página usa 'active'
-            menu.classList.toggle('show'); // ou 'active', dependendo do seu CSS
+            menu.classList.toggle('active'); // ou 'active', dependendo do seu CSS
         });
     </script>
 </body>

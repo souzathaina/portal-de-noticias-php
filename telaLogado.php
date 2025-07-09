@@ -121,8 +121,8 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
                 <p><?= htmlspecialchars($_SESSION['nome']) ?></p>
             </div>
             <button id="theme-toggle" class="theme-toggle-button">
-                <i class="fas fa-sun icon-light-mode"></i>
-                <i class="fas fa-moon icon-dark-mode"></i>
+                <span class="icon-light-mode">☀️</span>
+                <span class="icon-dark-mode">🌙</span>
             </button>
 
             <nav class="menu" id="menu">
@@ -160,20 +160,24 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
                                 </p>
                             </a>
                             <p class="acoes-noticia">
-                                <?php 
+                                <?php
                                 $isAuthor = ($item['dados']['id_autor'] == $_SESSION['id']);
                                 if ($isAuthor): ?>
-                                    <a href="alterarNoticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>" class="btn-alterar">Alterar</a>
-                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>" class="btn-excluir">Excluir</a>
+                                    <a href="alterarNoticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>"
+                                        class="btn-alterar">Alterar</a>
+                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>"
+                                        class="btn-excluir">Excluir</a>
                                 <?php elseif ($isAdmin): ?>
-                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>" class="btn-excluir">Excluir</a>
+                                    <a href="excluirNoticia.php?id=<?= htmlspecialchars($item['dados']['id']) ?>"
+                                        class="btn-excluir">Excluir</a>
                                 <?php endif; ?>
                             </p>
                         </article>
                     <?php elseif ($item['tipo'] === 'anuncio'): ?>
                         <div class="anuncio-intercalado">
                             <?php if ($item['dados']): ?>
-                                <a href="<?= htmlspecialchars($item['dados']['link']) ?>" target="_blank" title="<?= htmlspecialchars($item['dados']['nome']) ?>">
+                                <a href="<?= htmlspecialchars($item['dados']['link']) ?>" target="_blank"
+                                    title="<?= htmlspecialchars($item['dados']['nome']) ?>">
                                     <img src="imagens/<?= htmlspecialchars($item['dados']['imagem']) ?>"
                                         alt="Anúncio: <?= htmlspecialchars($item['dados']['nome']) ?>">
                                 </a>
@@ -191,11 +195,13 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
             <div class="anuncios-no-final">
                 <h3>Outros Anúncios</h3>
                 <div class="anuncios-grid-final">
-                    <?php foreach($anunciosRestantes as $anuncio): ?>
+                    <?php foreach ($anunciosRestantes as $anuncio): ?>
                         <?php if ($anuncio): ?>
                             <div class="anuncio-banner-final">
-                                <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank" title="<?= htmlspecialchars($anuncio['nome']) ?>">
-                                    <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>" alt="Anúncio: <?= htmlspecialchars($anuncio['nome']) ?>">
+                                <a href="<?= htmlspecialchars($anuncio['link']) ?>" target="_blank"
+                                    title="<?= htmlspecialchars($anuncio['nome']) ?>">
+                                    <img src="imagens/<?= htmlspecialchars($anuncio['imagem']) ?>"
+                                        alt="Anúncio: <?= htmlspecialchars($anuncio['nome']) ?>">
                                 </a>
                             </div>
                         <?php endif; ?>

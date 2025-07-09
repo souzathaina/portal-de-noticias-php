@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `db_portal_noticias` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `db_portal_noticias`;
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: db_portal_noticias
+-- Host: 127.0.0.1    Database: dbnoticias
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.4.32-MariaDB
 
@@ -30,9 +28,10 @@ CREATE TABLE `usuarios` (
   `email` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `foto` varchar(255) DEFAULT NULL,
+  `id_perfil` varchar(50) NOT NULL DEFAULT 'NORMAL',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +40,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Thaina','thaina@gmail.com','$2y$10$XxcIOKJiwBJYWQFEqMRu2OrpAYKuhLOM1/ibZ.lwwdTzv56ZQlGqW',NULL,'NORMAL'),(2,'Nessa','nessa@gmail.com','$2y$10$dYOobuEkyMUyrwGnCs5XP.64tKygI0qx2WB5LkXdsvCCz.KHhnRTS',NULL,'ADMIN'),(3,'wdwd','gusta@gmail.com','$2y$10$/gAwZ17nNggiMMx2pUhc8u5hQf5JS9S3o1YoKeGJlvy3pLwzzI0C2','imagens/686daa91544dd-Captura de tela 2025-07-07 213732.png','NORMAL');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-12 22:10:07
+-- Dump completed on 2025-07-09 19:32:16
